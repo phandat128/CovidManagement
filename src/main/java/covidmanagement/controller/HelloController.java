@@ -1,4 +1,4 @@
-package com.covidmanagement2;
+package covidmanagement.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

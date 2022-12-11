@@ -3,6 +3,8 @@ module com.example.covidmanagement2 {
     requires javafx.fxml;
 
 
-    opens com.covidmanagement2 to javafx.fxml;
-    exports com.covidmanagement2;
+    opens covidmanagement to javafx.fxml;
+    exports covidmanagement;
+    exports covidmanagement.controller;
+    opens covidmanagement.controller to javafx.fxml;
 }
