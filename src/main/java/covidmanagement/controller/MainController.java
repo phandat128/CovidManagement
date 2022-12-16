@@ -1,6 +1,7 @@
 package covidmanagement.controller;
 
 import covidmanagement.Main;
+import covidmanagement.Utility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +36,12 @@ public class MainController implements Initializable {
 
         for (String component: components){
             TreeItem<String> componentMain = new TreeItem<>("Quản lý " + component);
+
+            componentMain.getChildren().add(new TreeItem<>("Thêm " + component));
+            componentMain.getChildren().add(new TreeItem<>("Sửa " + component));
+            componentMain.getChildren().add(new TreeItem<>("Xóa " + component));
+            componentMain.getChildren().add(new TreeItem<>("Tìm kiếm " + component));
+
             root.getChildren().add(componentMain);
         }
 
@@ -44,12 +51,14 @@ public class MainController implements Initializable {
 
     public void selectItem(){
         TreeItem<String> item = treeView.getSelectionModel().getSelectedItem();
-        String temp = Normalizer.normalize(item.getValue(), Normalizer.Form.NFD);
-        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
-        String fileName = pattern.matcher(temp).replaceAll("").replace(" ", "").substring(6);
-        System.out.println(fileName);
+        if (item == null) return;
+        if (!item.isLeaf()) return;
+        String fileName = Utility.removeAccent(item.getValue());
+        String fileFolder = Utility.removeAccent(item.getParent().getValue()).substring(6);
+        System.out.println(fileFolder + "/" + fileName);
         try {
-            Parent componentScene = FXMLLoader.load(Main.class.getResource(fileName + "-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fileFolder + "/" + fileName + "-view.fxml"));
+            Parent componentScene = fxmlLoader.load();
             mainBorderPane.setCenter(componentScene);
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,9 +66,9 @@ public class MainController implements Initializable {
     }
 
     public void moveToLoginPage(ActionEvent event){
-        Parent componentScene = null;
         try {
-            componentScene = FXMLLoader.load(Main.class.getResource( "login-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource( "login-view.fxml"));
+            Parent componentScene = fxmlLoader.load();
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(componentScene);
             stage.setScene(scene);

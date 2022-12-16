@@ -1,0 +1,13 @@
+package covidmanagement;
+
+import java.text.Normalizer;
+import java.util.regex.Pattern;
+
+public class Utility {
+    //chuyển từ có dấu sang không dấu không cách
+    public static String removeAccent(String s){
+        String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(temp).replaceAll("").replace(" ", "");
+    }
+}
