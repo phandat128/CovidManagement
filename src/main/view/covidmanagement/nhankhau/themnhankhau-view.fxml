@@ -1,83 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<<<<<<< HEAD
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.text.Font?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="covidmanagement.controller.NhanKhauController"
-            prefHeight="400.0" prefWidth="600.0">
-    <children>
-        <Text layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is them nhan khau view" textAlignment="CENTER" wrappingWidth="600.0">
-            <font>
-                <Font size="14.0" />
-            </font>
-        </Text>
-    </children>
-=======
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane fx:id="themnhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.NhanKhauController">
-   <children>
-      <AnchorPane layoutY="253.0" prefHeight="150.0" prefWidth="910.0" AnchorPane.bottomAnchor="0.0">
-         <children>
-            <TableView layoutX="-1.0" prefHeight="150.0" prefWidth="910.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <columns>
-                <TableColumn prefWidth="70.0" text="Mã nhân khẩu" />
-                <TableColumn prefWidth="70.0" text="Họ tên" />
-                  <TableColumn prefWidth="70.0" text="Ngày sinh" />
-                  <TableColumn prefWidth="70.0" text="Giới tính" />
-                  <TableColumn prefWidth="70.0" text="CMND/CCCD" />
-                  <TableColumn prefWidth="70.0" text="Số điện thoại" />
-                  <TableColumn prefWidth="70.0" text="Nghề nghiệp" />
-                  <TableColumn prefWidth="70.0" text="Quốc tịch" />
-                  <TableColumn prefWidth="70.0" text="Tôn giáo" />
-                  <TableColumn prefWidth="70.0" text="Nguyên quán" />
-                  <TableColumn prefWidth="70.0" text="Chủ hộ" />
-                  <TableColumn prefWidth="70.0" text="Quan hệ với chủ hộ" />
-                  <TableColumn prefWidth="70.0" text="Mã hộ khẩu" />
-              </columns>
-            </TableView>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutY="-3.0" prefHeight="250.0" prefWidth="910.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label layoutX="50.0" layoutY="15.0" prefHeight="30.0" prefWidth="80.0" text="Mã hộ khẩu" />
-            <Label layoutX="50.0" layoutY="45.0" prefHeight="30.0" prefWidth="80.0" text="Họ tên" />
-            <Label layoutX="50.0" layoutY="75.0" prefHeight="30.0" prefWidth="80.0" text="Ngày sinh" />
-            <Label layoutX="50.0" layoutY="105.0" prefHeight="30.0" prefWidth="80.0" text="Giới tính" />
-            <Label layoutX="50.0" layoutY="135.0" prefHeight="30.0" prefWidth="80.0" text="CMND/CCCD" />
-            <Label layoutX="50.0" layoutY="165.0" prefHeight="30.0" prefWidth="80.0" text="Số điện thoại" />
-             <Label layoutX="50.0" layoutY="195.0" prefHeight="30.0" prefWidth="80.0" text="Nghề nghiệp" />
-            <Label layoutX="455.0" layoutY="15.0" prefHeight="30.0" prefWidth="110.0" text="Quốc tịch" />
-            <Label layoutX="455.0" layoutY="45.0" prefHeight="30.0" prefWidth="110.0" text="Tôn giáo" />
-            <Label layoutX="455.0" layoutY="75.0" prefHeight="30.0" prefWidth="110.0" text="Nguyên quán" />
-            <Label layoutX="455.0" layoutY="105.0" prefHeight="30.0" prefWidth="110.0" text="Chủ hộ" />
-            <Label layoutX="455.0" layoutY="135.0" prefHeight="30.0" prefWidth="110.0" text="Quan hệ với chủ hộ" />
-            <Label layoutX="455.0" layoutY="165.0" prefHeight="30.0" prefWidth="110.0" text="Mã hộ khẩu" />
-            <TextField layoutX="130.0" layoutY="18.0" prefHeight="25.0" prefWidth="200.0" />
-            <TextField layoutX="130.0" layoutY="48.0" prefHeight="25.0" prefWidth="200.0" />
-            <TextField layoutX="130.0" layoutY="78.0" prefHeight="25.0" prefWidth="200.0" />
-            <TextField layoutX="130.0" layoutY="108.0" prefHeight="25.0" prefWidth="200.0" />
-            <TextField layoutX="130.0" layoutY="138.0" prefHeight="25.0" prefWidth="200.0" />
-            <TextField layoutX="130.0" layoutY="168.0" prefHeight="25.0" prefWidth="200.0" />
-            <TextField layoutX="130.0" layoutY="198.0" prefHeight="25.0" prefWidth="200.0" />
-            <TextField layoutX="565.0" layoutY="18.0" prefHeight="25.0" prefWidth="200.0" />
-            <TextField layoutX="565.0" layoutY="48.0" prefHeight="25.0" prefWidth="200.0" />
-            <TextField layoutX="565.0" layoutY="78.0" prefHeight="25.0" prefWidth="200.0" />
-            <TextField layoutX="565.0" layoutY="108.0" prefHeight="25.0" prefWidth="200.0" />
-            <TextField layoutX="565.0" layoutY="138.0" prefHeight="25.0" prefWidth="200.0" />
-            <TextField layoutX="565.0" layoutY="168.0" prefHeight="25.0" prefWidth="200.0" />
-            <Button layoutX="765.0" layoutY="208.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Thêm nhân khẩu" AnchorPane.bottomAnchor="12.0" />
-         </children>
-      </AnchorPane>
-   </children>
->>>>>>> 8e155cdb5f89794518c0875f9fb659ce44eb2c9b
+    <children>
+        <AnchorPane layoutY="253.0" prefHeight="150.0" prefWidth="910.0" AnchorPane.bottomAnchor="0.0">
+            <children>
+                <TableView layoutX="-1.0" prefHeight="150.0" prefWidth="910.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                        <TableColumn prefWidth="70.0" text="Mã nhân khẩu" />
+                        <TableColumn prefWidth="70.0" text="Họ tên" />
+                        <TableColumn prefWidth="70.0" text="Ngày sinh" />
+                        <TableColumn prefWidth="70.0" text="Giới tính" />
+                        <TableColumn prefWidth="70.0" text="CMND/CCCD" />
+                        <TableColumn prefWidth="70.0" text="Số điện thoại" />
+                        <TableColumn prefWidth="70.0" text="Nghề nghiệp" />
+                        <TableColumn prefWidth="70.0" text="Quốc tịch" />
+                        <TableColumn prefWidth="70.0" text="Tôn giáo" />
+                        <TableColumn prefWidth="70.0" text="Nguyên quán" />
+                        <TableColumn prefWidth="70.0" text="Chủ hộ" />
+                        <TableColumn prefWidth="70.0" text="Quan hệ với chủ hộ" />
+                        <TableColumn prefWidth="70.0" text="Mã hộ khẩu" />
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutY="-3.0" prefHeight="250.0" prefWidth="910.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label layoutX="50.0" layoutY="15.0" prefHeight="30.0" prefWidth="80.0" text="Mã hộ khẩu" />
+                <Label layoutX="50.0" layoutY="45.0" prefHeight="30.0" prefWidth="80.0" text="Họ tên" />
+                <Label layoutX="50.0" layoutY="75.0" prefHeight="30.0" prefWidth="80.0" text="Ngày sinh" />
+                <Label layoutX="50.0" layoutY="105.0" prefHeight="30.0" prefWidth="80.0" text="Giới tính" />
+                <Label layoutX="50.0" layoutY="135.0" prefHeight="30.0" prefWidth="80.0" text="CMND/CCCD" />
+                <Label layoutX="50.0" layoutY="165.0" prefHeight="30.0" prefWidth="80.0" text="Số điện thoại" />
+                <Label layoutX="50.0" layoutY="195.0" prefHeight="30.0" prefWidth="80.0" text="Nghề nghiệp" />
+                <Label layoutX="455.0" layoutY="15.0" prefHeight="30.0" prefWidth="110.0" text="Quốc tịch" />
+                <Label layoutX="455.0" layoutY="45.0" prefHeight="30.0" prefWidth="110.0" text="Tôn giáo" />
+                <Label layoutX="455.0" layoutY="75.0" prefHeight="30.0" prefWidth="110.0" text="Nguyên quán" />
+                <Label layoutX="455.0" layoutY="105.0" prefHeight="30.0" prefWidth="110.0" text="Chủ hộ" />
+                <Label layoutX="455.0" layoutY="135.0" prefHeight="30.0" prefWidth="110.0" text="Quan hệ với chủ hộ" />
+                <Label layoutX="455.0" layoutY="165.0" prefHeight="30.0" prefWidth="110.0" text="Mã hộ khẩu" />
+                <TextField layoutX="130.0" layoutY="18.0" prefHeight="25.0" prefWidth="200.0" />
+                <TextField layoutX="130.0" layoutY="48.0" prefHeight="25.0" prefWidth="200.0" />
+                <TextField layoutX="130.0" layoutY="78.0" prefHeight="25.0" prefWidth="200.0" />
+                <TextField layoutX="130.0" layoutY="108.0" prefHeight="25.0" prefWidth="200.0" />
+                <TextField layoutX="130.0" layoutY="138.0" prefHeight="25.0" prefWidth="200.0" />
+                <TextField layoutX="130.0" layoutY="168.0" prefHeight="25.0" prefWidth="200.0" />
+                <TextField layoutX="130.0" layoutY="198.0" prefHeight="25.0" prefWidth="200.0" />
+                <TextField layoutX="565.0" layoutY="18.0" prefHeight="25.0" prefWidth="200.0" />
+                <TextField layoutX="565.0" layoutY="48.0" prefHeight="25.0" prefWidth="200.0" />
+                <TextField layoutX="565.0" layoutY="78.0" prefHeight="25.0" prefWidth="200.0" />
+                <TextField layoutX="565.0" layoutY="108.0" prefHeight="25.0" prefWidth="200.0" />
+                <TextField layoutX="565.0" layoutY="138.0" prefHeight="25.0" prefWidth="200.0" />
+                <TextField layoutX="565.0" layoutY="168.0" prefHeight="25.0" prefWidth="200.0" />
+                <Button layoutX="765.0" layoutY="208.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Thêm nhân khẩu" AnchorPane.bottomAnchor="12.0" />
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>
