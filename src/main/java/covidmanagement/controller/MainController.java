@@ -2,6 +2,8 @@ package covidmanagement.controller;
 
 import covidmanagement.Main;
 import covidmanagement.Utility;
+import covidmanagement.controller.xetnghiemcontroller.SuaController;
+import covidmanagement.model.XetNghiemModel.KetQuaXetNghiem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,9 +18,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.Normalizer;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 
 public class MainController implements Initializable {
 
@@ -39,7 +40,7 @@ public class MainController implements Initializable {
 
             componentMain.getChildren().add(new TreeItem<>("Thêm " + component));
             componentMain.getChildren().add(new TreeItem<>("Sửa " + component));
-            componentMain.getChildren().add(new TreeItem<>("Xóa " + component));
+            if (!component.equals("xét nghiệm")) componentMain.getChildren().add(new TreeItem<>("Xóa " + component));
             componentMain.getChildren().add(new TreeItem<>("Tìm kiếm " + component));
 
             root.getChildren().add(componentMain);
@@ -73,6 +74,18 @@ public class MainController implements Initializable {
             Scene scene = new Scene(componentScene);
             stage.setScene(scene);
             stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void moveToSuaXetNghiemPage(int idNK, String name, LocalDate date, String place, KetQuaXetNghiem result){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("xetnghiem/suaxetnghiem-view.fxml"));
+            Parent componentScene = fxmlLoader.load();
+            SuaController suaController = fxmlLoader.getController();
+            suaController.setField(idNK, name, date, place, result);
+            mainBorderPane.setCenter(componentScene);
         } catch (IOException e) {
             e.printStackTrace();
         }
