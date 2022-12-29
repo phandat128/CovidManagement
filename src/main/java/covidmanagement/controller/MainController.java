@@ -4,11 +4,11 @@ import covidmanagement.Main;
 import covidmanagement.Utility;
 import covidmanagement.controller.xetnghiemcontroller.SuaController;
 import covidmanagement.model.XetNghiemModel.KetQuaXetNghiem;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
@@ -38,10 +38,11 @@ public class MainController implements Initializable {
         for (String component: components){
             TreeItem<String> componentMain = new TreeItem<>("Quản lý " + component);
 
-            componentMain.getChildren().add(new TreeItem<>("Thêm " + component));
-            componentMain.getChildren().add(new TreeItem<>("Sửa " + component));
-            if (!component.equals("xét nghiệm")) componentMain.getChildren().add(new TreeItem<>("Xóa " + component));
-            componentMain.getChildren().add(new TreeItem<>("Tìm kiếm " + component));
+            final ObservableList<TreeItem<String>> branch = componentMain.getChildren();
+            branch.add(new TreeItem<>("Thêm " + component));
+            if (!component.equals("xét nghiệm")) branch.add(new TreeItem<>("Sửa " + component));
+            if (!component.equals("xét nghiệm")) branch.add(new TreeItem<>("Xóa " + component));
+            branch.add(new TreeItem<>("Tìm kiếm " + component));
 
             root.getChildren().add(componentMain);
         }
@@ -70,7 +71,7 @@ public class MainController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource( "login-view.fxml"));
             Parent componentScene = fxmlLoader.load();
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Stage stage = new Stage();
             Scene scene = new Scene(componentScene);
             stage.setScene(scene);
             stage.show();

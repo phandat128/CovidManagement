@@ -19,8 +19,12 @@ public class QueryDB {
         return this.statement.executeQuery(sql);
     }
 
-    public void close() throws SQLException{
-        this.statement.close();
-        this.connection.close();
+    public void close(){
+        try {
+            this.statement.close();
+            this.connection.close();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 }

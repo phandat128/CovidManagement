@@ -94,7 +94,7 @@
         </HBox>
         <BorderPane>
             <center>
-                <Button alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#onUpdate" prefHeight="30.0" prefWidth="98.0" text="Cập nhật">
+                <Button fx:id="updateButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#onUpdate" prefHeight="30.0" prefWidth="98.0" text="Cập nhật">
                     <font>
                         <Font size="14.0" />
                     </font>

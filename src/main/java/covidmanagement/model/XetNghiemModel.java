@@ -1,8 +1,10 @@
 package covidmanagement.model;
 
 import covidmanagement.Main;
+import covidmanagement.Utility;
 import covidmanagement.controller.MainController;
 import covidmanagement.database.QueryDB;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -12,12 +14,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class XetNghiemModel {
+    private int maXN;
     private int maNK;
     private String name;
     private String cmnd;
@@ -26,7 +28,8 @@ public class XetNghiemModel {
     private KetQuaXetNghiem result;
     private Button changeButton, deleteButton;
 
-    public XetNghiemModel(int maNK, String name, String cmnd, LocalDate date, String place, KetQuaXetNghiem result) {
+    public XetNghiemModel(int maXN, int maNK, String name, String cmnd, LocalDate date, String place, KetQuaXetNghiem result) {
+        this.maXN = maXN;
         this.maNK = maNK;
         this.name = name;
         this.cmnd = cmnd;
@@ -35,27 +38,13 @@ public class XetNghiemModel {
         this.result = result;
         this.changeButton = new Button("Sửa");
         this.deleteButton = new Button("Xóa");
-        changeButton.setOnAction(event -> {
-            System.out.println(maNK);
-            System.out.println(name);
-            System.out.println(date);
-            System.out.println(place);
-            System.out.println(result);
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
-                Scene scene = new Scene(fxmlLoader.load());
-                Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-                MainController mainController = fxmlLoader.getController();
-                mainController.moveToSuaXetNghiemPage(maNK, name, date, place, result);
-            } catch(IOException e){
-                e.printStackTrace();
-            }
-        });
+        changeButton.setOnAction(this::handleChangeClick);
+
+        deleteButton.setOnAction(this::handleDeleteClick);
+
     }
 
-    public List<XetNghiemModel> getData(String cmnd,
+    public List<XetNghiemModel> getXetNghiemList(String cmnd,
                         String name,
                         LocalDate from, LocalDate to,
                         KetQuaXetNghiem result) throws SQLException {
@@ -66,16 +55,41 @@ public class XetNghiemModel {
 
         ResultSet rs = queryDB.query(sql);
         while (rs.next()){
+            int _maXN = rs.getInt("maxetnghiem");
             int _maNK = rs.getInt("manhankhau");
             String _cmnd = rs.getString("cmnd_cccd");
             String _name = rs.getString("hoten");
             LocalDate _date = rs.getDate("thoigian").toLocalDate();
             String _place = rs.getString("diadiem");
             KetQuaXetNghiem _result = rs.getObject("ketqua", KetQuaXetNghiem.class);
-            queryList.add(new XetNghiemModel(_maNK, _name, _cmnd, _date, _place, _result));
+            queryList.add(new XetNghiemModel(_maXN, _maNK, _name, _cmnd, _date, _place, _result));
         }
         rs.close();
+        queryDB.close();
         return queryList;
+    }
+
+    private void handleDeleteClick(ActionEvent event) {
+        Utility.displayConfirmDialog("Xác nhận xóa?", this.maXN, "XetNghiem");
+    }
+
+    private void handleChangeClick(ActionEvent event){
+        System.out.println(maNK);
+        System.out.println(name);
+        System.out.println(date);
+        System.out.println(place);
+        System.out.println(result);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+            MainController mainController = fxmlLoader.getController();
+            mainController.moveToSuaXetNghiemPage(maNK, name, date, place, result);
+        } catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     public int getMaNK() {

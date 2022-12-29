@@ -31,8 +31,6 @@ CREATE TABLE NhanKhau(
 CREATE TABLE CachLy(
 	MaCachLy serial NOT NULL,
 	MaNhanKhau int NOT NULL,
-	TenNguoiCachLy varchar(50) NOT NULL,
-	CMND_CCCD varchar(20) NULL,
 	BatDau date NOT NULL,
 	KetThuc date NOT NULL,
 	DiaDiem varchar(100) NOT NULL,
@@ -45,7 +43,6 @@ CREATE TABLE KhaiBao(
 	MaKhaiBao serial NOT NULL,
 	MaNhanKhau int NOT NULL,
 	Diemkhaibao varchar(50) NOT NULL,
-	TenNguoiKhaiBao varchar(50) NOT NULL,
 	NgayKhaiBao date NOT NULL,
 	CMND_CCCD varchar(20),
 	BHYT boolean NOT NULL,
@@ -63,8 +60,6 @@ CREATE TABLE KhaiBao(
 CREATE TABLE XetNghiem(
 	MaXetNghiem serial NOT NULL,
 	MaNhanKhau int NOT NULL,
-	HoTen varchar(50) NOT NULL,
-	CMND_CCCD varchar(20),
 	ThoiGian date NOT NULL,
 	DiaDiem varchar(100) NOT NULL,
 	KetQua varchar(20) NOT NULL,

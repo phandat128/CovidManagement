@@ -2,7 +2,6 @@ package covidmanagement.controller.xetnghiemcontroller;
 
 import covidmanagement.Utility;
 import covidmanagement.model.XetNghiemModel;
-import covidmanagement.model.XetNghiemModel.KetQuaXetNghiem;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,25 +32,25 @@ public class TimKiemController implements Initializable {
 
     @FXML TableColumn<XetNghiemModel, String> placeColumn;
 
-    @FXML TableColumn<XetNghiemModel, KetQuaXetNghiem> resultColumn;
+    @FXML TableColumn<XetNghiemModel, XetNghiemModel.KetQuaXetNghiem> resultColumn;
 
     @FXML TableColumn<XetNghiemModel, Button> changeButtonColumn;
 
     @FXML TableColumn<XetNghiemModel, Button> deleteButtonColumn;
 
     private final ObservableList<XetNghiemModel> xetNghiemList = FXCollections.observableArrayList(
-        new XetNghiemModel(1, "hoang", "172366327", LocalDate.of(2022,1,2),
-                "wheraes", KetQuaXetNghiem.NEGATIVE),
-        new XetNghiemModel(2, "nam", "132534245", LocalDate.of(2022,1,3),
-                "asd", KetQuaXetNghiem.POSITIVE)
+        new XetNghiemModel(1,23, "hoang", "172366327", LocalDate.of(2022,1,2),
+                "wheraes", XetNghiemModel.KetQuaXetNghiem.NEGATIVE),
+        new XetNghiemModel(2,12, "nam", "132534245", LocalDate.of(2022,1,3),
+                "asd", XetNghiemModel.KetQuaXetNghiem.POSITIVE)
     );
 
-    @FXML ChoiceBox<KetQuaXetNghiem> resultSearch;
+    @FXML ChoiceBox<XetNghiemModel.KetQuaXetNghiem> resultSearch;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         resultSearch.setItems(FXCollections.observableArrayList(
-                KetQuaXetNghiem.values()
+                XetNghiemModel.KetQuaXetNghiem.values()
         ));
         resultSearch.setOnAction(this::getResultChoice);
 
@@ -77,16 +76,23 @@ public class TimKiemController implements Initializable {
 
     public void getResultChoice(ActionEvent event){
         //TODO here
-        KetQuaXetNghiem choice = resultSearch.getValue();
+        XetNghiemModel.KetQuaXetNghiem choice = resultSearch.getValue();
         System.out.println(choice);
     }
 
     public void onSearch(ActionEvent event) throws RuntimeException{
-        String idNKText = idNKField.getText();
+        int idNK = 0;
+        try {
+            if (!idNKField.getText().isBlank()) idNK = Integer.parseInt(idNKField.getText());
+        } catch (NumberFormatException e){
+            e.printStackTrace();
+            Utility.displayExceptionDialog(new NumberFormatException("Mã nhân khẩu chỉ được chứa chữ số!"));
+            return;
+        }
         String name = nameField.getText();
         LocalDate from = dateRangeFrom.getValue();
         LocalDate to = dateRangeTo.getValue();
-        KetQuaXetNghiem result = resultSearch.getValue();
+        XetNghiemModel.KetQuaXetNghiem result = resultSearch.getValue();
 
         if (from != null && to != null){
             if (from.isAfter(to)) {
@@ -96,7 +102,7 @@ public class TimKiemController implements Initializable {
         }
 
 
-        System.out.println(idNKText);
+        System.out.println(idNK == 0 ? null : idNK);
         System.out.println(name);
         System.out.println(from);
         System.out.println(to);
