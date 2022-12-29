@@ -28,13 +28,6 @@ CREATE TABLE NhanKhau(
  	CONSTRAINT PK_NhanKhau PRIMARY KEY (MaNhanKhau)
 );
 
-CREATE TABLE ChuHo(
-	MaHoKhau int NOT NULL,
-	MaChuHo int NOT NULL,
-	CONSTRAINT PK_Chu_Ho PRIMARY KEY (MaHoKhau, MaChuHo)
-);
-
-
 CREATE TABLE CachLy(
 	MaCachLy serial NOT NULL,
 	MaNhanKhau int NOT NULL,
@@ -50,6 +43,7 @@ CREATE TABLE CachLy(
 
 CREATE TABLE KhaiBao(
 	MaKhaiBao serial NOT NULL,
+	MaNhanKhau int NOT NULL,
 	Diemkhaibao varchar(50) NOT NULL,
 	TenNguoiKhaiBao varchar(50) NOT NULL,
 	NgayKhaiBao date NOT NULL,
@@ -89,22 +83,16 @@ REFERENCES HoKhau (MaHoKhau);
 ALTER TABLE XetNghiem   ADD  CONSTRAINT FK_XetNghiem_NhanKhau FOREIGN KEY(MaNhanKhau)
 REFERENCES NhanKhau (MaNhanKhau);
 
-ALTER TABLE ChuHo ADD CONSTRAINT FK_ChuHo_HoKhau FOREIGN KEY(MaHoKhau)
-REFERENCES HoKhau (MaHoKhau);
-
-ALTER TABLE ChuHo ADD CONSTRAINT FK_ChuHo_NhanKhau FOREIGN KEY(MaChuHo)
-REFERENCES NhanKhau (MaNhanKhau);
-
-INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
-VALUES (2, NULL, NULL, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
-INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
-VALUES (4, NULL, 14, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
-INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
-VALUES (7, NULL, NULL, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
-INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
-VALUES (12, NULL, 7, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
-INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
-VALUES (23, 2, 32, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
-INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
-VALUES (6, NULL, NULL, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
+--INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
+--VALUES (2, NULL, NULL, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
+--INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
+--VALUES (4, NULL, 14, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
+--INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
+--VALUES (7, NULL, NULL, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
+--INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
+--VALUES (12, NULL, 7, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
+--INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
+--VALUES (23, 2, 32, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
+--INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
+--VALUES (6, NULL, NULL, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
 
