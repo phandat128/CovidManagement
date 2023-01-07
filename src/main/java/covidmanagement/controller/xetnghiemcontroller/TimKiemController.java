@@ -39,10 +39,10 @@ public class TimKiemController implements Initializable {
     @FXML TableColumn<XetNghiemModel, Button> deleteButtonColumn;
 
     private final ObservableList<XetNghiemModel> xetNghiemList = FXCollections.observableArrayList(
-        new XetNghiemModel(1,23, "hoang", "172366327", LocalDate.of(2022,1,2),
-                "wheraes", XetNghiemModel.KetQuaXetNghiem.NEGATIVE),
-        new XetNghiemModel(2,12, "nam", "132534245", LocalDate.of(2022,1,3),
-                "asd", XetNghiemModel.KetQuaXetNghiem.POSITIVE)
+            new XetNghiemModel(1,23, "hoang", "172366327", LocalDate.of(2022,1,2),
+                    "wheraes", XetNghiemModel.KetQuaXetNghiem.NEGATIVE),
+            new XetNghiemModel(2,12, "nam", "132534245", LocalDate.of(2022,1,3),
+                    "asd", XetNghiemModel.KetQuaXetNghiem.POSITIVE)
     );
 
     @FXML ChoiceBox<XetNghiemModel.KetQuaXetNghiem> resultSearch;
@@ -68,9 +68,9 @@ public class TimKiemController implements Initializable {
 
         //set serial number column
         idColumn.setCellValueFactory(
-            cellDataFeatures -> new ReadOnlyObjectWrapper<>(
-                                searchTable.getItems().indexOf(cellDataFeatures.getValue()) + 1
-        ));
+                cellDataFeatures -> new ReadOnlyObjectWrapper<>(
+                        searchTable.getItems().indexOf(cellDataFeatures.getValue()) + 1
+                ));
         idColumn.setSortable(false);
     }
 
