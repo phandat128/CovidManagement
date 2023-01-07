@@ -11,5 +11,7 @@ module com.example.covidmanagement {
     opens covidmanagement.controller to javafx.fxml;
     exports covidmanagement.controller.xetnghiemcontroller;
     opens covidmanagement.controller.xetnghiemcontroller to javafx.fxml;
+    exports covidmanagement.controller.hokhaucontroller;
+    opens covidmanagement.controller.hokhaucontroller to javafx.fxml;
     exports covidmanagement.model;
 }

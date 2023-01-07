@@ -2,6 +2,7 @@ package covidmanagement.controller;
 
 import covidmanagement.Main;
 import covidmanagement.Utility;
+import covidmanagement.controller.hokhaucontroller.SuaHoKhaucontroller;
 import covidmanagement.controller.xetnghiemcontroller.SuaController;
 import covidmanagement.model.XetNghiemModel.KetQuaXetNghiem;
 import javafx.collections.ObservableList;
@@ -86,6 +87,19 @@ public class MainController implements Initializable {
             Parent componentScene = fxmlLoader.load();
             SuaController suaController = fxmlLoader.getController();
             suaController.setField(idNK, name, date, place, result);
+            mainBorderPane.setCenter(componentScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void moveToSuaHoKhauPage(int maHK, String soNha, String ngach, String ngo, String duong, String phuong, String thanhPho) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("HoKhau/suahokhau-view.fxml"));
+            Parent componentScene = fxmlLoader.load();
+            SuaHoKhaucontroller suaHoKhaucontroller = fxmlLoader.getController();
+            SuaHoKhaucontroller.setField(maHK, soNha, ngach, ngo, duong, phuong, thanhPho);
             mainBorderPane.setCenter(componentScene);
         } catch (IOException e) {
             e.printStackTrace();
