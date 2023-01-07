@@ -14,7 +14,7 @@ public class GenerateDB {
     public static void main(String[] args) {
         String URL = "jdbc:postgresql://localhost:5432/";
         String user = "postgres";
-        String password = "123123";
+        String password = "123456";
         StringBuilder builder = new StringBuilder();
 
         try {
