@@ -91,4 +91,15 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void moveToSuaCachLyPage(int idNK, String name, LocalDate begindate, LocalDate finishdate, String place){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("cachly/suacachly-view.fxml"));
+            Parent componentScene = fxmlLoader.load();
+            SuaCachLyController suaCachLyController = fxmlLoader.getController();
+            suaCachLyController.setFieldCl(idNK, name, begindate, finishdate, place);
+            mainBorderPane.setCenter(componentScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

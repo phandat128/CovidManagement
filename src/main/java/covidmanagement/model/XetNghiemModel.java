@@ -45,9 +45,9 @@ public class XetNghiemModel {
     }
 
     public List<XetNghiemModel> getXetNghiemList(String cmnd,
-                        String name,
-                        LocalDate from, LocalDate to,
-                        KetQuaXetNghiem result) throws SQLException {
+                                                 String name,
+                                                 LocalDate from, LocalDate to,
+                                                 KetQuaXetNghiem result) throws SQLException {
         List<XetNghiemModel> queryList = new ArrayList<>();
         QueryDB queryDB = new QueryDB();
         //TODO here
