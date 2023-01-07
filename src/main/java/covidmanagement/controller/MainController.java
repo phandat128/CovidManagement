@@ -40,9 +40,8 @@ public class MainController implements Initializable {
 
             final ObservableList<TreeItem<String>> branch = componentMain.getChildren();
             branch.add(new TreeItem<>("Thêm " + component));
-            if (!component.equals("xét nghiệm")) branch.add(new TreeItem<>("Sửa " + component));
-            if (!component.equals("xét nghiệm")) branch.add(new TreeItem<>("Xóa " + component));
             branch.add(new TreeItem<>("Tìm kiếm " + component));
+            branch.add(new TreeItem<>("Chỉnh sửa " + component));
 
             root.getChildren().add(componentMain);
         }

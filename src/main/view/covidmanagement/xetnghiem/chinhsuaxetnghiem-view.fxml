@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.xetnghiemcontroller.TimKiemController">
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.xetnghiemcontroller.ChinhSuaController">
     <top>
         <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -119,9 +119,11 @@
                         <TableColumn fx:id="idColumn" prefWidth="28.800018310546875" text="STT" />
                         <TableColumn fx:id="idNKColumn" prefWidth="60.0" text="Mã NK" />
                         <TableColumn fx:id="nameColumn" prefWidth="147.20004272460938" text="Họ tên" />
-                        <TableColumn fx:id="dateColumn" prefWidth="120.0" resizable="false" text="Ngày xét nghiệm" />
-                        <TableColumn fx:id="placeColumn" prefWidth="249.5999755859375" resizable="false" text="Địa chỉ xét nghiệm" />
-                        <TableColumn fx:id="resultColumn" prefWidth="83.199951171875" resizable="false" text="Kết quả" />
+                        <TableColumn fx:id="dateColumn" prefWidth="109.5999755859375" resizable="false" text="Ngày xét nghiệm" />
+                        <TableColumn fx:id="placeColumn" prefWidth="243.20001220703125" resizable="false" text="Địa chỉ xét nghiệm" />
+                        <TableColumn fx:id="resultColumn" prefWidth="87.20001220703125" resizable="false" text="Kết quả" />
+                        <TableColumn fx:id="changeButtonColumn" minWidth="0.0" prefWidth="60.800048828125" resizable="false" text="Sửa" />
+                        <TableColumn fx:id="deleteButtonColumn" prefWidth="61.599853515625" resizable="false" text="Xóa" />
                     </columns>
                     <GridPane.margin>
                         <Insets top="20.0" />

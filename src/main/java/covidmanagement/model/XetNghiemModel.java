@@ -44,7 +44,7 @@ public class XetNghiemModel {
 
     }
 
-    public List<XetNghiemModel> getXetNghiemList(String cmnd,
+    public static List<XetNghiemModel> getXetNghiemList(String cmnd,
                                                  String name,
                                                  LocalDate from, LocalDate to,
                                                  KetQuaXetNghiem result) throws SQLException {

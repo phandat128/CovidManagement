@@ -5,7 +5,6 @@ import covidmanagement.model.XetNghiemModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,9 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
 
-public class TimKiemController implements Initializable {
+public class ChinhSuaController implements Initializable {
     @FXML TextField idNKField, nameField;
 
     @FXML DatePicker dateRangeFrom, dateRangeTo;
@@ -36,14 +34,16 @@ public class TimKiemController implements Initializable {
 
     @FXML TableColumn<XetNghiemModel, XetNghiemModel.KetQuaXetNghiem> resultColumn;
 
+    @FXML TableColumn<XetNghiemModel, Button> changeButtonColumn;
+
+    @FXML TableColumn<XetNghiemModel, Button> deleteButtonColumn;
+
     private final ObservableList<XetNghiemModel> xetNghiemList = FXCollections.observableArrayList(
             new XetNghiemModel(1,23, "hoang", "172366327", LocalDate.of(2022,1,2),
                     "wheraes", XetNghiemModel.KetQuaXetNghiem.NEGATIVE),
             new XetNghiemModel(2,12, "nam", "132534245", LocalDate.of(2022,1,3),
                     "asd", XetNghiemModel.KetQuaXetNghiem.POSITIVE)
     );
-
-    private final FilteredList<XetNghiemModel> filteredList = new FilteredList<>(xetNghiemList);
 
     @FXML ChoiceBox<XetNghiemModel.KetQuaXetNghiem> resultSearch;
 
@@ -61,8 +61,10 @@ public class TimKiemController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         placeColumn.setCellValueFactory(new PropertyValueFactory<>("place"));
         resultColumn.setCellValueFactory(new PropertyValueFactory<>("result"));
+        changeButtonColumn.setCellValueFactory(new PropertyValueFactory<>("changeButton"));
+        deleteButtonColumn.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
 
-        searchTable.setItems(filteredList);
+        searchTable.setItems(xetNghiemList);
 
         //set serial number column
         idColumn.setCellValueFactory(
@@ -87,10 +89,10 @@ public class TimKiemController implements Initializable {
             Utility.displayExceptionDialog(new NumberFormatException("Mã nhân khẩu chỉ được chứa chữ số!"));
             return;
         }
-        final String name = nameField.getText();
-        final LocalDate from = dateRangeFrom.getValue();
-        final LocalDate to = dateRangeTo.getValue();
-        final XetNghiemModel.KetQuaXetNghiem result = resultSearch.getValue();
+        String name = nameField.getText();
+        LocalDate from = dateRangeFrom.getValue();
+        LocalDate to = dateRangeTo.getValue();
+        XetNghiemModel.KetQuaXetNghiem result = resultSearch.getValue();
 
         if (from != null && to != null){
             if (from.isAfter(to)) {
@@ -99,23 +101,11 @@ public class TimKiemController implements Initializable {
             }
         }
 
+
         System.out.println(idNK == 0 ? null : idNK);
         System.out.println(name);
         System.out.println(from);
         System.out.println(to);
         System.out.println(result);
-
-        int finalIdNK = idNK;
-        filteredList.setPredicate(new Predicate<XetNghiemModel>() {
-            @Override
-            public boolean test(XetNghiemModel xetNghiemRow) {
-                if (finalIdNK != 0 && xetNghiemRow.getMaNK() != finalIdNK) return false;
-                if (!name.isBlank() && !xetNghiemRow.getName().contains(name)) return false;
-                if (from != null && xetNghiemRow.getDate().isBefore(from)) return false;
-                if (to != null && xetNghiemRow.getDate().isAfter(to)) return false;
-                if (result != null && xetNghiemRow.getResult() != result) return false;
-                return true;
-            }
-        });
     }
 }

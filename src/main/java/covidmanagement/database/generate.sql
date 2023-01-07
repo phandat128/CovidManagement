@@ -44,7 +44,6 @@ CREATE TABLE KhaiBao(
 	MaNhanKhau int NOT NULL,
 	Diemkhaibao varchar(50) NOT NULL,
 	NgayKhaiBao date NOT NULL,
-	CMND_CCCD varchar(20),
 	BHYT boolean NOT NULL,
 	LichTrinh varchar(500),
 	Trieuchung boolean NOT NULL,
@@ -78,16 +77,16 @@ REFERENCES HoKhau (MaHoKhau);
 ALTER TABLE XetNghiem   ADD  CONSTRAINT FK_XetNghiem_NhanKhau FOREIGN KEY(MaNhanKhau)
 REFERENCES NhanKhau (MaNhanKhau);
 
---INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
---VALUES (2, NULL, NULL, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
---INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
---VALUES (4, NULL, 14, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
---INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
---VALUES (7, NULL, NULL, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
---INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
---VALUES (12, NULL, 7, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
---INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
---VALUES (23, 2, 32, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
---INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
---VALUES (6, NULL, NULL, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
+INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
+VALUES (2, NULL, NULL, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
+INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
+VALUES (4, NULL, 14, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
+INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
+VALUES (7, NULL, NULL, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
+INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
+VALUES (12, NULL, 7, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
+INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
+VALUES (23, 2, 32, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
+INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
+VALUES (6, NULL, NULL, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
 
