@@ -1,92 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="708.0" prefWidth="721.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.KhaiBaoController">
-    <children>
-        <Label layoutX="8.0" layoutY="134.0" prefHeight="18.0" prefWidth="78.0" text="Ngày khai báo">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font></Label>
-        <Label layoutX="44.0" layoutY="193.0" prefHeight="18.0" prefWidth="46.0" text="Họ tên">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font></Label>
-        <Label layoutX="8.0" layoutY="70.0" prefHeight="18.0" prefWidth="78.0" text="Điểm khai báo">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font></Label>
-        <TextField layoutX="109.0" layoutY="190.0" />
-        <ChoiceBox id="Điểm khai báo" layoutX="110.0" layoutY="246.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
-        <Label layoutX="29.0" layoutY="250.0" prefHeight="18.0" prefWidth="54.0" text="Giới tính">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font></Label>
-        <DatePicker id="DatePicker" layoutX="97.0" layoutY="131.0" promptText="Nhập ngày" />
-        <ChoiceBox id="Điểm khai báo" layoutX="109.0" layoutY="67.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="18.0" prefWidth="150.0" />
-        <TextField layoutX="109.0" layoutY="306.0" />
-        <Label layoutX="11.0" layoutY="310.0" prefHeight="18.0" prefWidth="106.0" text="CMND/CCCD">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font></Label>
-        <Label layoutX="56.0" layoutY="358.0" prefHeight="18.0" prefWidth="33.0" text="BHYT">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font></Label>
-        <TextField layoutX="14.0" layoutY="441.0" prefHeight="162.0" prefWidth="316.0" />
-        <Label alignment="TOP_LEFT" layoutX="14.0" layoutY="398.0" prefHeight="30.0" prefWidth="334.0" text="Trong 14 ngày qua, bạn đã đi đén những địa phương nào?">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font></Label>
-        <Label layoutX="359.0" layoutY="58.0" prefHeight="44.0" prefWidth="316.0" text="Trong 14 ngày qua, bạn có gặp những triệu chứng: sốt, ho, khó thở, đau họng, viêm phổi, mệt mỏi?">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font></Label>
-        <Label layoutX="359.0" layoutY="134.0" prefHeight="18.0" prefWidth="316.0" text="Trong 14 ngày qua, bạn có tiếp xúc những người sau?">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font></Label>
-        <Label alignment="TOP_LEFT" layoutX="359.0" layoutY="402.0" prefHeight="26.0" prefWidth="316.0" text="Chọn các bệnh nền mà bạn đang có?">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font></Label>
-        <Label layoutX="230.0" layoutY="25.0" prefHeight="30.0" prefWidth="190.0" text="MẪU KHAI BÁO Y TẾ" textAlignment="CENTER">
-            <font>
-                <Font size="20.0" />
-            </font>
-        </Label>
-        <Button layoutX="271.0" layoutY="643.0" mnemonicParsing="false" onAction="#switchToMainView" prefHeight="30.0" prefWidth="118.0" text="Cập nhật khai báo" />
-        <Label />
-        <Label layoutX="358.0" layoutY="175.0" text="Người bệnh hoặc nghi ngờ, mắc bệnh COVID-19 " />
-        <Label layoutX="359.0" layoutY="241.0" text="Người từ nước có bệnh COVID-19 " />
-        <Label layoutX="359.0" layoutY="310.0" text="Người có biểu hiện (Sốt, ho, khó thở, Viêm phổi) " />
-        <CheckBox layoutX="366.0" layoutY="435.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="131.0" text="Bệnh gan mãn tính " />
-        <CheckBox layoutX="366.0" layoutY="471.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="131.0" text="Bệnh máu mãn tính " />
-        <CheckBox layoutX="366.0" layoutY="509.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="131.0" text="Bệnh phổi mãn tính " />
-        <CheckBox layoutX="366.0" layoutY="548.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="131.0" text="Bệnh thận mãn tính " />
-        <CheckBox layoutX="517.0" layoutY="435.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" text="Bệnh tim mạch " />
-        <CheckBox layoutX="517.0" layoutY="472.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" text="Huyết áp cao " />
-        <CheckBox layoutX="517.0" layoutY="508.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="131.0" text="Suy giảm miễn dịch " />
-        <CheckBox layoutX="519.0" layoutY="588.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="175.0" text="Nhận ghép tạng, tủy xương " />
-        <CheckBox layoutX="517.0" layoutY="548.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="Tiểu đường " />
-        <CheckBox layoutX="366.0" layoutY="590.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="Ung thư " />
-        <RadioButton layoutX="408.0" layoutY="107.0" mnemonicParsing="false" text="Có " />
-        <RadioButton layoutX="547.0" layoutY="107.0" mnemonicParsing="false" text="Không" />
-        <RadioButton layoutX="412.0" layoutY="207.0" mnemonicParsing="false" text="Có " />
-        <RadioButton layoutX="551.0" layoutY="207.0" mnemonicParsing="false" text="Không" />
-        <RadioButton layoutX="412.0" layoutY="279.0" mnemonicParsing="false" text="Có " />
-        <RadioButton layoutX="554.0" layoutY="279.0" mnemonicParsing="false" text="Không" />
-        <RadioButton layoutX="412.0" layoutY="358.0" mnemonicParsing="false" text="Có " />
-        <RadioButton layoutX="551.0" layoutY="358.0" mnemonicParsing="false" text="Không" />
-        <RadioButton layoutX="129.0" layoutY="358.0" mnemonicParsing="false" text="Có " />
-        <RadioButton layoutX="215.0" layoutY="358.0" mnemonicParsing="false" text="Không" />
-    </children>
+<AnchorPane prefHeight="708.0" prefWidth="721.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.khaibaocontroller.SuaKhaiBaoController">
+   <children>
+      <Label layoutX="18.0" layoutY="144.0" prefHeight="18.0" prefWidth="86.0" text="Ngày khai báo">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="203.0" prefHeight="18.0" prefWidth="46.0" text="Họ tên">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="80.0" prefHeight="18.0" prefWidth="85.0" text="Điểm khai báo">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nameField" layoutX="120.0" layoutY="199.0" />
+      <ChoiceBox fx:id="gender" layoutX="120.0" layoutY="256.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
+      <Label layoutX="39.0" layoutY="260.0" prefHeight="18.0" prefWidth="54.0" text="Giới tính">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <DatePicker id="DatePicker" fx:id="declareDate" layoutX="119.0" layoutY="140.0" promptText="Nhập ngày" />
+      <TextField fx:id="IDField" layoutX="119.0" layoutY="316.0" />
+      <Label layoutX="21.0" layoutY="320.0" prefHeight="18.0" prefWidth="106.0" text="CMND/CCCD">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="60.0" layoutY="367.0" prefHeight="18.0" prefWidth="33.0" text="BHYT">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="traceField" layoutX="24.0" layoutY="451.0" prefHeight="162.0" prefWidth="316.0" />
+      <Label alignment="TOP_LEFT" layoutX="24.0" layoutY="408.0" prefHeight="30.0" prefWidth="334.0" text="Trong 14 ngày qua, bạn đã đi đén những địa phương nào?">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="369.0" layoutY="70.0" prefHeight="42.0" prefWidth="316.0" text="Trong 14 ngày qua, bạn có gặp những triệu chứng: sốt, ho, khó thở, đau họng, viêm phổi, mệt mỏi?" wrapText="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="369.0" layoutY="144.0" prefHeight="18.0" prefWidth="316.0" text="Trong 14 ngày qua, bạn có tiếp xúc những người sau?">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="369.0" layoutY="412.0" prefHeight="26.0" prefWidth="316.0" text="Hãy cho biết bệnh nền mà bạn đang có?">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="253.0" layoutY="28.0" prefHeight="30.0" prefWidth="190.0" text="MẪU KHAI BÁO Y TẾ" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="saveDeclare" layoutX="299.0" layoutY="647.0" mnemonicParsing="false" onAction="#switchToChangeView" prefHeight="30.0" prefWidth="118.0" text="Lưu khai báo" />
+      <Label layoutX="10.0" layoutY="10.0" />
+      <Label layoutX="368.0" layoutY="185.0" text="Người bệnh hoặc nghi ngờ, mắc bệnh COVID-19 " />
+      <Label layoutX="369.0" layoutY="251.0" text="Người từ nước có bệnh COVID-19 " />
+      <Label layoutX="369.0" layoutY="320.0" text="Người có biểu hiện (Sốt, ho, khó thở, Viêm phổi) " />
+      <RadioButton fx:id="symptomYes" layoutX="418.0" layoutY="117.0" mnemonicParsing="false" selected="true" text="Có ">
+         <toggleGroup>
+            <ToggleGroup fx:id="Symptom" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="symptomNo" layoutX="557.0" layoutY="117.0" mnemonicParsing="false" text="Không">
+         <toggleGroup>
+            <ToggleGroup fx:id="Symptom" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="covidContactYes" layoutX="422.0" layoutY="217.0" mnemonicParsing="false" selected="true" text="Có ">
+         <toggleGroup>
+            <ToggleGroup fx:id="COVIDContact" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="covidContactNo" layoutX="561.0" layoutY="217.0" mnemonicParsing="false" text="Không">
+         <toggleGroup>
+            <ToggleGroup fx:id="COVIDContact" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="countryContactYes" layoutX="422.0" layoutY="289.0" mnemonicParsing="false" selected="true" text="Có ">
+         <toggleGroup>
+            <ToggleGroup fx:id="CountryContact" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="countryContactNo" layoutX="564.0" layoutY="289.0" mnemonicParsing="false" text="Không">
+         <toggleGroup>
+            <ToggleGroup fx:id="CountryContact" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="symptomContactYes" layoutX="422.0" layoutY="368.0" mnemonicParsing="false" selected="true" text="Có ">
+         <toggleGroup>
+            <ToggleGroup fx:id="SymptomContact" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="symptomContactNo" layoutX="561.0" layoutY="368.0" mnemonicParsing="false" text="Không">
+         <toggleGroup>
+            <ToggleGroup fx:id="SymptomContact" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="BHYTYes" layoutX="139.0" layoutY="368.0" mnemonicParsing="false" selected="true" text="Có ">
+         <toggleGroup>
+            <ToggleGroup fx:id="BHYT" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="BHYTNo" layoutX="225.0" layoutY="368.0" mnemonicParsing="false" text="Không">
+         <toggleGroup>
+            <ToggleGroup fx:id="BHYT" />
+         </toggleGroup>
+      </RadioButton>
+      <TextField fx:id="declareSpotField" layoutX="120.0" layoutY="78.0" promptText="Điểm khai báo" />
+      <TextField fx:id="benhNenField" layoutX="369.0" layoutY="451.0" prefHeight="162.0" prefWidth="316.0" />
+   </children>
 </AnchorPane>

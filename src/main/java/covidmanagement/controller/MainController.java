@@ -2,7 +2,10 @@ package covidmanagement.controller;
 
 import covidmanagement.Main;
 import covidmanagement.Utility;
+import covidmanagement.controller.khaibaocontroller.SuaKhaiBaoController;
+import covidmanagement.controller.khaibaocontroller.XemKhaiBaoController;
 import covidmanagement.controller.xetnghiemcontroller.SuaController;
+import covidmanagement.model.KhaiBaoModel;
 import covidmanagement.model.XetNghiemModel.KetQuaXetNghiem;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,8 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -40,13 +42,11 @@ public class MainController implements Initializable {
 
             final ObservableList<TreeItem<String>> branch = componentMain.getChildren();
             branch.add(new TreeItem<>("Thêm " + component));
-            if (!component.equals("xét nghiệm")) branch.add(new TreeItem<>("Sửa " + component));
-            if (!component.equals("xét nghiệm")) branch.add(new TreeItem<>("Xóa " + component));
             branch.add(new TreeItem<>("Tìm kiếm " + component));
+            branch.add(new TreeItem<>("Chỉnh sửa " + component));
 
             root.getChildren().add(componentMain);
         }
-
         treeView.setRoot(root);
         treeView.setShowRoot(false);
     }
@@ -86,6 +86,37 @@ public class MainController implements Initializable {
             Parent componentScene = fxmlLoader.load();
             SuaController suaController = fxmlLoader.getController();
             suaController.setField(idNK, name, date, place, result);
+            mainBorderPane.setCenter(componentScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void moveToSuaKhaiBaoPage(String diemkhaibao, String hoTen, String cmnd, String lichTrinh, KhaiBaoModel.gioiTinh gioiTinh,
+                                     boolean bhyt, boolean trieuchung, boolean tiepXucNguoiBenh, boolean tiepXucNguoiTuVungDich,
+                                     boolean tiepXucNguoiCoBieuHien, String benhNen, LocalDate ngayKhaiBao){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("khaibao/suakhaibao-view.fxml"));
+            Parent componentScene = fxmlLoader.load();
+            SuaKhaiBaoController suaController = fxmlLoader.getController();
+            suaController.setField(diemkhaibao, hoTen, cmnd, lichTrinh, gioiTinh,
+                                bhyt, trieuchung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich,
+                                tiepXucNguoiCoBieuHien, benhNen, ngayKhaiBao);
+            mainBorderPane.setCenter(componentScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void moveToXemKhaiBaoPage(String diemkhaibao, String hoTen, String cmnd, String lichTrinh, KhaiBaoModel.gioiTinh gioiTinh,
+                                     boolean bhyt, boolean trieuchung, boolean tiepXucNguoiBenh, boolean tiepXucNguoiTuVungDich,
+                                     boolean tiepXucNguoiCoBieuHien, String benhNen, LocalDate ngayKhaiBao){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("khaibao/xemkhaibao-view.fxml"));
+            Parent componentScene = fxmlLoader.load();
+            XemKhaiBaoController xemController = fxmlLoader.getController();
+            xemController.setField(diemkhaibao, hoTen, cmnd, lichTrinh, gioiTinh,
+                    bhyt, trieuchung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich,
+                    tiepXucNguoiCoBieuHien, benhNen, ngayKhaiBao);
             mainBorderPane.setCenter(componentScene);
         } catch (IOException e) {
             e.printStackTrace();

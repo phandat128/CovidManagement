@@ -1,48 +1,159 @@
 package covidmanagement.model;
 
+import covidmanagement.Main;
+import covidmanagement.Utility;
+import covidmanagement.controller.MainController;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
 
 public class KhaiBaoModel {
-    public static void main(String[] args) {
-        Connection c = null;
-        Statement stmt = null;
+    private int maKhaiBao;
+    private String hoTen;
+    private static KhaiBaoModel.gioiTinh gioiTinh;
+    private String diemKhaiBao;
+    private LocalDate ngayKhaiBao;
+    private String cmnd;
+    private boolean BHYT;
+    private String lichTrinh;
+    private boolean trieuChung;
+    private boolean tiepXucNguoiBenh;
+    public boolean tiepXucNguoiTuVungDich;
+    public boolean tiepXucNguoiCoBieuHien;
+    public String benhNen;
+    public Button changeButton;
+    public Button deleteButton;
+    public Button viewButton;
+
+    public int getMaKhaiBao() {
+        return maKhaiBao;
+    }
+
+    public String getHoTen() {
+        return hoTen;
+    }
+
+    public static KhaiBaoModel.gioiTinh getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public String getDiemKhaiBao() {
+        return diemKhaiBao;
+    }
+
+    public LocalDate getNgayKhaiBao() {
+        return ngayKhaiBao;
+    }
+
+    public String getCmnd() {
+        return cmnd;
+    }
+
+    public boolean isBHYT() {
+        return BHYT;
+    }
+
+    public String getLichTrinh() {
+        return lichTrinh;
+    }
+
+    public boolean isTrieuChung() {
+        return trieuChung;
+    }
+
+    public boolean isTiepXucNguoiBenh() {
+        return tiepXucNguoiBenh;
+    }
+
+    public boolean isTiepXucNguoiTuVungDich() {
+        return tiepXucNguoiTuVungDich;
+    }
+
+    public boolean isTiepXucNguoiCoBieuHien() {
+        return tiepXucNguoiCoBieuHien;
+    }
+
+    public String getBenhNen() {
+        return benhNen;
+    }
+
+    public Button getChangeButton() {
+        return changeButton;
+    }
+
+    public Button getDeleteButton() {
+        return deleteButton;
+    }
+    public Button getViewButton() {
+        return viewButton;
+    }
+
+    public KhaiBaoModel(int maKhaiBao, String hoTen, String diemkhaibao, LocalDate ngayKhaiBao, String cmnd, KhaiBaoModel.gioiTinh gioiTinh,
+                        boolean bhyt, String lichTrinh, boolean trieuchung, boolean tiepXucNguoiBenh,
+                        boolean tiepXucNguoiTuVungDich, boolean tiepXucNguoiCoBieuHien, String benhNen) {
+        this.maKhaiBao = maKhaiBao;
+        this.hoTen = hoTen;
+        this.diemKhaiBao = diemkhaibao;
+        this.ngayKhaiBao = ngayKhaiBao;
+        KhaiBaoModel.gioiTinh = gioiTinh;
+        this.cmnd = cmnd;
+        BHYT = bhyt;
+        this.lichTrinh = lichTrinh;
+        this.trieuChung = trieuchung;
+        this.tiepXucNguoiBenh = tiepXucNguoiBenh;
+        this.tiepXucNguoiTuVungDich = tiepXucNguoiTuVungDich;
+        this.tiepXucNguoiCoBieuHien = tiepXucNguoiCoBieuHien;
+        this.benhNen = benhNen;
+        this.changeButton = new Button("Sửa");
+        this.deleteButton = new Button("Xóa");
+        this.viewButton = new Button("Xem");
+        changeButton.setOnAction(this::handleChangeClick);
+        deleteButton.setOnAction(this::handleDeleteClick);
+        viewButton.setOnAction(this::handleViewClick);
+    }
+
+    private void handleDeleteClick(ActionEvent actionEvent) {
+        Utility.displayConfirmDialog("Bạn muốn xóa khai báo này không?", maKhaiBao, "Khaibao");
+    }
+
+    private void handleChangeClick(ActionEvent event){
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/test",
-                            "postgres", "123123");
-            System.out.println("Opened database successfully");
-
-            stmt = c.createStatement();
-            String sql = "CREATE TYPE trieuchung AS ENUM ('Sốt', 'Ho', 'Khó thở', 'Viêm phổi', 'Đau họng', 'Mệt mỏi', 'Không');" +
-                    "CREATE TYPE tiepxuc AS ENUM ('Người bệnh hoặc nghi ngờ, mắc bệnh COVID-19', 'Người từ nước có bệnh COVID-19', 'Người có biểu hiện (Sốt, ho, khó thở, Viêm phổi)', 'Không');" +
-                    "CREATE TYPE benhnen AS ENUM ('Bệnh gan mãn tính', 'Bệnh máu mãn tính', 'Bệnh phổi mãn tính', 'Bệnh thận mãn tính', 'Bệnh tim mạch', 'Huyết áp cao', 'Suy giảm miễn dịch', 'Người nhận ghép tạng, Tủy xương', 'Tiểu đường', 'Ung thư', 'Không');" +
-                    "CREATE TYPE diemkhaibao AS ENUM ('Quận Hoàng Mai', 'Quận Long Biên', 'Quận Thanh Xuân', 'Quận Bắc Từ Liêm', 'Quận Ba Đình', 'Quận Cầu Giấy', 'Quận Đống Đa', 'Quận Hai Bà Trưng', 'Quận Hoàn Kiếm', 'Quận Hà Đông', 'Quận Tây Hồ', 'Quận Nam Từ Liêm');" +
-                    "CREATE TABLE IF NOT EXIST KHAIBAOYTE " +
-                    "CREATE TYPE gioitinh AS ENUM ('Nam', 'Nữ');" +
-                    "(ID INT PRIMARY KEY                NOT NULL," +
-                    " NGAYKHAIBAO       DATE            NOT NULL," +
-                    " DIEMKHAIBAO       diemkhaibao     NOT NULL," +
-                    " HOTEN             CHAR(50)        NOT NULL," +
-                    " GIOITINH          gioitinh        NOT NULL," +
-                    " CMND              CHAR(20)        NOT NULL," +
-                    " DIACHI            CHAR(50)," +
-                    " BHYT              BOOL            NOT NULL," +
-                    " DIAPHUONGDIQUA    TEXT            NOT NULL," +
-                    " TRIEUCHUNG        trieuchung      NOT NULL," +
-                    " TIEPXUC           tiepxuc         NOT NULL," +
-                    " BENHNEN           benhnen         NOT NULL);";
-            String sql2 = " ";
-            stmt.executeUpdate(sql);
-            stmt.executeUpdate(sql2);
-            stmt.close();
-            c.close();
-
-        } catch (Exception e) {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+            MainController mainController = fxmlLoader.getController();
+            mainController.moveToSuaKhaiBaoPage(diemKhaiBao, hoTen, cmnd, lichTrinh, gioiTinh,
+                    BHYT, trieuChung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich,
+                    tiepXucNguoiCoBieuHien, benhNen, ngayKhaiBao);
+        } catch(IOException e){
             e.printStackTrace();
-            System.err.println(e.getClass().getName()+": "+e.getMessage());
-            System.exit(0);
         }
-        System.out.println("Table created successfully");
+    }
+    private void handleViewClick(ActionEvent event){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+            MainController mainController = fxmlLoader.getController();
+            mainController.moveToXemKhaiBaoPage(diemKhaiBao, hoTen, cmnd, lichTrinh, gioiTinh,
+                    BHYT, trieuChung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich,
+                    tiepXucNguoiCoBieuHien, benhNen, ngayKhaiBao);
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    public enum gioiTinh {
+        NAM, NỮ, UNDEFINED;
     }
 }
