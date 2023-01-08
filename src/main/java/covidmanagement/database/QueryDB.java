@@ -5,7 +5,7 @@ import java.sql.*;
 public class QueryDB {
     Connection connection;
     Statement statement;
-    String URL = "jdbc:postgresql://localhost:5432/";
+    String URL = "jdbc:postgresql://localhost:5432/covidmanagement";
     String user = "postgres";
     String password = "123456";
 
@@ -15,8 +15,12 @@ public class QueryDB {
         statement = connection.createStatement();
     }
 
-    public ResultSet query(String sql) throws SQLException{
+    public ResultSet executeQuery(String sql) throws SQLException{
         return this.statement.executeQuery(sql);
+    }
+
+    public void executeUpdate(String sql) throws SQLException{
+        this.statement.executeUpdate(sql);
     }
 
     public void close(){
