@@ -5,14 +5,18 @@ import covidmanagement.model.XetNghiemModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class ChinhSuaController implements Initializable {
@@ -39,11 +43,9 @@ public class ChinhSuaController implements Initializable {
     @FXML TableColumn<XetNghiemModel, Button> deleteButtonColumn;
 
     private final ObservableList<XetNghiemModel> xetNghiemList = FXCollections.observableArrayList(
-            new XetNghiemModel(1,23, "hoang", "172366327", LocalDate.of(2022,1,2),
-                    "wheraes", XetNghiemModel.KetQuaXetNghiem.NEGATIVE),
-            new XetNghiemModel(2,12, "nam", "132534245", LocalDate.of(2022,1,3),
-                    "asd", XetNghiemModel.KetQuaXetNghiem.POSITIVE)
+            XetNghiemModel.getXetNghiemList()
     );
+    private final FilteredList<XetNghiemModel> filteredList = new FilteredList<>(xetNghiemList);
 
     @FXML ChoiceBox<XetNghiemModel.KetQuaXetNghiem> resultSearch;
 
@@ -53,9 +55,23 @@ public class ChinhSuaController implements Initializable {
                 XetNghiemModel.KetQuaXetNghiem.values()
         ));
         resultSearch.setOnAction(this::getResultChoice);
-
-
-
+        // set date format to DD/MM/yyyy
+        StringConverter<LocalDate> dateConverter = new StringConverter<LocalDate>() {
+            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            @Override
+            public String toString(LocalDate localDate) {
+                if (localDate == null) return "";
+                return formatter.format(localDate);
+            }
+            @Override
+            public LocalDate fromString(String s) {
+                if (s.isBlank()) return null;
+                return LocalDate.parse(s, formatter);
+            }
+        };
+        dateRangeFrom.setConverter(dateConverter);
+        dateRangeTo.setConverter(dateConverter);
+        // set up for table view
         idNKColumn.setCellValueFactory(new PropertyValueFactory<>("maNK"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -64,9 +80,8 @@ public class ChinhSuaController implements Initializable {
         changeButtonColumn.setCellValueFactory(new PropertyValueFactory<>("changeButton"));
         deleteButtonColumn.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
 
-        searchTable.setItems(xetNghiemList);
-
-        //set serial number column
+        searchTable.setItems(filteredList);
+        // set serial number column
         idColumn.setCellValueFactory(
                 cellDataFeatures -> new ReadOnlyObjectWrapper<>(
                         searchTable.getItems().indexOf(cellDataFeatures.getValue()) + 1
@@ -75,7 +90,7 @@ public class ChinhSuaController implements Initializable {
     }
 
     public void getResultChoice(ActionEvent event){
-        //TODO here
+        // TODO here
         XetNghiemModel.KetQuaXetNghiem choice = resultSearch.getValue();
         System.out.println(choice);
     }
@@ -83,7 +98,8 @@ public class ChinhSuaController implements Initializable {
     public void onSearch(ActionEvent event) throws RuntimeException{
         int idNK = 0;
         try {
-            if (!idNKField.getText().isBlank()) idNK = Integer.parseInt(idNKField.getText());
+            if (!idNKField.getText().isBlank())
+                idNK = Integer.parseInt(idNKField.getText());
         } catch (NumberFormatException e){
             e.printStackTrace();
             Utility.displayExceptionDialog(new NumberFormatException("Mã nhân khẩu chỉ được chứa chữ số!"));
@@ -101,11 +117,28 @@ public class ChinhSuaController implements Initializable {
             }
         }
 
-
         System.out.println(idNK == 0 ? null : idNK);
         System.out.println(name);
         System.out.println(from);
         System.out.println(to);
         System.out.println(result);
+
+        final int finalIdNK = idNK;
+        filteredList.setPredicate(xetNghiemRow -> {
+            if (finalIdNK != 0 && xetNghiemRow.getMaNK() != finalIdNK) return false;
+            if (!name.isBlank() && !xetNghiemRow.getName().contains(name)) return false;
+            if (from != null && xetNghiemRow.getDate().isBefore(from)) return false;
+            if (to != null && xetNghiemRow.getDate().isAfter(to)) return false;
+            if (result != null && xetNghiemRow.getResult() != result) return false;
+            return true;
+        });
+    }
+
+    public void resetAllFields(ActionEvent event){
+        idNKField.setText("");
+        nameField.setText("");
+        dateRangeFrom.setValue(null);
+        dateRangeTo.setValue(null);
+        resultSearch.setValue(null);
     }
 }

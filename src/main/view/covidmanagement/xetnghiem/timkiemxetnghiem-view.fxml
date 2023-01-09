@@ -106,6 +106,16 @@
                     </children>
                 </HBox>
                 <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <left>
+                        <Button mnemonicParsing="false" onAction="#resetAllFields" text="Xóa các mục tìm kiếm" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <BorderPane.margin>
+                                <Insets left="40.0" />
+                            </BorderPane.margin>
+                        </Button>
+                    </left>
                     <center>
                         <Button fx:id="searchButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSearch" text="Tìm kiếm" BorderPane.alignment="CENTER">
                             <font>

@@ -11,11 +11,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
 
 public class TimKiemController implements Initializable {
     @FXML TextField idNKField, nameField;
@@ -37,12 +39,8 @@ public class TimKiemController implements Initializable {
     @FXML TableColumn<XetNghiemModel, XetNghiemModel.KetQuaXetNghiem> resultColumn;
 
     private final ObservableList<XetNghiemModel> xetNghiemList = FXCollections.observableArrayList(
-            new XetNghiemModel(1,23, "hoang", "172366327", LocalDate.of(2022,1,2),
-                    "wheraes", XetNghiemModel.KetQuaXetNghiem.NEGATIVE),
-            new XetNghiemModel(2,12, "nam", "132534245", LocalDate.of(2022,1,3),
-                    "asd", XetNghiemModel.KetQuaXetNghiem.POSITIVE)
+            XetNghiemModel.getXetNghiemList()
     );
-
     private final FilteredList<XetNghiemModel> filteredList = new FilteredList<>(xetNghiemList);
 
     @FXML ChoiceBox<XetNghiemModel.KetQuaXetNghiem> resultSearch;
@@ -53,9 +51,23 @@ public class TimKiemController implements Initializable {
                 XetNghiemModel.KetQuaXetNghiem.values()
         ));
         resultSearch.setOnAction(this::getResultChoice);
-
-
-
+        // set date format to DD/MM/yyyy
+        StringConverter<LocalDate> dateConverter = new StringConverter<LocalDate>() {
+            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            @Override
+            public String toString(LocalDate localDate) {
+                if (localDate == null) return "";
+                return formatter.format(localDate);
+            }
+            @Override
+            public LocalDate fromString(String s) {
+                if (s.isBlank()) return null;
+                return LocalDate.parse(s, formatter);
+            }
+        };
+        dateRangeFrom.setConverter(dateConverter);
+        dateRangeTo.setConverter(dateConverter);
+        // set up for table view
         idNKColumn.setCellValueFactory(new PropertyValueFactory<>("maNK"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -63,7 +75,6 @@ public class TimKiemController implements Initializable {
         resultColumn.setCellValueFactory(new PropertyValueFactory<>("result"));
 
         searchTable.setItems(filteredList);
-
         //set serial number column
         idColumn.setCellValueFactory(
                 cellDataFeatures -> new ReadOnlyObjectWrapper<>(
@@ -105,17 +116,22 @@ public class TimKiemController implements Initializable {
         System.out.println(to);
         System.out.println(result);
 
-        int finalIdNK = idNK;
-        filteredList.setPredicate(new Predicate<XetNghiemModel>() {
-            @Override
-            public boolean test(XetNghiemModel xetNghiemRow) {
-                if (finalIdNK != 0 && xetNghiemRow.getMaNK() != finalIdNK) return false;
-                if (!name.isBlank() && !xetNghiemRow.getName().contains(name)) return false;
-                if (from != null && xetNghiemRow.getDate().isBefore(from)) return false;
-                if (to != null && xetNghiemRow.getDate().isAfter(to)) return false;
-                if (result != null && xetNghiemRow.getResult() != result) return false;
-                return true;
-            }
+        final int finalIdNK = idNK;
+        filteredList.setPredicate(xetNghiemRow -> {
+            if (finalIdNK != 0 && xetNghiemRow.getMaNK() != finalIdNK) return false;
+            if (!name.isBlank() && !xetNghiemRow.getName().contains(name)) return false;
+            if (from != null && xetNghiemRow.getDate().isBefore(from)) return false;
+            if (to != null && xetNghiemRow.getDate().isAfter(to)) return false;
+            if (result != null && xetNghiemRow.getResult() != result) return false;
+            return true;
         });
+    }
+
+    public void resetAllFields(ActionEvent event){
+        idNKField.setText("");
+        nameField.setText("");
+        dateRangeFrom.setValue(null);
+        dateRangeTo.setValue(null);
+        resultSearch.setValue(null);
     }
 }
