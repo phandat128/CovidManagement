@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
-public class ChinhSuaController {
+public class XoaTimkiemController {
 
     @FXML
     private TextField txtHoVaTen;
@@ -19,30 +19,55 @@ public class ChinhSuaController {
     private TextField txtMaHoKhau;
     @FXML
     private DatePicker pickerNgaySinh;
+
     @FXML
-    private TableView<?> tableNhanKhau;
+    private TableView<?> tableThem;
     @FXML
     private TableColumn<?, ?> columnHoVaTen;
+
     @FXML
     private TableColumn<?, ?> columnMaChuHo;
+
+    @FXML
+    private TableColumn<?, ?> columnTonGiao;
+
     @FXML
     private TableColumn<?, ?> columnNgheNghiep;
+
     @FXML
     private TableColumn<?, ?> collumnMaNhanKhau;
+
+    @FXML
+    private TableColumn<?, ?> columnLaChuHo;
+
+    @FXML
+    private TableColumn<?, ?> columnQuanHeVoiChuHo;
+
+    @FXML
+    private TableColumn<?, ?> columnNguyenQuan;
+
     @FXML
     private TableColumn<?, ?> columnGioiTinh;
+
     @FXML
     private TableColumn<?, ?> columnSDT;
+
     @FXML
     private TableColumn<?, ?> columnNgaySinh;
+
+    @FXML
+    private Button themButton;
+    @FXML
+    private AnchorPane themnhankhauView;
+
     @FXML
     private TableColumn<?, ?> columnCMND_CCCD;
+
     @FXML
-    private AnchorPane chinhsuanhankhauView;
+    private TableColumn<?, ?> columnQuocTich;
+
     @FXML
-    private Button btnTimKiem, btnSua, btnXem, btnXoa;
-    @FXML
-    void xemActionevent(ActionEvent event) {
+    void dongActionevent(ActionEvent event) {
 
     }
 
