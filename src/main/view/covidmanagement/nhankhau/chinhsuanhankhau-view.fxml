@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="chinhsuanhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.ChinhSuaController">
+    <children>
+        <AnchorPane layoutX="0.0" layoutY="350.0" prefHeight="200.0" prefWidth="910.0">
+            <children>
+                <TableView fx:id="tableNhanKhau" layoutX="0.0" layoutY="0.0" prefHeight="200.0" prefWidth="880.0" AnchorPane.leftAnchor="15.0">
+                    <columns>
+                        <TableColumn fx:id="collumnMaNhanKhau" prefWidth="110.0" text="Mã Nhân Khẩu" />
+                        <TableColumn fx:id="columnHoVaTen" prefWidth="110.0" text="Họ và Tên" />
+                        <TableColumn fx:id="columnNgaySinh" prefWidth="110.0" text="Ngày Sinh" />
+                        <TableColumn fx:id="columnGioiTinh" prefWidth="110.0" text="Giới Tính" />
+                        <TableColumn fx:id="columnCMND_CCCD" prefWidth="110.0" text="CMND_CCCD" />
+                        <TableColumn fx:id="columnSDT" prefWidth="110.0" text="Số Điện Thoại" />
+                        <TableColumn fx:id="columnNgheNghiep" prefWidth="110.0" text="Nghề Nghiệp" />
+                        <TableColumn fx:id="columnMaChuHo" prefWidth="110.0" text="Mã Hộ Khẩu" />
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="430.0">
+            <children>
+                <Label layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="120.0" text="Mã Nhân Khẩu" />
+                <TextField fx:id="txtMaNhanKhau" layoutX="134.0" layoutY="14.0" prefHeight="40.0" prefWidth="250.0" />
+                <Label layoutX="14.0" layoutY="73.0" prefHeight="40.0" prefWidth="120.0" text="Họ và Tên" />
+                <Label layoutX="14.0" layoutY="126.0" prefHeight="40.0" prefWidth="120.0" text="Ngày Sinh" />
+                <TextField fx:id="txtHoVaTen" layoutX="134.0" layoutY="73.0" prefHeight="40.0" prefWidth="250.0" />
+                <DatePicker fx:id="pickerNgaySinh" layoutX="134.0" layoutY="131.0" prefHeight="40.0" prefWidth="250.0" />
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="455.0" layoutY="14.0" prefHeight="200.0" prefWidth="430.0">
+            <children>
+                <Label layoutX="14.0" layoutY="126.0" prefHeight="40.0" prefWidth="120.0" text="Mã Hộ Khẩu" />
+                <Label layoutX="14.0" layoutY="73.0" prefHeight="40.0" prefWidth="120.0" text="Số Điện Thoại" />
+                <TextField fx:id="txtMaHoKhau" layoutX="134.0" layoutY="126.0" prefHeight="40.0" prefWidth="250.0" />
+                <TextField fx:id="txtSDT" layoutX="134.0" layoutY="73.0" prefHeight="40.0" prefWidth="250.0" />
+                <Label layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="120.0" text="CMND_CCCD" />
+                <TextField fx:id="txtCMND_CDDD" layoutX="134.0" layoutY="14.0" prefHeight="40.0" prefWidth="250.0" />
+            </children>
+        </AnchorPane>
+        <Button id="themButton" fx:id="btnTimKiem" layoutX="160.0" layoutY="255.0" mnemonicParsing="false" onAction="#timkiemActionevent" prefHeight="40.0" prefWidth="150.0" text="Tìm kiếm" />
+      <Button id="themButton" fx:id="btnXoa" layoutX="640.0" layoutY="255.0" mnemonicParsing="false" onAction="#xoaActionevent" prefHeight="40.0" prefWidth="150.0" text="Xóa" />
+      <Button id="themButton" fx:id="btnSua" layoutX="400.0" layoutY="255.0" mnemonicParsing="false" onAction="#suaActionevent" prefHeight="40.0" prefWidth="150.0" text="Sửa" />
+    </children>
+</AnchorPane>

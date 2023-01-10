@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 public class SuaController implements Initializable  {
         @FXML
-        private Button btnSua;
+        private Button btnCapNhat;
         @FXML
         private Button btnDong;
 
