@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="covidmanagement.controller.NhanKhauController"
+            fx:controller="covidmanagement.controller.nhankhaucontroller.NhanKhauController"
             prefHeight="400.0" prefWidth="600.0">
     <children>
         <Text layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is xoa nhan khau view" textAlignment="CENTER" wrappingWidth="600.0">

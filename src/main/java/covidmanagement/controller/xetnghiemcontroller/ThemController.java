@@ -9,9 +9,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class ThemController implements Initializable {
@@ -29,6 +31,21 @@ public class ThemController implements Initializable {
         resultField.setItems(FXCollections.observableArrayList(KetQuaXetNghiem.values()));
         resultField.setValue(KetQuaXetNghiem.UNDEFINED);
         dateField.setValue(LocalDate.now());
+        dateField.setConverter(new StringConverter<>() {
+            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            @Override
+            public String toString(LocalDate localDate) {
+                if (localDate == null) return "";
+                return formatter.format(localDate);
+            }
+
+            @Override
+            public LocalDate fromString(String s) {
+                if (s.isBlank()) return null;
+                return LocalDate.parse(s, formatter);
+            }
+        });
     }
 
     public void onAdd(){
@@ -49,7 +66,7 @@ public class ThemController implements Initializable {
             throw placeException;
         }
         //xử lý ngoại lệ trường hợp trường mã nhân khẩu không phải là chữ số
-        int idNK = 0;
+        int idNK;
         try {
             idNK = Integer.parseInt(idNKField.getText());
         } catch (NumberFormatException e) {
