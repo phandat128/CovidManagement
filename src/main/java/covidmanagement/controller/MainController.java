@@ -41,9 +41,8 @@ public class MainController implements Initializable {
 
             final ObservableList<TreeItem<String>> branch = componentMain.getChildren();
             branch.add(new TreeItem<>("Thêm " + component));
-            if (!component.equals("xét nghiệm")) branch.add(new TreeItem<>("Sửa " + component));
-            if (!component.equals("xét nghiệm")) branch.add(new TreeItem<>("Xóa " + component));
             branch.add(new TreeItem<>("Tìm kiếm " + component));
+            branch.add(new TreeItem<>("Chỉnh sửa " + component));
 
             root.getChildren().add(componentMain);
         }
@@ -81,17 +80,6 @@ public class MainController implements Initializable {
         }
     }
 
-    public void moveToSuaXetNghiemPage(int idNK, String name, LocalDate date, String place, KetQuaXetNghiem result){
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("xetnghiem/suaxetnghiem-view.fxml"));
-            Parent componentScene = fxmlLoader.load();
-            SuaController suaController = fxmlLoader.getController();
-            suaController.setField(idNK, name, date, place, result);
-            mainBorderPane.setCenter(componentScene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     public void moveToSuaCachLyPage(int idNK, String name, LocalDate begindate, LocalDate finishdate, String place){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("cachly/suacachly-view.fxml"));

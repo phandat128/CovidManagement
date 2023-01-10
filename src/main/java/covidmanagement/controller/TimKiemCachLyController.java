@@ -38,7 +38,7 @@ public class TimKiemCachLyController implements Initializable {
 
     @FXML TableColumn<CachLyModel, Button> deleteButtonColumnCl;
 
-    private final ObservableList<CachLyModel> CachLyist = FXCollections.observableArrayList(
+    private final ObservableList<CachLyModel> CachLyList = FXCollections.observableArrayList(
             new CachLyModel(1,23, "hoang", "172366327", LocalDate.of(2022,1,2),
                     LocalDate.of(2022,1,17),"bach khoa"
             ),
@@ -46,7 +46,6 @@ public class TimKiemCachLyController implements Initializable {
             new CachLyModel(2,12,"long","124124124", LocalDate.of(2022,1,3),
                     LocalDate.of(2022,1,18),"truong dinh"
             )
-
     );
 
 
@@ -63,7 +62,7 @@ public class TimKiemCachLyController implements Initializable {
         changeButtonColumnCl.setCellValueFactory(new PropertyValueFactory<>("changeButton"));
         deleteButtonColumnCl.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
 
-        searchTableCl.setItems(CachLyist);
+        searchTableCl.setItems(CachLyList);
 
         //set serial number column
         idColumnCl.setCellValueFactory(

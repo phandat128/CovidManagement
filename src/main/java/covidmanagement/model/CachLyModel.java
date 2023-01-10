@@ -54,7 +54,7 @@ public class CachLyModel {
         //TODO here
         String sql = "";
 
-        ResultSet rs = queryDB.query(sql);
+        ResultSet rs = queryDB.executeQuery(sql);
         while (rs.next()){
             int _maCL = rs.getInt("macachly");
             int _maNK = rs.getInt("manhankhau");
@@ -71,7 +71,7 @@ public class CachLyModel {
         return queryList;
     }
     private void handleDeleteClickCl(ActionEvent event) {
-        Utility.displayConfirmDialog("Xác nhận xóa", this.maCl, "CachLy");
+        Utility.displayConfirmDeleteDialog("Xác nhận xóa", this.maCl, "CachLy");
     }
 
     private void handleChangeClickCl(ActionEvent event) {
