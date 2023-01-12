@@ -2,18 +2,16 @@ package covidmanagement.model;
 
 import covidmanagement.Main;
 import covidmanagement.Utility;
-import covidmanagement.controller.MainController;
+import covidmanagement.controller.xetnghiemcontroller.SuaController;
 import covidmanagement.database.QueryDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +26,10 @@ public class XetNghiemModel {
     private KetQuaXetNghiem result;
     private Button changeButton, deleteButton;
 
-    public XetNghiemModel(int maXN, int maNK, String name, String cmnd, LocalDate date, String place, KetQuaXetNghiem result) {
+    public XetNghiemModel(int maXN, int maNK, LocalDate date, String place, KetQuaXetNghiem result) {
         this.maXN = maXN;
         this.maNK = maNK;
-        this.name = name;
-        this.cmnd = cmnd;
+        setNameAndCMND(maNK);
         this.date = date;
         this.place = place;
         this.result = result;
@@ -44,33 +41,59 @@ public class XetNghiemModel {
 
     }
 
-    public List<XetNghiemModel> getXetNghiemList(String cmnd,
-                        String name,
-                        LocalDate from, LocalDate to,
-                        KetQuaXetNghiem result) throws SQLException {
+    public static List<XetNghiemModel> getXetNghiemList(){
         List<XetNghiemModel> queryList = new ArrayList<>();
-        QueryDB queryDB = new QueryDB();
-        //TODO here
-        String sql = "";
+        try {
+            QueryDB queryDB = new QueryDB();
+            String sql = "select * from xetnghiem;";
 
-        ResultSet rs = queryDB.query(sql);
-        while (rs.next()){
-            int _maXN = rs.getInt("maxetnghiem");
-            int _maNK = rs.getInt("manhankhau");
-            String _cmnd = rs.getString("cmnd_cccd");
-            String _name = rs.getString("hoten");
-            LocalDate _date = rs.getDate("thoigian").toLocalDate();
-            String _place = rs.getString("diadiem");
-            KetQuaXetNghiem _result = rs.getObject("ketqua", KetQuaXetNghiem.class);
-            queryList.add(new XetNghiemModel(_maXN, _maNK, _name, _cmnd, _date, _place, _result));
+            ResultSet rs = queryDB.executeQuery(sql);
+            while (rs.next()) {
+                int _maXN = rs.getInt("maxetnghiem");
+                int _maNK = rs.getInt("manhankhau");
+                LocalDate _date = rs.getDate("thoigian").toLocalDate();
+                String _place = rs.getString("diadiem");
+                KetQuaXetNghiem _result = KetQuaXetNghiem.valueOf(rs.getString("ketqua"));
+                queryList.add(new XetNghiemModel(_maXN, _maNK, _date, _place, _result));
+            }
+            rs.close();
+            queryDB.close();
+        } catch (SQLException e){
+            e.printStackTrace();
         }
-        rs.close();
-        queryDB.close();
         return queryList;
     }
 
+    public static void add(int maNK, LocalDate date, String place, KetQuaXetNghiem result) throws SQLException{
+        QueryDB queryDB = new QueryDB();
+        PreparedStatement statement = queryDB.getConnection().prepareStatement(
+                "INSERT INTO XetNghiem(manhankhau, thoigian, diadiem, ketqua) VALUES (?, ?, ?, ?);"
+        );
+        statement.setInt(1, maNK);
+        statement.setDate(2, Date.valueOf(date));
+        statement.setString(3, place);
+        statement.setString(4, result.toString());
+        statement.executeUpdate();
+        statement.close();
+        queryDB.close();
+    }
+
+    public static void update(int maXetNghiem, LocalDate date, String place, KetQuaXetNghiem result) throws SQLException{
+        QueryDB queryDB = new QueryDB();
+        PreparedStatement statement = queryDB.getConnection().prepareStatement(
+                "UPDATE XetNghiem SET (thoigian, diadiem, ketqua) = (?, ?, ?) WHERE maxetnghiem = ?;"
+        );
+        statement.setDate(1, Date.valueOf(date));
+        statement.setString(2, place);
+        statement.setString(3, result.toString());
+        statement.setInt(4, maXetNghiem);
+        statement.executeUpdate();
+        statement.close();
+        queryDB.close();
+    }
+
     private void handleDeleteClick(ActionEvent event) {
-        Utility.displayConfirmDialog("Xác nhận xóa?", this.maXN, "XetNghiem");
+        Utility.displayConfirmDeleteDialog("Xác nhận xóa?", this.maXN, "XetNghiem");
     }
 
     private void handleChangeClick(ActionEvent event){
@@ -80,13 +103,13 @@ public class XetNghiemModel {
         System.out.println(place);
         System.out.println(result);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("xetnghiem/suaxetnghiem-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
-            MainController mainController = fxmlLoader.getController();
-            mainController.moveToSuaXetNghiemPage(maNK, name, date, place, result);
+            SuaController controller = fxmlLoader.getController();
+            controller.setField(maXN, maNK, name, date, place, result);
         } catch(IOException e){
             e.printStackTrace();
         }
@@ -118,6 +141,10 @@ public class XetNghiemModel {
 
     public Button getDeleteButton() {
         return deleteButton;
+    }
+
+    private void setNameAndCMND(int maNK){
+        //TODO
     }
 
     public enum KetQuaXetNghiem{

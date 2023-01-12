@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-public class TimKiemController implements Initializable {
+public class ChinhSuaController implements Initializable {
     @FXML TextField idNKField, nameField;
 
     @FXML DatePicker dateRangeFrom, dateRangeTo;
@@ -37,6 +37,10 @@ public class TimKiemController implements Initializable {
     @FXML TableColumn<XetNghiemModel, String> placeColumn;
 
     @FXML TableColumn<XetNghiemModel, XetNghiemModel.KetQuaXetNghiem> resultColumn;
+
+    @FXML TableColumn<XetNghiemModel, Button> changeButtonColumn;
+
+    @FXML TableColumn<XetNghiemModel, Button> deleteButtonColumn;
 
     private final ObservableList<XetNghiemModel> xetNghiemList = FXCollections.observableArrayList(
             XetNghiemModel.getXetNghiemList()
@@ -73,9 +77,11 @@ public class TimKiemController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         placeColumn.setCellValueFactory(new PropertyValueFactory<>("place"));
         resultColumn.setCellValueFactory(new PropertyValueFactory<>("result"));
+        changeButtonColumn.setCellValueFactory(new PropertyValueFactory<>("changeButton"));
+        deleteButtonColumn.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
 
         searchTable.setItems(filteredList);
-        //set serial number column
+        // set serial number column
         idColumn.setCellValueFactory(
                 cellDataFeatures -> new ReadOnlyObjectWrapper<>(
                         searchTable.getItems().indexOf(cellDataFeatures.getValue()) + 1
@@ -84,7 +90,7 @@ public class TimKiemController implements Initializable {
     }
 
     public void getResultChoice(ActionEvent event){
-        //TODO here
+        // TODO here
         XetNghiemModel.KetQuaXetNghiem choice = resultSearch.getValue();
         System.out.println(choice);
     }
@@ -92,16 +98,17 @@ public class TimKiemController implements Initializable {
     public void onSearch(ActionEvent event) throws RuntimeException{
         int idNK = 0;
         try {
-            if (!idNKField.getText().isBlank()) idNK = Integer.parseInt(idNKField.getText());
+            if (!idNKField.getText().isBlank())
+                idNK = Integer.parseInt(idNKField.getText());
         } catch (NumberFormatException e){
             e.printStackTrace();
             Utility.displayExceptionDialog(new NumberFormatException("Mã nhân khẩu chỉ được chứa chữ số!"));
             return;
         }
-        final String name = nameField.getText();
-        final LocalDate from = dateRangeFrom.getValue();
-        final LocalDate to = dateRangeTo.getValue();
-        final XetNghiemModel.KetQuaXetNghiem result = resultSearch.getValue();
+        String name = nameField.getText();
+        LocalDate from = dateRangeFrom.getValue();
+        LocalDate to = dateRangeTo.getValue();
+        XetNghiemModel.KetQuaXetNghiem result = resultSearch.getValue();
 
         if (from != null && to != null){
             if (from.isAfter(to)) {

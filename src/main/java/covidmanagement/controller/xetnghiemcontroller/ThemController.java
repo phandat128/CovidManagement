@@ -1,6 +1,8 @@
 package covidmanagement.controller.xetnghiemcontroller;
 
 import covidmanagement.Utility;
+import covidmanagement.database.QueryDB;
+import covidmanagement.model.XetNghiemModel;
 import covidmanagement.model.XetNghiemModel.KetQuaXetNghiem;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -9,9 +11,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.util.StringConverter;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class ThemController implements Initializable {
@@ -29,9 +34,23 @@ public class ThemController implements Initializable {
         resultField.setItems(FXCollections.observableArrayList(KetQuaXetNghiem.values()));
         resultField.setValue(KetQuaXetNghiem.UNDEFINED);
         dateField.setValue(LocalDate.now());
+        // set date format to DD/MM/yyyy
+        dateField.setConverter(new StringConverter<>() {
+            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            @Override
+            public String toString(LocalDate localDate) {
+                if (localDate == null) return "";
+                return formatter.format(localDate);
+            }
+            @Override
+            public LocalDate fromString(String s) {
+                if (s.isBlank()) return null;
+                return LocalDate.parse(s, formatter);
+            }
+        });
     }
 
-    public void onAdd(){
+    public void onAdd() throws SQLException {
         //xử lý ngoại lệ trường hợp các trường thông tin cần thiết bị thiếu
         if (idNKField.getText().isBlank()){
             RuntimeException idNKException = new RuntimeException("Trường mã nhân khẩu không được để trống!");
@@ -48,27 +67,33 @@ public class ThemController implements Initializable {
             Utility.displayExceptionDialog(placeException);
             throw placeException;
         }
-        //xử lý ngoại lệ trường hợp trường mã nhân khẩu không phải là chữ số
-        int idNK = 0;
+        //xử lý ngoại lệ của trường mã nhân khẩu
         try {
-            idNK = Integer.parseInt(idNKField.getText());
+            Integer.parseInt(idNKField.getText());
         } catch (NumberFormatException e) {
             e.printStackTrace();
             Utility.displayExceptionDialog(new NumberFormatException("Mã nhân khẩu chỉ được chứa chữ số!"));
             return;
         }
-        //TODO here: xử lý ngoại lệ với cơ sở dữ liệu
+        int idNK = Integer.parseInt(idNKField.getText());
+        if (idNK <= 0) {
+            RuntimeException notPositiveException = new RuntimeException("Mã nhân khẩu phải là số dương");
+            Utility.displayExceptionDialog(notPositiveException);
+            throw notPositiveException;
+        }
         String name = nameField.getText();
         LocalDate date = dateField.getValue();
         String place = placeField.getText();
         KetQuaXetNghiem result = resultField.getValue();
-        System.out.println(idNK == 0 ? null : idNK);
+
+        System.out.println(idNK);
         System.out.println(name);
         System.out.println(date);
         System.out.println(place);
         System.out.println(result);
+        //TODO here: xử lý ngoại lệ với cơ sở dữ liệu: xử lý trường hợp tên nhập vào không tương ứng với mã nhân khẩu
 
         //TODO with database
-//        String sql = "INSERT INTO XetNghiem ()"
+        XetNghiemModel.add(idNK, date, place, result);
     }
 }

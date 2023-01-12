@@ -14,7 +14,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -47,6 +48,7 @@ public class MainController implements Initializable {
 
             root.getChildren().add(componentMain);
         }
+
         treeView.setRoot(root);
         treeView.setShowRoot(false);
     }
@@ -80,12 +82,12 @@ public class MainController implements Initializable {
         }
     }
 
-    public void moveToSuaXetNghiemPage(int idNK, String name, LocalDate date, String place, KetQuaXetNghiem result){
+    public void moveToSuaCachLyPage(int idNK, String name, LocalDate begindate, LocalDate finishdate, String place){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("xetnghiem/suaxetnghiem-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("cachly/suacachly-view.fxml"));
             Parent componentScene = fxmlLoader.load();
-            SuaController suaController = fxmlLoader.getController();
-            suaController.setField(idNK, name, date, place, result);
+            SuaCachLyController suaCachLyController = fxmlLoader.getController();
+            suaCachLyController.setFieldCl(idNK, name, begindate, finishdate, place);
             mainBorderPane.setCenter(componentScene);
         } catch (IOException e) {
             e.printStackTrace();

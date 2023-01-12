@@ -57,7 +57,7 @@ public class Utility {
     }
 
     //hộp tin xác nhận xóa hàng có chỉ số id trong bảng tableName trong cơ sở dữ liệu
-    public static void displayConfirmDialog(String message, int id, String tableName){
+    public static void displayConfirmDeleteDialog(String message, int id, String tableName){
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Are you sure?");
         alert.setHeaderText(message);
@@ -68,21 +68,21 @@ public class Utility {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.OK){
-            //remove id in tableName
-            if (tableName.toLowerCase().equals("hokhau")){
-                //TODO here about delete one row in hokhau table
-                //đặt mã hộ khẩu trong bảng nhân khẩu về 0
-
-                return;
-            }
-            String sql = "DELETE FROM " + tableName + " WHERE ma" + tableName + "=" + id + ";";
+            //remove row id in tableName
+            String sql = "DELETE FROM " + tableName + " WHERE ma" + tableName + " = " + id + ";";
             System.out.println(sql);
-//            try {
-//                QueryDB queryDB = new QueryDB();
-//                queryDB.query(sql);
-//            } catch (SQLException e){
-//                e.printStackTrace();
-//            }
+            try {
+                QueryDB queryDB = new QueryDB();
+                queryDB.executeUpdate(sql);
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            if (tableName.equalsIgnoreCase("hokhau")){
+                //TODO here: đặt mã hộ khẩu của các nhân khẩu trong hộ về 0
+
+            }
+
         }
     }
 }

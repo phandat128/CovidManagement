@@ -41,11 +41,9 @@ CREATE TABLE CachLy(
 
 CREATE TABLE KhaiBao(
 	MaKhaiBao serial NOT NULL,
-	HoTen varchar(50) NOT NULL,
+	MaNhanKhau int NOT NULL,
 	Diemkhaibao varchar(50) NOT NULL,
 	NgayKhaiBao date NOT NULL,
-	GioiTinh varchar(10) NOT NULL,
-	CMND_CCCD varchar(20) NOT NULL,
 	BHYT boolean NOT NULL,
 	LichTrinh varchar(500),
 	Trieuchung boolean NOT NULL,
