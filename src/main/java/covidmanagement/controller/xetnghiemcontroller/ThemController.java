@@ -50,7 +50,7 @@ public class ThemController implements Initializable {
         });
     }
 
-    public void onAdd() throws SQLException {
+    public void onAdd() {
         //xử lý ngoại lệ trường hợp các trường thông tin cần thiết bị thiếu
         if (idNKField.getText().isBlank()){
             RuntimeException idNKException = new RuntimeException("Trường mã nhân khẩu không được để trống!");
@@ -94,6 +94,15 @@ public class ThemController implements Initializable {
         //TODO here: xử lý ngoại lệ với cơ sở dữ liệu: xử lý trường hợp tên nhập vào không tương ứng với mã nhân khẩu
 
         //TODO with database
-        XetNghiemModel.add(idNK, date, place, result);
+        try {
+            XetNghiemModel.add(idNK, date, place, result);
+            //TODO: thông báo thêm thành công
+            Utility.displaySuccessDialog("Thêm thành công!");
+        } catch (SQLException e){
+            e.printStackTrace();
+            //TODO: thông báo lỗi không thêm được
+            Utility.displayExceptionDialog(e);
+        }
+        //TODO: chuyển đến trang
     }
 }

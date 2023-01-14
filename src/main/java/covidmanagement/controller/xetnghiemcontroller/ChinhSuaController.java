@@ -140,5 +140,6 @@ public class ChinhSuaController implements Initializable {
         dateRangeFrom.setValue(null);
         dateRangeTo.setValue(null);
         resultSearch.setValue(null);
+        onSearch(event);
     }
 }
