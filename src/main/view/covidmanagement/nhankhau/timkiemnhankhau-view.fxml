@@ -4,13 +4,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="timkiemnhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.ChinhSuaController">
+<AnchorPane fx:id="timkiemnhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.TimKiemNhanKhauController">
   <children>
     <AnchorPane layoutX="0.0" layoutY="350.0" prefHeight="200.0" prefWidth="910.0">
       <children>
         <TableView fx:id="tableNhanKhau" layoutX="0.0" layoutY="0.0" prefHeight="200.0" prefWidth="880.0" AnchorPane.leftAnchor="15.0">
           <columns>
-            <TableColumn fx:id="collumnMaNhanKhau" prefWidth="110.0" text="Mã Nhân Khẩu" />
+            <TableColumn fx:id="columnMaNhanKhau" prefWidth="110.0" text="Mã Nhân Khẩu" />
             <TableColumn fx:id="columnHoVaTen" prefWidth="110.0" text="Họ và Tên" />
             <TableColumn fx:id="columnNgaySinh" prefWidth="110.0" text="Ngày Sinh" />
             <TableColumn fx:id="columnGioiTinh" prefWidth="110.0" text="Giới Tính" />

@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="suanhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.SuaController">
+<AnchorPane fx:id="suanhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.SuaNhanKhauController">
    <children>
       <VBox layoutX="15.0" layoutY="14.0" prefHeight="350.0" prefWidth="440.0">
          <children>

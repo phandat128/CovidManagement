@@ -1,18 +1,13 @@
 package covidmanagement.controller.nhankhaucontroller;
 
 import covidmanagement.Utility;
-import covidmanagement.database.Database;
 import covidmanagement.database.QueryDB;
-import covidmanagement.model.NhanKhauModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -20,7 +15,7 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 
-public class ThemController implements Initializable {
+public class ThemNhanKhauController implements Initializable {
     @FXML
     private ResourceBundle resources;
 
@@ -29,7 +24,6 @@ public class ThemController implements Initializable {
 
     @FXML
     private Button btnThem;
-
 
     @FXML
     private TextField txtMaNhanKhau, txtHoVaTen, txtGioiTinh, txtCMND_CCCD, txtQuocTich, txtTonGiao, txtSDT, txtNguyenQuan, txtNgheNghiep, txtMaHoKhau, txtLaChuHo, txtQuanHeVoiChuHo;
@@ -62,6 +56,18 @@ public class ThemController implements Initializable {
             throw ngaySinhException;
         }
 
+        if (txtCMND_CCCD.getText().isBlank()) {
+            RuntimeException cmnd_CCCDException = new RuntimeException("Trường CMND_CCCD không được để trống!");
+            Utility.displayExceptionDialog(cmnd_CCCDException);
+            throw cmnd_CCCDException;
+        }
+
+        if (txtMaHoKhau.getText().isBlank()) {
+            RuntimeException maHoKhauException = new RuntimeException("Trường Mã Hộ Khẩu không được để trống!");
+            Utility.displayExceptionDialog(maHoKhauException);
+            throw maHoKhauException;
+        }
+
 
         int maNhanKhau = Integer.parseInt(txtMaNhanKhau.getText());
         String hoVaTen = txtHoVaTen.getText();
@@ -76,7 +82,9 @@ public class ThemController implements Initializable {
         int maHoKhau = Integer.parseInt(txtMaHoKhau.getText());
         String quanHeVoiChuHo = txtQuanHeVoiChuHo.getText();
         // TODO
-        Boolean laChuHo = true;
+        Boolean laChuHo;
+        if(txtLaChuHo.getText() == "có") laChuHo = true;
+        else laChuHo = false;
 
 
         try {
@@ -99,10 +107,10 @@ public class ThemController implements Initializable {
             preparedStatement.setString(12, quanHeVoiChuHo);
             preparedStatement.setString(13, ngheNghiep);
 
-            int resuilt = preparedStatement.executeUpdate();
+            int result = preparedStatement.executeUpdate();
             preparedStatement.close();
             queryDB.close();
-            if(resuilt == 1){
+            if(result == 1){
                 RuntimeException thanhCongException = new RuntimeException("Thêm nhân khẩu thành công");
                 Utility.displayExceptionDialog(thanhCongException);
                 throw thanhCongException;
