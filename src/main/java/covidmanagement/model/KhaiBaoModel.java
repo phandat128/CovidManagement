@@ -3,6 +3,9 @@ package covidmanagement.model;
 import covidmanagement.Main;
 import covidmanagement.Utility;
 import covidmanagement.controller.MainController;
+import covidmanagement.controller.khaibaocontroller.SuaKhaiBaoController;
+import covidmanagement.controller.khaibaocontroller.XemKhaiBaoController;
+import covidmanagement.database.QueryDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,14 +16,17 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class KhaiBaoModel {
     private int maKhaiBao;
-    private String hoTen;
-    private static KhaiBaoModel.gioiTinh gioiTinh;
+
+    private int maNhanKhau;
+    //private static KhaiBaoModel.gioiTinh gioiTinh;
     private String diemKhaiBao;
     private LocalDate ngayKhaiBao;
-    private String cmnd;
+    //private String cmnd;
     private boolean BHYT;
     private String lichTrinh;
     private boolean trieuChung;
@@ -35,15 +41,7 @@ public class KhaiBaoModel {
     public int getMaKhaiBao() {
         return maKhaiBao;
     }
-
-    public String getHoTen() {
-        return hoTen;
-    }
-
-    public static KhaiBaoModel.gioiTinh getGioiTinh() {
-        return gioiTinh;
-    }
-
+    public int getMaNhanKhau() {return maNhanKhau;}
     public String getDiemKhaiBao() {
         return diemKhaiBao;
     }
@@ -52,9 +50,6 @@ public class KhaiBaoModel {
         return ngayKhaiBao;
     }
 
-    public String getCmnd() {
-        return cmnd;
-    }
 
     public boolean isBHYT() {
         return BHYT;
@@ -95,15 +90,13 @@ public class KhaiBaoModel {
         return viewButton;
     }
 
-    public KhaiBaoModel(int maKhaiBao, String hoTen, String diemkhaibao, LocalDate ngayKhaiBao, String cmnd, KhaiBaoModel.gioiTinh gioiTinh,
+    public KhaiBaoModel(int maKhaiBao, int maNhanKhau, String diemkhaibao, LocalDate ngayKhaiBao,
                         boolean bhyt, String lichTrinh, boolean trieuchung, boolean tiepXucNguoiBenh,
                         boolean tiepXucNguoiTuVungDich, boolean tiepXucNguoiCoBieuHien, String benhNen) {
         this.maKhaiBao = maKhaiBao;
-        this.hoTen = hoTen;
+        this.maNhanKhau = maNhanKhau;
         this.diemKhaiBao = diemkhaibao;
         this.ngayKhaiBao = ngayKhaiBao;
-        KhaiBaoModel.gioiTinh = gioiTinh;
-        this.cmnd = cmnd;
         BHYT = bhyt;
         this.lichTrinh = lichTrinh;
         this.trieuChung = trieuchung;
@@ -120,7 +113,7 @@ public class KhaiBaoModel {
     }
 
     private void handleDeleteClick(ActionEvent actionEvent) {
-        Utility.displayConfirmDialog("Bạn muốn xóa khai báo này không?", maKhaiBao, "Khaibao");
+        Utility.displayConfirmDeleteDialog("Bạn muốn xóa khai báo này không?", maKhaiBao, "Khaibao");
     }
 
     private void handleChangeClick(ActionEvent event){
@@ -130,10 +123,10 @@ public class KhaiBaoModel {
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-            MainController mainController = fxmlLoader.getController();
-            mainController.moveToSuaKhaiBaoPage(diemKhaiBao, hoTen, cmnd, lichTrinh, gioiTinh,
+            SuaKhaiBaoController mainController = fxmlLoader.getController();
+            mainController.setField(maKhaiBao ,diemKhaiBao, ngayKhaiBao, maNhanKhau, lichTrinh,
                     BHYT, trieuChung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich,
-                    tiepXucNguoiCoBieuHien, benhNen, ngayKhaiBao);
+                    tiepXucNguoiCoBieuHien, benhNen);
         } catch(IOException e){
             e.printStackTrace();
         }
@@ -145,15 +138,84 @@ public class KhaiBaoModel {
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-            MainController mainController = fxmlLoader.getController();
-            mainController.moveToXemKhaiBaoPage(diemKhaiBao, hoTen, cmnd, lichTrinh, gioiTinh,
+            XemKhaiBaoController mainController = fxmlLoader.getController();
+            mainController.setField(diemKhaiBao, ngayKhaiBao, maNhanKhau, lichTrinh,
                     BHYT, trieuChung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich,
-                    tiepXucNguoiCoBieuHien, benhNen, ngayKhaiBao);
+                    tiepXucNguoiCoBieuHien, benhNen);
         } catch(IOException e){
             e.printStackTrace();
         }
     }
-    public enum gioiTinh {
-        NAM, NỮ, UNDEFINED;
+
+    public static List<KhaiBaoModel> getKhaiBaoList(){
+        List<KhaiBaoModel> queryList = new ArrayList<>();
+        try {
+            QueryDB queryDB = new QueryDB();
+            String sql = "select * from khaibao;";
+
+            ResultSet rs = queryDB.executeQuery(sql);
+            while (rs.next()) {
+                int _maKB = rs.getInt("makhaibao");
+                int _maNK = rs.getInt("manhankhau");
+                String _diemKB = rs.getString("diemkhaibao");
+                LocalDate _ngayKB = rs.getDate("thoigian").toLocalDate();
+                boolean _BHYT = rs.getBoolean("baohiemyte");
+                String _lichtrinh = rs.getString("lichtrinh");
+                boolean _trieuchung = rs.getBoolean("trieuchung");
+                boolean _tiepxucnguoibenh = rs.getBoolean("tiepxucnguoibenh");
+                boolean _tiepxucnguoituvungdich = rs.getBoolean("tiepxucnguoituvungdich");
+                boolean _tiepxucnguoicobieuhien = rs.getBoolean("tiepxucnguoicobieuhien");
+                String _benhnen = rs.getString("benhnen");
+                queryList.add(new KhaiBaoModel(_maKB, _maNK, _diemKB, _ngayKB, _BHYT, _lichtrinh, _trieuchung,
+                        _tiepxucnguoibenh, _tiepxucnguoituvungdich, _tiepxucnguoicobieuhien, _benhnen));
+            }
+            rs.close();
+            queryDB.close();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return queryList;
+    }
+    public static void add(int maNhanKhau, String diemkhaibao, LocalDate ngayKhaiBao,
+                           boolean bhyt, String lichTrinh, boolean trieuchung, boolean tiepXucNguoiBenh,
+                           boolean tiepXucNguoiTuVungDich, boolean tiepXucNguoiCoBieuHien, String benhNen) throws SQLException{
+        QueryDB queryDB = new QueryDB();
+        PreparedStatement statement = queryDB.getConnection().prepareStatement(
+                "INSERT INTO KhaiBao(maNhanKhau, diemKhaiBao, ngayKhaiBao, lichTrinh, BHYT, trieuChung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich, tiepXucNguoiCoBieuHien, benhNen) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+        );
+        statement.setInt(1, maNhanKhau);
+        statement.setString(2, diemkhaibao);
+        statement.setDate(3, Date.valueOf(ngayKhaiBao));
+        statement.setString(4, String.valueOf(bhyt));
+        statement.setString(5, lichTrinh);
+        statement.setString(6, String.valueOf(trieuchung));
+        statement.setString(7, String.valueOf(tiepXucNguoiBenh));
+        statement.setString(8, String.valueOf(tiepXucNguoiTuVungDich));
+        statement.setString(9, String.valueOf(tiepXucNguoiCoBieuHien));
+        statement.setString(10, benhNen);
+        statement.executeUpdate();
+        statement.close();
+        queryDB.close();
+    }
+    public static void update(int maKhaiBao, String diemkhaibao, LocalDate ngayKhaiBao,
+                           boolean bhyt, String lichTrinh, boolean trieuchung, boolean tiepXucNguoiBenh,
+                           boolean tiepXucNguoiTuVungDich, boolean tiepXucNguoiCoBieuHien, String benhNen) throws SQLException{
+        QueryDB queryDB = new QueryDB();
+        PreparedStatement statement = queryDB.getConnection().prepareStatement(
+                "UPDATE KhaiBao SET (diemKhaiBao, ngayKhaiBao, BHYT, lichTrinh,  trieuChung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich, tiepXucNguoiCoBieuHien, benhNen) = (?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE makhaibao = ?;"
+        );
+        statement.setString(1, diemkhaibao);
+        statement.setDate(2, Date.valueOf(ngayKhaiBao));
+        statement.setString(3, String.valueOf(bhyt));
+        statement.setString(4, lichTrinh);
+        statement.setString(5, String.valueOf(trieuchung));
+        statement.setString(6, String.valueOf(tiepXucNguoiBenh));
+        statement.setString(7, String.valueOf(tiepXucNguoiTuVungDich));
+        statement.setString(8, String.valueOf(tiepXucNguoiCoBieuHien));
+        statement.setString(9, benhNen);
+        statement.setString(10, String.valueOf(maKhaiBao));
+        statement.executeUpdate();
+        statement.close();
+        queryDB.close();
     }
 }

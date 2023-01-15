@@ -93,35 +93,35 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
-    public void moveToSuaKhaiBaoPage(String diemkhaibao, String hoTen, String cmnd, String lichTrinh, KhaiBaoModel.gioiTinh gioiTinh,
-                                     boolean bhyt, boolean trieuchung, boolean tiepXucNguoiBenh, boolean tiepXucNguoiTuVungDich,
-                                     boolean tiepXucNguoiCoBieuHien, String benhNen, LocalDate ngayKhaiBao){
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("khaibao/suakhaibao-view.fxml"));
-            Parent componentScene = fxmlLoader.load();
-            SuaKhaiBaoController suaController = fxmlLoader.getController();
-            suaController.setField(diemkhaibao, hoTen, cmnd, lichTrinh, gioiTinh,
-                                bhyt, trieuchung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich,
-                                tiepXucNguoiCoBieuHien, benhNen, ngayKhaiBao);
-            mainBorderPane.setCenter(componentScene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void moveToSuaKhaiBaoPage(String diemkhaibao, int maNhanKhau, LocalDate ngayKhaiBao, String lichTrinh,
+//                                     boolean bhyt, boolean trieuchung, boolean tiepXucNguoiBenh, boolean tiepXucNguoiTuVungDich,
+//                                     boolean tiepXucNguoiCoBieuHien, String benhNen){
+//        try {
+//            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("khaibao/suakhaibao-view.fxml"));
+//            Parent componentScene = fxmlLoader.load();
+//            SuaKhaiBaoController suaController = fxmlLoader.getController();
+//            suaController.setField(diemkhaibao, ngayKhaiBao, maNhanKhau, lichTrinh,
+//                                bhyt, trieuchung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich,
+//                                tiepXucNguoiCoBieuHien, benhNen);
+//            mainBorderPane.setCenter(componentScene);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-    public void moveToXemKhaiBaoPage(String diemkhaibao, String hoTen, String cmnd, String lichTrinh, KhaiBaoModel.gioiTinh gioiTinh,
-                                     boolean bhyt, boolean trieuchung, boolean tiepXucNguoiBenh, boolean tiepXucNguoiTuVungDich,
-                                     boolean tiepXucNguoiCoBieuHien, String benhNen, LocalDate ngayKhaiBao){
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("khaibao/xemkhaibao-view.fxml"));
-            Parent componentScene = fxmlLoader.load();
-            XemKhaiBaoController xemController = fxmlLoader.getController();
-            xemController.setField(diemkhaibao, hoTen, cmnd, lichTrinh, gioiTinh,
-                    bhyt, trieuchung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich,
-                    tiepXucNguoiCoBieuHien, benhNen, ngayKhaiBao);
-            mainBorderPane.setCenter(componentScene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void moveToXemKhaiBaoPage(String diemkhaibao, LocalDate ngayKhaiBao, int maNhanKhau, String lichTrinh,
+//                                     boolean bhyt, boolean trieuchung, boolean tiepXucNguoiBenh, boolean tiepXucNguoiTuVungDich,
+//                                     boolean tiepXucNguoiCoBieuHien, String benhNen){
+//        try {
+//            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("khaibao/xemkhaibao-view.fxml"));
+//            Parent componentScene = fxmlLoader.load();
+//            XemKhaiBaoController xemController = fxmlLoader.getController();
+//            xemController.setField(diemkhaibao, ngayKhaiBao, maNhanKhau, lichTrinh,
+//                    bhyt, trieuchung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich,
+//                    tiepXucNguoiCoBieuHien, benhNen);
+//            mainBorderPane.setCenter(componentScene);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

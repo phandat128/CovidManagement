@@ -21,14 +21,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ThemKhaiBaoController implements Initializable {
     @FXML
-    TextField declareSpotField, nameField, IDField, traceField, benhNenField;
-    @FXML
-    ChoiceBox<KhaiBaoModel.gioiTinh> gender;
+    TextField declareSpotField, nameField, traceField, benhNenField;
     @FXML
     RadioButton BHYTYes, BHYTNo, symptomYes, symptomNo, covidContactYes, covidContactNo, countryContactYes, countryContactNo, symptomContactYes, symptomContactNo;
     @FXML
@@ -37,62 +36,44 @@ public class ThemKhaiBaoController implements Initializable {
     Button saveDeclare;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        gender.setItems(FXCollections.observableArrayList(KhaiBaoModel.gioiTinh.values()));
-        gender.setValue(KhaiBaoModel.gioiTinh.UNDEFINED);
         declareDate.setValue(LocalDate.now());
     }
 
-    public void onAdd(){
+    public void onAdd() throws SQLException {
         //xử lý ngoại lệ trường hợp các trường thông tin cần thiết bị thiếu
-        if (IDField.getText().isBlank()){
-            RuntimeException IDException = new RuntimeException("Trường CMND/CCCD không được để trống!");
-            Utility.displayExceptionDialog(IDException);
-            throw IDException;
-        }
         if (nameField.getText().isBlank()){
-            RuntimeException nameException = new RuntimeException("Trường họ tên không được để trống!");
-            Utility.displayExceptionDialog(nameException);
-            throw nameException;
+            RuntimeException idNKException = new RuntimeException("Trường mã nhân khẩu không được để trống!");
+            Utility.displayExceptionDialog(idNKException);
+            throw idNKException;
         }
         if (declareSpotField.getText().isBlank()){
-            RuntimeException placeException = new RuntimeException("Trường địa điểm khai báo không được để trống!");
+            RuntimeException placeException = new RuntimeException("Trường địa điểm không được để trống!");
             Utility.displayExceptionDialog(placeException);
             throw placeException;
         }
-        if (gender.getValue() == KhaiBaoModel.gioiTinh.UNDEFINED){
-            RuntimeException genderException = new RuntimeException("Trường giới tính không được để trống!");
-            Utility.displayExceptionDialog(genderException);
-            throw genderException;
-        }
-
-        //xử lý ngoại lệ trường hợp trường mã nhân khẩu không phải là chữ số
-        int ID = 0;
+        //xử lý ngoại lệ của trường mã nhân khẩu
         try {
-            ID = Integer.parseInt(IDField.getText());
+            Integer.parseInt(nameField.getText());
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            Utility.displayExceptionDialog(new NumberFormatException("CCCD/CMND chỉ được chứa chữ số!"));
+            Utility.displayExceptionDialog(new NumberFormatException("Mã nhân khẩu chỉ được chứa chữ số!"));
             return;
         }
-        //TODO here: xử lý ngoại lệ với cơ sở dữ liệu
-        String name = nameField.getText();
+        int idNK = Integer.parseInt(nameField.getText());
+        if (idNK <= 0) {
+            RuntimeException notPositiveException = new RuntimeException("Mã nhân khẩu phải là số dương");
+            Utility.displayExceptionDialog(notPositiveException);
+            throw notPositiveException;
+        }
         LocalDate date = declareDate.getValue();
         String place = declareSpotField.getText();
-        KhaiBaoModel.gioiTinh result = gender.getValue();
-        System.out.println(ID == 0 ? null : ID);
-        System.out.println(name);
-        System.out.println(date);
-        System.out.println(place);
-        System.out.println(result);
+        String lichtrinh = traceField.getText();
+        String benhNen = benhNenField.getText();
+
+        //TODO here: xử lý ngoại lệ với cơ sở dữ liệu: xử lý trường hợp tên nhập vào không tương ứng với mã nhân khẩu
 
         //TODO with database
-    }
-    public void switchToMainView(ActionEvent e) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
-        Parent componentScene = fxmlLoader.load();
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Scene scene = new Scene(componentScene);
-        stage.setScene(scene);
-        stage.show();
+        KhaiBaoModel.add(idNK,  place, date, BHYTYes.isSelected(), lichtrinh, symptomYes.isSelected(),
+                covidContactYes.isSelected(), countryContactYes.isSelected(), symptomContactYes.isSelected(), benhNen);
     }
 }
