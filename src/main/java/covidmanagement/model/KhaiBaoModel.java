@@ -158,8 +158,8 @@ public class KhaiBaoModel {
                 int _maKB = rs.getInt("makhaibao");
                 int _maNK = rs.getInt("manhankhau");
                 String _diemKB = rs.getString("diemkhaibao");
-                LocalDate _ngayKB = rs.getDate("thoigian").toLocalDate();
-                boolean _BHYT = rs.getBoolean("baohiemyte");
+                LocalDate _ngayKB = rs.getDate("ngaykhaibao").toLocalDate();
+                boolean _BHYT = rs.getBoolean("BHYT");
                 String _lichtrinh = rs.getString("lichtrinh");
                 boolean _trieuchung = rs.getBoolean("trieuchung");
                 boolean _tiepxucnguoibenh = rs.getBoolean("tiepxucnguoibenh");
@@ -181,17 +181,17 @@ public class KhaiBaoModel {
                            boolean tiepXucNguoiTuVungDich, boolean tiepXucNguoiCoBieuHien, String benhNen) throws SQLException{
         QueryDB queryDB = new QueryDB();
         PreparedStatement statement = queryDB.getConnection().prepareStatement(
-                "INSERT INTO KhaiBao(maNhanKhau, diemKhaiBao, ngayKhaiBao, lichTrinh, BHYT, trieuChung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich, tiepXucNguoiCoBieuHien, benhNen) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+                "INSERT INTO KhaiBao(maNhanKhau, diemKhaiBao, ngayKhaiBao, BHYT, lichTrinh,  trieuChung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich, tiepXucNguoiCoBieuHien, benhNen) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
         );
         statement.setInt(1, maNhanKhau);
         statement.setString(2, diemkhaibao);
         statement.setDate(3, Date.valueOf(ngayKhaiBao));
-        statement.setString(4, String.valueOf(bhyt));
+        statement.setBoolean(4, bhyt);
         statement.setString(5, lichTrinh);
-        statement.setString(6, String.valueOf(trieuchung));
-        statement.setString(7, String.valueOf(tiepXucNguoiBenh));
-        statement.setString(8, String.valueOf(tiepXucNguoiTuVungDich));
-        statement.setString(9, String.valueOf(tiepXucNguoiCoBieuHien));
+        statement.setBoolean(6, trieuchung);
+        statement.setBoolean(7, tiepXucNguoiBenh);
+        statement.setBoolean(8, tiepXucNguoiTuVungDich);
+        statement.setBoolean(9, tiepXucNguoiCoBieuHien);
         statement.setString(10, benhNen);
         statement.executeUpdate();
         statement.close();
