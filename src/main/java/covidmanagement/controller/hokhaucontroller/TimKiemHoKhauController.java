@@ -6,6 +6,7 @@ import covidmanagement.model.XetNghiemModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -45,13 +46,10 @@ public class TimKiemHoKhauController implements Initializable {
     TableColumn<HoKhauModel, String> quanColumn;
     @FXML
     TableColumn<HoKhauModel, String> thanhPhoColumn;
-    @FXML
-    TableColumn<HoKhauModel, String> suaColumn;
-    @FXML
-    TableColumn<HoKhauModel, String> xoaColumn;
-    private final ObservableList<HoKhauModel> HoKhauList = FXCollections.observableArrayList(
-            new HoKhauModel(1, 423, 193754683, "35a", "32", "214", "láng", "Láng Thượng", "Đống Đa", "Hà Nội")
+    private final ObservableList<HoKhauModel> hoKhauList = FXCollections.observableArrayList(
+            HoKhauModel.getHoKhauList()
     );
+    private final FilteredList<HoKhauModel> filteredList = new FilteredList<>(hoKhauList);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -65,11 +63,10 @@ public class TimKiemHoKhauController implements Initializable {
         duongColumn.setCellValueFactory(new PropertyValueFactory<>("duong"));
         phuongColumn.setCellValueFactory(new PropertyValueFactory<>("phuong"));
         quanColumn.setCellValueFactory(new PropertyValueFactory<>("quan"));
-        thanhPhoColumn.setCellValueFactory(new PropertyValueFactory<>("thanhpho"));
-        suaColumn.setCellValueFactory(new PropertyValueFactory<>("suaButton"));
-        xoaColumn.setCellValueFactory(new PropertyValueFactory<>("xoaButton"));
+        thanhPhoColumn.setCellValueFactory(new PropertyValueFactory<>("thanhPho"));
 
-        table.setItems(HoKhauList);
+
+        table.setItems(filteredList);
 
         //set serial number column
         sttColumn.setCellValueFactory(
@@ -79,11 +76,29 @@ public class TimKiemHoKhauController implements Initializable {
         sttColumn.setSortable(false);
     }
     public void timKiem(ActionEvent event) throws RuntimeException{
+        final String tp = thanhPho.getText();
+        final String qu = quan.getText();
+        final String ph = phuong.getText();
+        final String d=duong.getText();
 
 
-        System.out.println(thanhPho);
-        System.out.println(quan);
-        System.out.println(phuong);
-        System.out.println(duong);
+        System.out.println(tp);
+        System.out.println(qu);
+        System.out.println(ph);
+        System.out.println(d);
+        filteredList.setPredicate(hoKhauRow -> {
+            if (!tp.isBlank() && !hoKhauRow.getThanhPho().contains(tp)) return false;
+            if (!qu.isBlank() && hoKhauRow.getQuan().contains(qu)) return false;
+            if (!ph.isBlank() && hoKhauRow.getPhuong().contains(ph)) return false;
+            if (!d.isBlank() && hoKhauRow.getDuong().contains(d)) return false;
+
+            return true;
+        });
+    }
+    public void xoaTimKiem (ActionEvent event) {
+        thanhPho.setText("");
+        quan.setText("");
+        phuong.setText("");
+        duong.setText("");
     }
 }

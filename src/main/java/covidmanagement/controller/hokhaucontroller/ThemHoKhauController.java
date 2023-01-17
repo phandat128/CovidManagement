@@ -1,11 +1,13 @@
 package covidmanagement.controller.hokhaucontroller;
 
 import covidmanagement.Utility;
+import covidmanagement.model.HoKhauModel;
 import covidmanagement.model.XetNghiemModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class ThemHoKhauController {
@@ -14,7 +16,7 @@ public class ThemHoKhauController {
     @FXML
     Button them;
 
-    public void xuLy() {
+    public void xuLy() throws SQLException {
     //xử lý ngoại lệ trường hợp các trường thông tin cần thiết bị thiếu
         if (maHoKhau.getText().isBlank()){
             RuntimeException idNKException = new RuntimeException("Trường mã hộ khẩu không được để trống!");
@@ -71,7 +73,7 @@ public class ThemHoKhauController {
         String phuongText = phuong.getText();
         String quanText = quan.getText();
         String thanhPhoText = thanhPho.getText();
-        System.out.println(idHK == 0 ? null : idHK);
+        System.out.println(idHK);
         System.out.println(soNhaText);
         System.out.println(ngachText);
         System.out.println(ngoText);
@@ -81,6 +83,7 @@ public class ThemHoKhauController {
         System.out.println(thanhPhoText);
 
         //TODO with database
+        HoKhauModel.add(idHK, soNhaText, ngachText, ngoText,duongText, phuongText, quanText,thanhPhoText);
     }
 }
 

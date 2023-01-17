@@ -79,4 +79,6 @@ public class SuaController implements Initializable {
         XetNghiemModel.update(idXN, date, place, result);
         //TODO: đóng cửa sổ, thông báo thành công/thất bại, chuyển đến trang tìm kiếm
     }
+
+
 }

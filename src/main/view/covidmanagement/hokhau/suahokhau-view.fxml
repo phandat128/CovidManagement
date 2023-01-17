@@ -15,25 +15,25 @@
         </Label>
         <Label alignment="CENTER" layoutX="28.0" layoutY="167.0" prefHeight="39.0" prefWidth="78.0" text="Ngõ" />
         <Label layoutX="28.0" layoutY="129.0" prefHeight="39.0" prefWidth="78.0" text="Nhập số nhà" />
-        <TextField layoutX="115.0" layoutY="174.0" />
-        <TextField layoutX="126.0" layoutY="135.0" />
-        <TextField layoutX="434.0" layoutY="174.0" />
-        <TextField layoutX="434.0" layoutY="135.0" />
+        <TextField fx:id="ngoField" layoutX="115.0" layoutY="174.0" />
+        <TextField fx:id="soNhaField" layoutX="126.0" layoutY="135.0" />
+        <TextField fx:id="duongField" layoutX="434.0" layoutY="174.0" />
+        <TextField fx:id="ngachField" layoutX="434.0" layoutY="135.0" />
         <Label alignment="CENTER" layoutX="339.0" layoutY="128.0" prefHeight="39.0" prefWidth="78.0" text="Ngách" />
         <Label alignment="CENTER" layoutX="338.0" layoutY="167.0" prefHeight="39.0" prefWidth="78.0" text="Đường" />
         <Label alignment="CENTER" layoutX="36.0" layoutY="212.0" prefHeight="39.0" prefWidth="78.0" text="Phường" />
-        <TextField layoutX="157.0" layoutY="272.0" prefHeight="26.0" prefWidth="322.0" />
-        <TextField layoutX="157.0" layoutY="219.0" prefHeight="26.0" prefWidth="322.0" />
+        <TextField fx:id="quanField" layoutX="157.0" layoutY="272.0" prefHeight="26.0" prefWidth="322.0" />
+        <TextField fx:id="phuongField" layoutX="157.0" layoutY="219.0" prefHeight="26.0" prefWidth="322.0" />
         <Label alignment="CENTER" layoutX="36.0" layoutY="313.0" prefHeight="39.0" prefWidth="78.0" text="Thành phố" />
         <Label alignment="CENTER" layoutX="36.0" layoutY="266.0" prefHeight="39.0" prefWidth="78.0" text="Quận " />
-        <TextField layoutX="157.0" layoutY="319.0" prefHeight="26.0" prefWidth="322.0" />
+        <TextField fx:id="thanhPhoField" layoutX="157.0" layoutY="319.0" prefHeight="26.0" prefWidth="322.0" />
         <Label alignment="CENTER" layoutX="20.0" layoutY="62.0" prefHeight="39.0" prefWidth="171.0" text="Mã hộ khẩu">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <TextField layoutX="183.0" layoutY="68.0" prefHeight="26.0" prefWidth="171.0" />
-        <Button layoutX="509.0" layoutY="285.0" mnemonicParsing="false" text="Cập nhật">
+        <TextField fx:id="maHKField" layoutX="183.0" layoutY="68.0" prefHeight="26.0" prefWidth="171.0" />
+        <Button fx:id="capNhat" layoutX="509.0" layoutY="285.0" mnemonicParsing="false" text="Cập nhật">
             <font>
                 <Font size="18.0" />
             </font>
