@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="641.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.KhaiBaoController">
+<AnchorPane prefHeight="641.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.khaibaocontroller.TimKiemKhaiBaoController">
     <children>
-        <Label layoutX="96.0" layoutY="111.0" prefHeight="18.0" prefWidth="91.0" text="Ngày khai báo">
+        <Label layoutX="262.0" layoutY="113.0" prefHeight="18.0" prefWidth="91.0" text="Ngày khai báo">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font></Label>
-        <Label layoutX="360.0" layoutY="71.0" prefHeight="18.0" prefWidth="46.0" text="Họ tên">
+        <Label layoutX="321.0" layoutY="71.0" prefHeight="18.0" prefWidth="85.0" text="Mã nhân khẩu">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font></Label>
@@ -22,14 +23,8 @@
             <font>
                 <Font name="System Bold" size="12.0" />
             </font></Label>
-        <TextField layoutX="426.0" layoutY="67.0" />
-        <DatePicker id="DatePicker" layoutX="96.0" layoutY="143.0" promptText="Nhập ngày" />
-        <ChoiceBox id="Điểm khai báo" layoutX="112.0" layoutY="67.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="18.0" prefWidth="150.0" />
-        <TextField layoutX="426.0" layoutY="130.0" />
-        <Label layoutX="328.0" layoutY="134.0" prefHeight="18.0" prefWidth="106.0" text="CMND/CCCD">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font></Label>
+        <TextField fx:id="nameField" layoutX="426.0" layoutY="67.0" />
+        <DatePicker id="DatePicker" fx:id="dateRangeFrom" layoutX="52.0" layoutY="143.0" prefHeight="26.0" prefWidth="227.0" promptText="Nhập ngày" />
         <Label layoutX="207.0" layoutY="18.0" prefHeight="30.0" prefWidth="241.0" text="TÌM KIẾM KHAI BÁO Y TẾ" textAlignment="CENTER">
             <font>
                 <Font size="20.0" />
@@ -37,8 +32,21 @@
         </Label>
         <Label />
       <Button layoutX="259.0" layoutY="233.0" mnemonicParsing="false" text="Tìm kiếm" />
-      <DatePicker id="DatePicker" layoutX="96.0" layoutY="189.0" promptText="Nhập ngày" />
-      <Label layoutX="14.0" layoutY="146.0" prefHeight="18.0" prefWidth="78.0" text="Từ" />
-      <Label layoutX="14.0" layoutY="192.0" prefHeight="18.0" prefWidth="78.0" text="Đến" />
+      <DatePicker id="DatePicker" fx:id="dateRangeTo" layoutX="361.0" layoutY="143.0" prefHeight="26.0" prefWidth="227.0" promptText="Nhập ngày" />
+      <Label layoutX="21.0" layoutY="146.0" prefHeight="18.0" prefWidth="31.0" text="Từ" />
+      <Label layoutX="328.0" layoutY="146.0" prefHeight="18.0" prefWidth="31.0" text="Đến" />
+      <TableView fx:id="searchTable" layoutY="226.0" prefHeight="413.0" prefWidth="615.0">
+        <columns>
+          <TableColumn fx:id="countColumn" prefWidth="44.79995805025101" text="STT" />
+          <TableColumn fx:id="nameColumn" prefWidth="74.39999008178711" text="Họ tên" />
+            <TableColumn fx:id="declareDateColumn" prefWidth="131.199951171875" text="Ngày khai báo" />
+            <TableColumn fx:id="declareSpotColumn" prefWidth="125.60003662109375" text="Điểm khai báo" />
+            <TableColumn fx:id="trieuchungColumn" prefWidth="115.199951171875" text="Triệu chứng" />
+            <TableColumn fx:id="changeColumn" prefWidth="51.20001220703125" text="Sửa" />
+            <TableColumn fx:id="deleteColumn" prefWidth="65.5999755859375" text="Xóa" />
+        </columns>
+      </TableView>
+      <TextField fx:id="declareSpot" layoutX="112.0" layoutY="67.0" />
+      <Button fx:id="searchButton" layoutX="275.0" layoutY="184.0" mnemonicParsing="false" onAction="#onSearch" text="Tìm kiếm" />
     </children>
 </AnchorPane>

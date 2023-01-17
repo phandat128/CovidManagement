@@ -1,5 +1,6 @@
 package covidmanagement.controller.xetnghiemcontroller;
 
+import covidmanagement.Utility;
 import covidmanagement.model.XetNghiemModel;
 import covidmanagement.model.XetNghiemModel.KetQuaXetNghiem;
 import javafx.beans.value.ChangeListener;
@@ -8,10 +9,12 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.net.URL;
@@ -72,12 +75,22 @@ public class SuaController implements Initializable {
         resultField.setValue(result);
     }
 
-    public void onUpdate() throws SQLException {
+    public void onUpdate(ActionEvent event){
         final LocalDate date = dateField.getValue();
         final String place = placeField.getText();
         final KetQuaXetNghiem result = resultField.getValue();
-        XetNghiemModel.update(idXN, date, place, result);
-        //TODO: đóng cửa sổ, thông báo thành công/thất bại, chuyển đến trang tìm kiếm
+        try {
+            XetNghiemModel.update(idXN, date, place, result);
+            //TODO: thông báo thành công
+            Utility.displaySuccessDialog("Cập nhật thành công!");
+        } catch (SQLException e){
+            e.printStackTrace();
+            //TODO: thông báo thất bại
+            Utility.displayExceptionDialog(e);
+        }
+        //TODO: tắt cửa sổ cập nhật
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
 

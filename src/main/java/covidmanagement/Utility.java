@@ -62,9 +62,6 @@ public class Utility {
         alert.setTitle("Are you sure?");
         alert.setHeaderText(message);
 
-        GridPane expContent = new GridPane();
-        expContent.setMaxWidth(Double.MAX_VALUE);
-
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.OK){
@@ -74,16 +71,24 @@ public class Utility {
             try {
                 QueryDB queryDB = new QueryDB();
                 queryDB.executeUpdate(sql);
+                //TODO: hiển thị thông báo xóa thành công
+                displaySuccessDialog("Đã xóa thành công!");
             } catch (SQLException e){
                 e.printStackTrace();
+                //TODO: hiển thị thông báo xóa không thành công
+                displayExceptionDialog(e);
             }
 
             if (tableName.equalsIgnoreCase("hokhau")){
                 //TODO here: đặt mã hộ khẩu của các nhân khẩu trong hộ về 0
 
             }
-
         }
     }
-
+    // hiển thị hộp thông báo thành công
+    public static void displaySuccessDialog(String message){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setHeaderText(message);
+        alert.show();
+    }
 }

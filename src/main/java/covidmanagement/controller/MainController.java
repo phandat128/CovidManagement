@@ -3,7 +3,10 @@ package covidmanagement.controller;
 import covidmanagement.Main;
 import covidmanagement.Utility;
 import covidmanagement.controller.hokhaucontroller.SuaHoKhaucontroller;
+import covidmanagement.controller.khaibaocontroller.SuaKhaiBaoController;
+import covidmanagement.controller.khaibaocontroller.XemKhaiBaoController;
 import covidmanagement.controller.xetnghiemcontroller.SuaController;
+import covidmanagement.model.KhaiBaoModel;
 import covidmanagement.model.XetNghiemModel.KetQuaXetNghiem;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -91,5 +94,35 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
+//    public void moveToSuaKhaiBaoPage(String diemkhaibao, int maNhanKhau, LocalDate ngayKhaiBao, String lichTrinh,
+//                                     boolean bhyt, boolean trieuchung, boolean tiepXucNguoiBenh, boolean tiepXucNguoiTuVungDich,
+//                                     boolean tiepXucNguoiCoBieuHien, String benhNen){
+//        try {
+//            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("khaibao/suakhaibao-view.fxml"));
+//            Parent componentScene = fxmlLoader.load();
+//            SuaKhaiBaoController suaController = fxmlLoader.getController();
+//            suaController.setField(diemkhaibao, ngayKhaiBao, maNhanKhau, lichTrinh,
+//                                bhyt, trieuchung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich,
+//                                tiepXucNguoiCoBieuHien, benhNen);
+//            mainBorderPane.setCenter(componentScene);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
+//    public void moveToXemKhaiBaoPage(String diemkhaibao, LocalDate ngayKhaiBao, int maNhanKhau, String lichTrinh,
+//                                     boolean bhyt, boolean trieuchung, boolean tiepXucNguoiBenh, boolean tiepXucNguoiTuVungDich,
+//                                     boolean tiepXucNguoiCoBieuHien, String benhNen){
+//        try {
+//            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("khaibao/xemkhaibao-view.fxml"));
+//            Parent componentScene = fxmlLoader.load();
+//            XemKhaiBaoController xemController = fxmlLoader.getController();
+//            xemController.setField(diemkhaibao, ngayKhaiBao, maNhanKhau, lichTrinh,
+//                    bhyt, trieuchung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich,
+//                    tiepXucNguoiCoBieuHien, benhNen);
+//            mainBorderPane.setCenter(componentScene);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
