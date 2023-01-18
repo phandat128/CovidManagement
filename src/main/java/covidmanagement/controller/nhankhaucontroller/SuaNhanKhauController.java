@@ -6,9 +6,7 @@ import covidmanagement.model.NhanKhauModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -27,12 +25,12 @@ public class SuaNhanKhauController implements Initializable  {
 
         @FXML
         private TextField txtHoVaTen, txtMaNhanKhau, txtTonGiao, txtNguyenQuan, txtNgheNghiep, txtQuocTich, txtGioiTinh,
-                txtSDT, txtQuanHeVoiChuHo, txtLaChuHo, txtCMND_CCCD, txtMaHoKhau;
+                txtSDT, txtQuanHeVoiChuHo, txtCMND_CCCD, txtMaHoKhau;
         @FXML
         private DatePicker pickerNgaySinh;
 
-        int MaNhanKhau;
-        String HoTen;
+        @FXML
+        private RadioButton lachuhoco, lachuhokhong;
 
         @Override
         public void initialize(URL location, ResourceBundle resources) {
@@ -42,9 +40,9 @@ public class SuaNhanKhauController implements Initializable  {
         public void setField(int maNhanKhau, String hoVaTen, String gioiTinh, LocalDate ngaySinh, String cmnd_CCCD_,
                              String quocTich, String tonGiao, String sDT, String nguyenQuan, String ngheNghiep,
                              int maHoKhau, Boolean laChuHo, String quanHeVoiChuHo){
-                String chuho = "không";
-                if(laChuHo == true) chuho = "có";
-                this.MaNhanKhau = maNhanKhau;
+
+                txtMaNhanKhau.setText(String.valueOf(maNhanKhau));
+                txtMaNhanKhau.setDisable(true);
                 txtHoVaTen.setText(hoVaTen);
                 txtGioiTinh.setText(gioiTinh);
                 pickerNgaySinh.setValue(ngaySinh);
@@ -55,66 +53,91 @@ public class SuaNhanKhauController implements Initializable  {
                 txtNguyenQuan.setText(nguyenQuan);
                 txtNgheNghiep.setText(ngheNghiep);
                 txtMaHoKhau.setText(String.valueOf(maHoKhau));
-                txtLaChuHo.setText(chuho);
+
+                if (laChuHo) lachuhoco.setSelected(true);
+                else lachuhokhong.setSelected(true);
+
                 txtQuanHeVoiChuHo.setText(quanHeVoiChuHo);
         }
 
         @FXML
         void suaActionevent(ActionEvent event) throws SQLException {
-                if (txtMaNhanKhau.getText().isBlank()) {
-                        RuntimeException maNhanKhauException = new RuntimeException("Trường Mã Nhân Khẩu không được để trống!");
-                        Utility.displayExceptionDialog(maNhanKhauException);
-                        throw maNhanKhauException;
-                }
-
+                Boolean key = true;
                 if (txtHoVaTen.getText().isBlank()) {
-                        RuntimeException hoVaTenException = new RuntimeException("Trường Họ Và Tên không được để trống!");
-                        Utility.displayExceptionDialog(hoVaTenException);
-                        throw hoVaTenException;
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setHeaderText("Trường Họ Và Tên không được để trống!");
+                        alert.show();
+                        key = false;
                 }
 
                 if (pickerNgaySinh.getValue() == null) {
-                        RuntimeException ngaySinhException = new RuntimeException("Trường Ngày Sinh không được để trống!");
-                        Utility.displayExceptionDialog(ngaySinhException);
-                        throw ngaySinhException;
+
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setHeaderText("Trường Ngày Sinh không được để trống!");
+                        alert.show();
+                        key = false;
                 }
 
                 if (txtCMND_CCCD.getText().isBlank()) {
-                        RuntimeException cmnd_CCCDException = new RuntimeException("Trường CMND_CCCD không được để trống!");
-                        Utility.displayExceptionDialog(cmnd_CCCDException);
-                        throw cmnd_CCCDException;
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setHeaderText("Trường CMND_CCCD không được để trống!");
+                        alert.show();
+                        key = false;
+                }
+
+                if (!txtCMND_CCCD.getText().matches("[0-9]+")){
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setHeaderText("Trường CMND_CCCD chỉ được chứa chữ số!");
+                        alert.show();
+                        key = false;
                 }
 
                 if (txtMaHoKhau.getText().isBlank()) {
-                        RuntimeException maHoKhauException = new RuntimeException("Trường Mã Hộ Khẩu không được để trống!");
-                        Utility.displayExceptionDialog(maHoKhauException);
-                        throw maHoKhauException;
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setHeaderText("Trường Mã Hộ Khẩu không được để trống!");
+                        alert.show();
+                        key = false;
                 }
+                if (lachuhoco.isSelected() && lachuhokhong.isSelected()) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setHeaderText("Bạn có là chủ hộ không?");
+                        alert.show();
+                        key = false;
+                }
+                try {
+                        if (key) {
+                                int maNhanKhau = Integer.parseInt(txtMaNhanKhau.getText());
+                                String hoVaTen = txtHoVaTen.getText();
+                                String gioiTinh = txtGioiTinh.getText();
+                                LocalDate ngaySinh = pickerNgaySinh.getValue();
+                                String cmnd_CCCD_ = txtCMND_CCCD.getText();
+                                String quocTich = txtQuocTich.getText();
+                                String tonGiao = txtTonGiao.getText();
+                                String sDT = txtSDT.getText();
+                                String nguyenQuan = txtNguyenQuan.getText();
+                                String ngheNghiep = txtNgheNghiep.getText();
+                                int maHoKhau = Integer.parseInt(txtMaHoKhau.getText());
+                                // TODO
+                                String quanHeVoiChuHo;
+                                Boolean laChuHo;
+                                if (lachuhoco.isSelected()) {
+                                        laChuHo = true;
+                                        quanHeVoiChuHo = "Chủ hộ";
 
+                                } else {
+                                        laChuHo = false;
+                                        quanHeVoiChuHo = txtQuanHeVoiChuHo.getText();
+                                }
 
-                int maNhanKhau = Integer.parseInt(txtMaNhanKhau.getText());
-                String hoVaTen = txtHoVaTen.getText();
-                String gioiTinh = txtGioiTinh.getText();
-                LocalDate ngaySinh = pickerNgaySinh.getValue();
-                String cmnd_CCCD_ = txtCMND_CCCD.getText();
-                String quocTich = txtQuocTich.getText();
-                String tonGiao = txtTonGiao.getText();
-                String sDT = txtSDT.getText();
-                String nguyenQuan = txtNguyenQuan.getText();
-                String ngheNghiep = txtNgheNghiep.getText();
-                int maHoKhau = Integer.parseInt(txtMaHoKhau.getText());
-                String quanHeVoiChuHo = txtQuanHeVoiChuHo.getText();
-                // TODO
-                Boolean laChuHo;
-                if(txtLaChuHo.getText() == "có") laChuHo = true;
-                else laChuHo = false;
+                                NhanKhauModel.updateNhanKhau(maNhanKhau, hoVaTen, gioiTinh, ngaySinh, cmnd_CCCD_, quocTich, tonGiao,
+                                        sDT, nguyenQuan, ngheNghiep, maHoKhau, laChuHo, quanHeVoiChuHo);
 
-                NhanKhauModel.updateNhanKhau(maNhanKhau, hoVaTen, gioiTinh, ngaySinh, cmnd_CCCD_, quocTich, tonGiao,
-                        sDT, nguyenQuan, ngheNghiep, maHoKhau, laChuHo, quanHeVoiChuHo);
-
-
-
-
+                        }
+                }catch (NumberFormatException e) {
+                        Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                        alert2.setHeaderText("Lỗi khi thêm dữ liệu: " + e.getMessage() + "." + "Vui lòng nhập lại!!");
+                        alert2.show();
+                }
 
         }
 

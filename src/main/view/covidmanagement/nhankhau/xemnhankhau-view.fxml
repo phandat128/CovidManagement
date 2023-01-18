@@ -136,7 +136,8 @@
                 <HBox prefHeight="40.0" prefWidth="455.0">
                     <children>
                         <Label prefHeight="40.0" prefWidth="150.0" text="Là Chủ Hộ" />
-                        <TextField fx:id="txtLaChuHo" prefHeight="40.0" prefWidth="305.0" />
+                        <RadioButton fx:id="lachuhoco" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Có" />
+                        <RadioButton fx:id="lachuhokhong" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Không" />
                     </children>
                     <VBox.margin>
                         <Insets right="15.0" top="10.0" />

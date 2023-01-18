@@ -2,6 +2,7 @@ package covidmanagement.model;
 
 import covidmanagement.Utility;
 import covidmanagement.database.QueryDB;
+import javafx.scene.control.Alert;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -80,80 +81,124 @@ public class NhanKhauModel {
         return NhanKhauList;
     }
 
-    public static void addNhanKhau(int maNhanKhau, String hoVaTen, String gioiTinh, LocalDate ngaySinh, String cmnd_CCCD_,
+    public static void addNhanKhau( String hoVaTen, String gioiTinh, LocalDate ngaySinh, String cmnd_CCCD_,
                                    String quocTich, String tonGiao, String sDT, String nguyenQuan, String ngheNghiep,
-                                   int maHoKhau, Boolean laChuHo, String quanHeVoiChuHo) throws SQLException{
-        QueryDB queryDB = new QueryDB();
-        PreparedStatement preparedStatement = queryDB.getConnection().prepareStatement(
-                "INSERT INTO nhankhau(manhankhau, hoten, ngaysinh, gioitinh, cmnd_cccd, sdt, quoctich, tongiao, " +
-                        "nguyenquan, mahokhau, lachuho, quanhevoichuho, nghenghiep) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)"
-        );
-        preparedStatement.setInt(1, maNhanKhau);
-        preparedStatement.setString(2, hoVaTen);
-        preparedStatement.setDate(3, Date.valueOf(ngaySinh));
-        preparedStatement.setString(4, gioiTinh);
-        preparedStatement.setString(5, cmnd_CCCD_);
-        preparedStatement.setString(6, sDT);
-        preparedStatement.setString(7, quocTich);
-        preparedStatement.setString(8, tonGiao);
-        preparedStatement.setString(9, nguyenQuan);
-        preparedStatement.setInt(10, maHoKhau);
-        preparedStatement.setBoolean(11, laChuHo);
-        preparedStatement.setString(12, quanHeVoiChuHo);
-        preparedStatement.setString(13, ngheNghiep);
+                                   int maHoKhau, Boolean laChuHo, String quanHeVoiChuHo) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        QueryDB queryDB = null;
+        try {
+            queryDB = new QueryDB();
+            preparedStatement = queryDB.getConnection().prepareStatement(
+                    "INSERT INTO nhankhau(hoten, ngaysinh, gioitinh, cmnd_cccd, sdt, quoctich, tongiao, nguyenquan, mahokhau, lachuho, quanhevoichuho, nghenghiep) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"
+            );
+            preparedStatement.setString(1, hoVaTen);
+            preparedStatement.setDate(2, Date.valueOf(ngaySinh));
+            preparedStatement.setString(3, gioiTinh);
+            preparedStatement.setString(4, cmnd_CCCD_);
+            preparedStatement.setString(5, sDT);
+            preparedStatement.setString(6, quocTich);
+            preparedStatement.setString(7, tonGiao);
+            preparedStatement.setString(8, nguyenQuan);
+            preparedStatement.setInt(9, maHoKhau);
+            preparedStatement.setBoolean(10, laChuHo);
+            preparedStatement.setString(11, quanHeVoiChuHo);
+            preparedStatement.setString(12, ngheNghiep);
 
-        int result = preparedStatement.executeUpdate();
-        preparedStatement.close();
-        queryDB.close();
-        if(result == 1){
-            RuntimeException thanhCongException = new RuntimeException("Thêm nhân khẩu thành công");
-            Utility.displayExceptionDialog(thanhCongException);
-            throw thanhCongException;
-        } else{
-//                RuntimeException thatBaiException = new RuntimeException("Thêm nhân khẩu thất bại");
-//                Utility.displayExceptionDialog(thatBaiException);
-//                throw thatBaiException;
+            int result = preparedStatement.executeUpdate();
+            if (result == 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Thêm nhân khẩu thành công!!");
+                alert.show();
+            } else {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Thêm nhân khẩu thất bại!!");
+                alert.show();
+            }
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Lỗi khi thêm dữ liệu: " + e.getMessage()+"." + "Vui lòng nhập lại!!");
+            alert.show();
+        } finally {
+            preparedStatement.close();
+            queryDB.close();
         }
     }
 
     public static void updateNhanKhau(int maNhanKhau, String hoVaTen, String gioiTinh, LocalDate ngaySinh, String cmnd_CCCD_,
                                       String quocTich, String tonGiao, String sDT, String nguyenQuan, String ngheNghiep,
-                                      int maHoKhau, Boolean laChuHo, String quanHeVoiChuHo) throws SQLException{
-        QueryDB queryDB = new QueryDB();
-        PreparedStatement preparedStatement = queryDB.getConnection().prepareStatement(
-                "UPDATE nhankhau SET (hoten, ngaysinh, gioitinh, cmnd_cccd, sdt, quoctich, tongiao, " +
-                        "nguyenquan, mahokhau, lachuho, quanhevoichuho, nghenghiep) = (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " +
-                        "WHERE manhankhau = ?;"
-        );
-        preparedStatement.setString(1, hoVaTen);
-        preparedStatement.setDate(2, Date.valueOf(ngaySinh));
-        preparedStatement.setString(3, gioiTinh);
-        preparedStatement.setString(4, cmnd_CCCD_);
-        preparedStatement.setString(5, sDT);
-        preparedStatement.setString(6, quocTich);
-        preparedStatement.setString(7, tonGiao);
-        preparedStatement.setString(8, nguyenQuan);
-        preparedStatement.setInt(9, maHoKhau);
-        preparedStatement.setBoolean(10, laChuHo);
-        preparedStatement.setString(11, quanHeVoiChuHo);
-        preparedStatement.setString(12, ngheNghiep);
-        preparedStatement.setInt(13, maNhanKhau);
-        int result = preparedStatement.executeUpdate();
-        preparedStatement.close();
-        queryDB.close();
-        if(result == 1){
-            RuntimeException thanhCongException = new RuntimeException("Cập nhật nhân khẩu thành công");
-            Utility.displayExceptionDialog(thanhCongException);
-            throw thanhCongException;
-        } else{
-//                RuntimeException thatBaiException = new RuntimeException("Thêm nhân khẩu thất bại");
-//                Utility.displayExceptionDialog(thatBaiException);
-//                throw thatBaiException;
+                                      int maHoKhau, Boolean laChuHo, String quanHeVoiChuHo) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        QueryDB queryDB = null;
+        try {
+            queryDB = new QueryDB();
+            preparedStatement = queryDB.getConnection().prepareStatement(
+                    "UPDATE nhankhau SET (hoten, ngaysinh, gioitinh, cmnd_cccd, sdt, quoctich, tongiao, " +
+                            "nguyenquan, mahokhau, lachuho, quanhevoichuho, nghenghiep) = (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " +
+                            "WHERE manhankhau = ?;"
+            );
+            preparedStatement.setString(1, hoVaTen);
+            preparedStatement.setDate(2, Date.valueOf(ngaySinh));
+            preparedStatement.setString(3, gioiTinh);
+            preparedStatement.setString(4, cmnd_CCCD_);
+            preparedStatement.setString(5, sDT);
+            preparedStatement.setString(6, quocTich);
+            preparedStatement.setString(7, tonGiao);
+            preparedStatement.setString(8, nguyenQuan);
+            preparedStatement.setInt(9, maHoKhau);
+            preparedStatement.setBoolean(10, laChuHo);
+            preparedStatement.setString(11, quanHeVoiChuHo);
+            preparedStatement.setString(12, ngheNghiep);
+            preparedStatement.setInt(13, maNhanKhau);
+            int result = preparedStatement.executeUpdate();
+            if (result == 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Cập nhật nhân khẩu thành công!!");
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Cập nhật nhân khẩu thất bại!!");
+                alert.show();
+            }
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Lỗi khi cập nhật dữ liệu: " + e.getMessage() + "." + "Vui lòng nhập lại!!");
+            alert.show();
+        } finally {
+            preparedStatement.close();
+            queryDB.close();
         }
 
 
     }
 
+    public static void deleteNhanKhau(int maNhanKhau) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        QueryDB queryDB = null;
+        try {
+            queryDB = new QueryDB();
+            preparedStatement = queryDB.getConnection().prepareStatement(
+                    "DELETE FROM nhankhau WHERE manhankhau = ?;");
+            preparedStatement.setInt(1, maNhanKhau);
+            int result = preparedStatement.executeUpdate();
+//            if (result == 1) {
+//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                alert.setHeaderText("Xóa nhân khẩu thành công trong database!!");
+//                alert.show();
+//            } else {
+//                Alert alert = new Alert(Alert.AlertType.ERROR);
+//                alert.setHeaderText("Xóa nhân khẩu thất bại!!");
+//                alert.show();
+//            }
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Lỗi khi Xóa dữ liệu: " + e.getMessage() + "." + "Vui lòng nhập lại!!");
+            alert.show();
+        } finally {
+            preparedStatement.close();
+            queryDB.close();
+        }
+    }
 
 
 
