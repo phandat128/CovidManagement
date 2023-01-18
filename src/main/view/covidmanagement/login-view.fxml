@@ -9,8 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.LoginController">
+<BorderPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.LoginController">
     <left>
         <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #00b8e5;" BorderPane.alignment="CENTER">
             <children>
@@ -29,7 +28,7 @@
                 <AnchorPane layoutX="75.0" layoutY="240.0" prefHeight="50.0" prefWidth="250.0">
                     <children>
                         <FontAwesomeIconView fill="#00b8e5" glyphName="USER" layoutX="14.0" layoutY="32.0" size="20" />
-                        <TextField layoutX="50.0" layoutY="9.0" prefHeight="30.0" prefWidth="200.0" promptText="Tên đăng nhập">
+                        <TextField fx:id="username" layoutX="50.0" layoutY="9.0" prefHeight="30.0" prefWidth="200.0" promptText="Tên đăng nhập">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -39,19 +38,19 @@
                 <AnchorPane layoutX="75.0" layoutY="300.0" prefHeight="50.0" prefWidth="250.0">
                     <children>
                         <FontAwesomeIconView fill="#00b8e5" glyphName="LOCK" layoutX="14.0" layoutY="33.0" size="20" text="" />
-                        <PasswordField layoutX="50.0" layoutY="10.0" prefHeight="30.0" prefWidth="200.0" promptText="Mật khẩu">
+                        <PasswordField fx:id="password" layoutX="50.0" layoutY="10.0" prefHeight="30.0" prefWidth="200.0" promptText="Mật khẩu">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </PasswordField>
                     </children>
                 </AnchorPane>
-                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="101.0" layoutY="374.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="98.0" style="-fx-background-color: #00b8e5;" text="Đăng nhập" textFill="WHITE">
+                <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" layoutX="101.0" layoutY="374.0" mnemonicParsing="false" onAction="#onLogin" prefHeight="32.0" prefWidth="98.0" style="-fx-background-color: #00b8e5;" text="Đăng nhập" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <Button onAction="#moveToMainPage" alignment="CENTER" contentDisplay="CENTER" layoutX="230.0" layoutY="374.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #fd1100;" text="Hủy" textFill="WHITE">
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="230.0" layoutY="374.0" mnemonicParsing="false" onAction="#onClose" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #fd1100;" text="Hủy" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>

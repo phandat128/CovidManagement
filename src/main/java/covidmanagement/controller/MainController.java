@@ -74,6 +74,9 @@ public class MainController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource( "login-view.fxml"));
             Parent componentScene = fxmlLoader.load();
             Stage stage = new Stage();
+            stage.setTitle("Đăng nhập");
+            LoginController loginController = fxmlLoader.getController();
+            loginController.setStage(stage);
             Scene scene = new Scene(componentScene);
             stage.setScene(scene);
             stage.show();
