@@ -9,7 +9,7 @@ public class QueryDB {
     public QueryDB() throws SQLException{
         final String URL = "jdbc:postgresql://localhost:5432/covidmanagement";
         final String user = "postgres";
-        final String password = "123123";
+        final String password = "truyen123";
         connection = DriverManager.getConnection(URL, user, password);
         System.out.println("Connected!");
         statement = connection.createStatement();
