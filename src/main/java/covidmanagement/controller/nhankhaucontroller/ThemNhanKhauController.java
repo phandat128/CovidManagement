@@ -57,6 +57,13 @@ public class ThemNhanKhauController implements Initializable {
             key = false;
         }
 
+        if (!pickerNgaySinh.getValue().isBefore(LocalDate.now())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Đồng chí từ tương lai tới à!!");
+            alert.show();
+            key = false;
+        }
+
         if (!gioitinhnam.isSelected() && !gioitinhnu.isSelected()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText("Trường Giới Tính không được để trống!");

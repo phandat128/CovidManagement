@@ -74,9 +74,15 @@ public class SuaNhanKhauController implements Initializable  {
                 }
 
                 if (pickerNgaySinh.getValue() == null) {
-
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setHeaderText("Trường Ngày Sinh không được để trống!");
+                        alert.show();
+                        key = false;
+                }
+
+                if (!pickerNgaySinh.getValue().isBefore(LocalDate.now())) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setHeaderText("Đồng chí từ tương lai tới à!!");
                         alert.show();
                         key = false;
                 }
