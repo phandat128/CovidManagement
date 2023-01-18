@@ -89,10 +89,10 @@ public class HoKhauModel {
         queryDB.close();
     }
 
-    public static void update(String soNha, String ngach, String ngo, String duong, String phuong, String quan, String thanhPho) throws SQLException{
+    public static void update(String soNha, String ngach, String ngo, String duong, String phuong, String quan, int maHK) throws SQLException{
         QueryDB queryDB = new QueryDB();
         PreparedStatement statement = queryDB.getConnection().prepareStatement(
-                "UPDATE HoKhau SET (sonha, ngach, ngo, duong, phuong, quan, thanhpho) = (?, ?, ?, ?, ?, ?, ?) ;"
+                "UPDATE HoKhau SET (sonha, ngach, ngo, duong, phuong, quan) = (?, ?, ?, ?, ?, ?) WHERE mahokhau = ?;"
         );
         statement.setString(1, soNha);
         statement.setString(2, ngach);
@@ -100,8 +100,7 @@ public class HoKhauModel {
         statement.setString(4, duong);
         statement.setString(5, phuong);
         statement.setString(6, quan);
-        statement.setString(7, thanhPho);
-
+        statement.setInt(7, maHK);
         statement.executeUpdate();
         statement.close();
         queryDB.close();

@@ -81,9 +81,18 @@ public class ThemHoKhauController {
         System.out.println(phuongText);
         System.out.println(quanText);
         System.out.println(thanhPhoText);
-
         //TODO with database
-        HoKhauModel.add(idHK, soNhaText, ngachText, ngoText,duongText, phuongText, quanText,thanhPhoText);
+        try {
+            HoKhauModel.add(idHK, soNhaText, ngachText, ngoText,duongText, phuongText, quanText,thanhPhoText);
+            //TODO: thông báo thêm thành công
+            Utility.displaySuccessDialog("Thêm thành công!");
+        } catch (SQLException e){
+            e.printStackTrace();
+            //TODO: thông báo lỗi không thêm được
+            Utility.displayExceptionDialog(e);
+        }
+        //TODO: chuyển đến trang
+
     }
 }
 

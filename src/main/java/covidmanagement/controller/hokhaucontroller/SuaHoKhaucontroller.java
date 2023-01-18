@@ -1,12 +1,16 @@
 package covidmanagement.controller.hokhaucontroller;
 
+import covidmanagement.Utility;
 import covidmanagement.model.HoKhauModel;
 import covidmanagement.model.XetNghiemModel;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.net.URL;
@@ -85,6 +89,7 @@ public class SuaHoKhaucontroller implements Initializable {
 
     public  void setField( int maHK, String soNha, String ngach, String ngo, String duong, String phuong, String quan, String thanhPho) {
         maHKField.setText(String.valueOf(maHK));
+        maHKField.setDisable(true);
         soNhaField.setText(soNha);
         ngachField.setText(ngach);
         ngoField.setText(ngo);
@@ -92,16 +97,30 @@ public class SuaHoKhaucontroller implements Initializable {
         phuongField.setText(phuong);
         quanField.setText(quan);
         thanhPhoField.setText(thanhPho);
+        thanhPhoField.setDisable(true);
     }
-    public void capnhat () throws SQLException {
+    public void capnhat (ActionEvent event) throws SQLException {
         final String soNha = soNhaField.getText();
         final String ngach = ngachField.getText();
         final String ngo = ngoField.getText();
         final String duong = duongField.getText();
         final String phuong = phuongField.getText();
         final String quan = quanField.getText();
-        final String thanhPho = thanhPhoField.getText();
-        HoKhauModel.update(soNha, ngach, ngo, duong, phuong, quan, thanhPho);
-        //TODO: đóng cửa sổ, thông báo thành công/thất bại, chuyển đến trang tìm kiếm
+        final String ma= maHKField.getText();
+        maHK = Integer.parseInt(ma);
+        try {
+            HoKhauModel.update(soNha, ngach, ngo, duong, phuong, quan,maHK);
+            //TODO: thông báo thành công
+            Utility.displaySuccessDialog("Cập nhật thành công!");
+        } catch (SQLException e){
+            e.printStackTrace();
+            //TODO: thông báo thất bại
+            Utility.displayExceptionDialog(e);
+        }
+        //TODO: tắt cửa sổ cập nhật
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.close();
+//        HoKhauModel.update(soNha, ngach, ngo, duong, phuong, quan,maHK);
+//        //TODO: đóng cửa sổ, thông báo thành công/thất bại, chuyển đến trang tìm kiếm
     }
 }

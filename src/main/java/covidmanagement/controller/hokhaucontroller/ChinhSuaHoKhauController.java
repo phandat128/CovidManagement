@@ -104,5 +104,6 @@ public class ChinhSuaHoKhauController implements Initializable {
         quan.setText("");
         phuong.setText("");
         duong.setText("");
+        timKiem(event);
     }
 }
