@@ -48,7 +48,7 @@ public class ChinhSuaKhaiBaoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         trieuchungColumn.setCellValueFactory(new PropertyValueFactory<>("trieuChung"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("maNhanKhau"));
         declareDateColumn.setCellValueFactory(new PropertyValueFactory<>("ngayKhaiBao"));
         declareSpotColumn.setCellValueFactory(new PropertyValueFactory<>("diemKhaiBao"));
         viewColumn.setCellValueFactory(new PropertyValueFactory<>("viewButton"));

@@ -41,10 +41,10 @@
       <TableView fx:id="searchTable" layoutY="243.0" prefHeight="406.0" prefWidth="626.0">
          <columns>
             <TableColumn fx:id="countColumn" prefWidth="67.99999845027924" text="STT" />
-            <TableColumn fx:id="nameColumn" prefWidth="86.39997100830078" text="Họ tên" />
-            <TableColumn fx:id="declareDateColumn" prefWidth="114.4000244140625" text="Ngày khai báo" />
-            <TableColumn fx:id="declareSpotColumn" prefWidth="152.79998779296875" text="Điểm khai báo" />
-            <TableColumn fx:id="trieuchungColumn" prefWidth="94.39999389648438" text="Triệu chứng" />
+            <TableColumn fx:id="nameColumn" prefWidth="97.59998321533203" text="Mã nhân khẩu" />
+            <TableColumn fx:id="declareDateColumn" prefWidth="122.39996337890625" text="Ngày khai báo" />
+            <TableColumn fx:id="declareSpotColumn" prefWidth="143.2000732421875" text="Điểm khai báo" />
+            <TableColumn fx:id="trieuchungColumn" prefWidth="85.60000610351562" text="Triệu chứng" />
             <TableColumn fx:id="viewColumn" prefWidth="109.60003662109375" text="Xem thêm" />
          </columns>
       </TableView>
