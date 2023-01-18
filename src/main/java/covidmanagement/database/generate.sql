@@ -17,7 +17,7 @@ CREATE TABLE NhanKhau(
 	NgaySinh date NOT NULL,
 	GioiTinh varchar(10) NOT NULL,
 	CMND_CCCD varchar(20) UNIQUE,
-	SDT varchar(15) UNIQUE,
+	SDT varchar(15),
 	QuocTich varchar(20) NOT NULL,
 	TonGiao varchar(20) DEFAULT 'Không',
 	NguyenQuan varchar(100),
@@ -65,6 +65,12 @@ CREATE TABLE XetNghiem(
  	CONSTRAINT PK_XetNghiem PRIMARY KEY (MaXetNghiem)
 );
 
+CREATE TABLE TaiKhoan(
+    username varchar(100) NOT NULL UNIQUE,
+    password varchar(100) NOT NULL,
+    CONSTRAINT PK_TaiKhoan PRIMARY KEY(username)
+);
+
 ALTER TABLE CachLy   ADD  CONSTRAINT FK_CachLy_NhanKhau FOREIGN KEY(MaNhanKhau)
 REFERENCES NhanKhau (MaNhanKhau);
 
@@ -90,3 +96,5 @@ REFERENCES NhanKhau (MaNhanKhau);
 --INSERT INTO HoKhau (SoNha, Ngach, Ngo, Duong, Phuong, Quan, ThanhPho)
 --VALUES (6, NULL, NULL, 'Tạ Quang Bửu', 'Bách Khoa', 'Hai Bà Trưng', 'Hà Nội');
 
+INSERT INTO TaiKhoan (username, password)
+VALUES ('admin', '123456');
