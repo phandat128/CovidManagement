@@ -41,6 +41,7 @@ public class XetNghiemModel {
 
     }
 
+
     public static List<XetNghiemModel> getXetNghiemList(){
         List<XetNghiemModel> queryList = new ArrayList<>();
         try {

@@ -1,8 +1,8 @@
 CREATE TABLE HoKhau(
 	MaHoKhau serial NOT NULL,
-	SoNha int NOT NULL,
-	Ngach int,
-	Ngo int,
+	SoNha varchar(20),
+	Ngach varchar(20),
+	Ngo varchar(20),
 	Duong varchar(50) NOT NULL,
 	Phuong varchar(20) NOT NULL,
 	Quan varchar(20) NOT NULL,

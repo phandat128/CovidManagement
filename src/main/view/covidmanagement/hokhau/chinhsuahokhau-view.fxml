@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.hokhaucontroller.TimKiemHoKhauController">
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.hokhaucontroller.ChinhSuaHoKhauController">
     <top>
         <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -68,11 +68,11 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                  <TextField fx:id="duong" prefHeight="30.0" prefWidth="239.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
+                        <TextField fx:id="duong" prefHeight="30.0" prefWidth="239.0">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" layoutX="410.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -82,42 +82,44 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                  <TextField fx:id="phuong" prefHeight="30.0" prefWidth="239.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
+                        <TextField fx:id="phuong" prefHeight="30.0" prefWidth="239.0">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2" />
                 <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <left>
+                    <left>
                         <Button fx:id="searchButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#timKiem" text="Tìm kiếm" BorderPane.alignment="CENTER">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Button>
-               </left>
-               <center>
-                  <Button mnemonicParsing="false" onAction="#xoaTimKiem" text="Xóa tất cả tìm kiếm" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
-               </center>
+                    </left>
+                    <center>
+                        <Button mnemonicParsing="false" onAction="#xoaTimKiem" text="Xóa tất cả tìm kiếm" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                    </center>
                 </BorderPane>
                 <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                     <columns>
                         <TableColumn fx:id="sttColumn" prefWidth="28.800018310546875" text="STT" />
                         <TableColumn fx:id="maHoKhauColumn" prefWidth="71.20001220703125" text="Mã hộ khẩu" />
                         <TableColumn fx:id="maChuHoColumn" prefWidth="69.60006713867188" text="Mã chủ hộ" />
-                        <TableColumn fx:id="soNhaColumn" prefWidth="63.20001220703125" resizable="false" text="Số nhà" />
-                        <TableColumn fx:id="ngachColumn" prefWidth="55.20001220703125" resizable="false" text="Ngách " />
-                        <TableColumn fx:id="ngoColumn" prefWidth="55.199951171875" resizable="false" text="Ngõ " />
-                        <TableColumn fx:id="duongColumn" minWidth="0.0" prefWidth="123.20001220703125" resizable="false" text="Đường " />
-                        <TableColumn fx:id="phuongColumn" minWidth="0.0" prefWidth="128.0" resizable="false" text="Phường" />
-                  <TableColumn fx:id="quanColumn" prefWidth="105.60003662109375" resizable="false" text="Quận" />
-                  <TableColumn fx:id="thanhPhoColumn" prefWidth="99.199951171875" resizable="false" text="Thành phố" />
+                        <TableColumn fx:id="soNhaColumn" prefWidth="53.5999755859375" resizable="false" text="Số nhà" />
+                        <TableColumn fx:id="ngachColumn" prefWidth="45.5999755859375" resizable="false" text="Ngách " />
+                        <TableColumn fx:id="ngoColumn" prefWidth="36.0" resizable="false" text="Ngõ " />
+                        <TableColumn fx:id="duongColumn" minWidth="0.0" prefWidth="103.20001220703125" resizable="false" text="Đường " />
+                        <TableColumn fx:id="phuongColumn" minWidth="0.0" prefWidth="104.79998779296875" resizable="false" text="Phường" />
+                        <TableColumn fx:id="quanColumn" prefWidth="96.0" resizable="false" text="Quận" />
+                        <TableColumn fx:id="thanhPhoColumn" prefWidth="97.59991455078125" resizable="false" text="Thành phố" />
+                        <TableColumn fx:id="suaColumn" prefWidth="44.7999267578125" resizable="false" text="Sửa" />
+                        <TableColumn prefWidth="50.4000244140625" resizable="false" text="Xóa" fx:id="xoaColumn" />
                     </columns>
                     <GridPane.margin>
                         <Insets top="20.0" />

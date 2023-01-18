@@ -2,6 +2,7 @@ package covidmanagement.controller;
 
 import covidmanagement.Main;
 import covidmanagement.Utility;
+import covidmanagement.controller.hokhaucontroller.SuaHoKhaucontroller;
 import covidmanagement.controller.khaibaocontroller.SuaKhaiBaoController;
 import covidmanagement.controller.khaibaocontroller.XemKhaiBaoController;
 import covidmanagement.controller.xetnghiemcontroller.SuaController;
