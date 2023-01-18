@@ -74,8 +74,8 @@ CREATE TABLE TaiKhoan(
 ALTER TABLE CachLy   ADD  CONSTRAINT FK_CachLy_NhanKhau FOREIGN KEY(MaNhanKhau)
 REFERENCES NhanKhau (MaNhanKhau);
 
---ALTER TABLE KhaiBao   ADD  CONSTRAINT FK_KhaiBao_NhanKhau FOREIGN KEY(MaNhanKhau)
---REFERENCES NhanKhau (MaNhanKhau);
+ALTER TABLE KhaiBao   ADD  CONSTRAINT FK_KhaiBao_NhanKhau FOREIGN KEY(MaNhanKhau)
+REFERENCES NhanKhau (MaNhanKhau);
 
 ALTER TABLE NhanKhau   ADD  CONSTRAINT FK_NhanKhau_HoKhau FOREIGN KEY(MaHoKhau)
 REFERENCES HoKhau (MaHoKhau);
