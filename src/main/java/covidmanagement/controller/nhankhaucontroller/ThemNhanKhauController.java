@@ -27,13 +27,13 @@ public class ThemNhanKhauController implements Initializable {
     private Button btnThem;
 
     @FXML
-    private TextField txtMaNhanKhau, txtHoVaTen, txtGioiTinh, txtCMND_CCCD, txtQuocTich, txtTonGiao, txtSDT, txtNguyenQuan, txtNgheNghiep, txtMaHoKhau, txtQuanHeVoiChuHo;
+    private TextField txtMaNhanKhau, txtHoVaTen, txtCMND_CCCD, txtQuocTich, txtTonGiao, txtSDT, txtNguyenQuan, txtNgheNghiep, txtMaHoKhau, txtQuanHeVoiChuHo;
 
     @FXML
     private DatePicker pickerNgaySinh;
 
     @FXML
-    private RadioButton lachuhoco, lachuhokhong;
+    private RadioButton lachuhoco, lachuhokhong, gioitinhnam, gioitinhnu;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -53,6 +53,13 @@ public class ThemNhanKhauController implements Initializable {
         if (pickerNgaySinh.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText("Trường Ngày Sinh không được để trống!");
+            alert.show();
+            key = false;
+        }
+
+        if (!gioitinhnam.isSelected() && !gioitinhnu.isSelected()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Trường Giới Tính không được để trống!");
             alert.show();
             key = false;
         }
@@ -77,16 +84,20 @@ public class ThemNhanKhauController implements Initializable {
             alert.show();
             key = false;
         }
-        if (lachuhoco.isSelected() && lachuhokhong.isSelected()) {
+        if (lachuhokhong.isSelected() && txtQuanHeVoiChuHo.getText().equalsIgnoreCase("Chủ hộ")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText("Bạn có là chủ hộ không?");
+            alert.setHeaderText("Vui lòng chọn lại trường quan hệ với chủ hộ!!");
             alert.show();
             key = false;
         }
         try{
             if(key) {
                 String hoVaTen = txtHoVaTen.getText();
-                String gioiTinh = txtGioiTinh.getText();
+
+                String gioiTinh = null;
+                if (gioitinhnam.isSelected()) gioiTinh = "Nam";
+                if (gioitinhnu.isSelected()) gioiTinh = "Nữ";
+
                 LocalDate ngaySinh = pickerNgaySinh.getValue();
                 String cmnd_CCCD_ = txtCMND_CCCD.getText();
                 String quocTich = txtQuocTich.getText();
@@ -113,7 +124,7 @@ public class ThemNhanKhauController implements Initializable {
         }
         catch (NumberFormatException e) {
                 Alert alert2 = new Alert(Alert.AlertType.ERROR);
-                alert2.setHeaderText("Lỗi khi thêm dữ liệu: " + e.getMessage() + "." + "Vui lòng nhập lại!!");
+                alert2.setHeaderText("Lỗi khi thêm dữ liệu: " + e.getMessage() + ".\n" + "Mã nhân khẩu chỉ chứa chữ số. Vui lòng nhập lại!!");
                 alert2.show();
             }
 
@@ -126,7 +137,10 @@ public class ThemNhanKhauController implements Initializable {
         txtMaNhanKhau.setText("");
         txtHoVaTen.setText("");
         pickerNgaySinh.setValue(null);
-        txtGioiTinh.setText("");
+
+        gioitinhnam.setSelected(false);
+        gioitinhnu.setSelected(false);
+
         txtCMND_CCCD.setText("");
         txtQuocTich.setText("");
         txtTonGiao.setText("");

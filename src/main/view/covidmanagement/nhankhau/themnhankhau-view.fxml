@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="themnhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.ThemNhanKhauController">
+<AnchorPane fx:id="themnhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.ThemNhanKhauController">
     <children>
         <VBox layoutX="15.0" layoutY="14.0" prefHeight="350.0" prefWidth="440.0">
             <children>
@@ -50,7 +51,12 @@
                 <HBox prefHeight="40.0" prefWidth="455.0">
                     <children>
                         <Label prefHeight="40.0" prefWidth="150.0" text="Giới Tính" />
-                        <TextField fx:id="txtGioiTinh" prefHeight="40.0" prefWidth="305.0" />
+                  <RadioButton fx:id="gioitinhnam" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Nam">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="GioiTinh" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="gioitinhnu" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Nữ" toggleGroup="$GioiTinh" />
                     </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />
@@ -132,8 +138,11 @@
                 <HBox prefHeight="40.0" prefWidth="455.0">
                     <children>
                         <Label prefHeight="40.0" prefWidth="150.0" text="Là Chủ Hộ?" />
-                  <RadioButton fx:id="lachuhoco" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Có" />
-                  <RadioButton fx:id="lachuhokhong" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Không" />
+                  <RadioButton fx:id="lachuhoco" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Có">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="lachuho" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="lachuhokhong" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Không" toggleGroup="$lachuho" />
                     </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />
