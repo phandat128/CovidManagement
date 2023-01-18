@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="suanhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.SuaNhanKhauController">
+<AnchorPane fx:id="suanhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.SuaNhanKhauController">
    <children>
       <VBox layoutX="15.0" layoutY="14.0" prefHeight="350.0" prefWidth="440.0">
          <children>
@@ -136,7 +135,8 @@
             <HBox prefHeight="40.0" prefWidth="455.0">
                <children>
                   <Label prefHeight="40.0" prefWidth="150.0" text="Là Chủ Hộ" />
-                  <TextField fx:id="txtLaChuHo" prefHeight="40.0" prefWidth="305.0" />
+                  <RadioButton fx:id="lachuhoco" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Có" />
+                  <RadioButton fx:id="lachuhokhong" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Không" />
                </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />
@@ -145,7 +145,7 @@
             <HBox prefHeight="40.0" prefWidth="455.0">
                <children>
                   <Label prefHeight="40.0" prefWidth="150.0" text="Quan Hệ Với Chủ Hộ" />
-                  <TextField fx:id="txtQuanHeVoiChuHo" prefHeight="40.0" prefWidth="305.0" />
+                  <TextField fx:id="txtQuanHeVoiChuHo" prefHeight="40.0" prefWidth="305.0" promptText="Là chủ hộ bỏ qua ô này!!" />
                </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />

@@ -10,14 +10,15 @@
       <children>
         <TableView fx:id="tableNhanKhau" layoutX="0.0" layoutY="0.0" prefHeight="200.0" prefWidth="880.0" AnchorPane.leftAnchor="15.0">
           <columns>
-            <TableColumn fx:id="columnMaNhanKhau" prefWidth="110.0" text="Mã Nhân Khẩu" />
-            <TableColumn fx:id="columnHoVaTen" prefWidth="110.0" text="Họ và Tên" />
-            <TableColumn fx:id="columnNgaySinh" prefWidth="110.0" text="Ngày Sinh" />
-            <TableColumn fx:id="columnGioiTinh" prefWidth="110.0" text="Giới Tính" />
-            <TableColumn fx:id="columnCMND_CCCD" prefWidth="110.0" text="CMND_CCCD" />
-            <TableColumn fx:id="columnSDT" prefWidth="110.0" text="Số Điện Thoại" />
-            <TableColumn fx:id="columnNgheNghiep" prefWidth="110.0" text="Nghề Nghiệp" />
-            <TableColumn fx:id="columnMaChuHo" prefWidth="110.0" text="Mã Hộ Khẩu" />
+            <TableColumn fx:id="columnid" prefWidth="40.0" text="#" />
+            <TableColumn fx:id="columnMaNhanKhau" prefWidth="105.0" text="Mã Nhân Khẩu" />
+            <TableColumn fx:id="columnHoVaTen" prefWidth="105.0" text="Họ và Tên" />
+            <TableColumn fx:id="columnNgaySinh" prefWidth="105.0" text="Ngày Sinh" />
+            <TableColumn fx:id="columnGioiTinh" prefWidth="105.0" text="Giới Tính" />
+            <TableColumn fx:id="columnCMND_CCCD" prefWidth="105.0" text="CMND_CCCD" />
+            <TableColumn fx:id="columnSDT" prefWidth="105.0" text="Số Điện Thoại" />
+            <TableColumn fx:id="columnNgheNghiep" prefWidth="105.0" text="Nghề Nghiệp" />
+            <TableColumn fx:id="columnMaChuHo" prefWidth="105.0" text="Mã Hộ Khẩu" />
           </columns>
         </TableView>
       </children>
@@ -44,5 +45,6 @@
       </children>
     </AnchorPane>
     <Button id="themButton" fx:id="btnTimKiem" layoutX="230.0" layoutY="255.0" mnemonicParsing="false" onAction="#timkiemActionevent" prefHeight="40.0" prefWidth="150.0" text="Tìm kiếm" />
+      <Button fx:id="btnReset" layoutX="805.0" layoutY="295.0" mnemonicParsing="false" onAction="#resetActionevent" prefHeight="40.0" prefWidth="80.0" text="Reset" />
   </children>
 </AnchorPane>

@@ -2,6 +2,7 @@ package covidmanagement.controller.nhankhaucontroller;
 
 import covidmanagement.Utility;
 import covidmanagement.database.QueryDB;
+import covidmanagement.model.NhanKhauModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,107 +27,119 @@ public class ThemNhanKhauController implements Initializable {
     private Button btnThem;
 
     @FXML
-    private TextField txtMaNhanKhau, txtHoVaTen, txtGioiTinh, txtCMND_CCCD, txtQuocTich, txtTonGiao, txtSDT, txtNguyenQuan, txtNgheNghiep, txtMaHoKhau, txtLaChuHo, txtQuanHeVoiChuHo;
+    private TextField txtMaNhanKhau, txtHoVaTen, txtGioiTinh, txtCMND_CCCD, txtQuocTich, txtTonGiao, txtSDT, txtNguyenQuan, txtNgheNghiep, txtMaHoKhau, txtQuanHeVoiChuHo;
 
     @FXML
     private DatePicker pickerNgaySinh;
 
+    @FXML
+    private RadioButton lachuhoco, lachuhokhong;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        txtMaNhanKhau.setDisable(true);
 
     }
     @FXML
-    void addActionevent(ActionEvent event) {
-
-        if (txtMaNhanKhau.getText().isBlank()) {
-            RuntimeException maNhanKhauException = new RuntimeException("Trường Mã Nhân Khẩu không được để trống!");
-            Utility.displayExceptionDialog(maNhanKhauException);
-            throw maNhanKhauException;
-        }
-
+    void addActionevent(ActionEvent event) throws SQLException {
+        Boolean key = true;
         if (txtHoVaTen.getText().isBlank()) {
-            RuntimeException hoVaTenException = new RuntimeException("Trường Họ Và Tên không được để trống!");
-            Utility.displayExceptionDialog(hoVaTenException);
-            throw hoVaTenException;
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Trường Họ Và Tên không được để trống!");
+            alert.show();
+            key = false;
         }
 
         if (pickerNgaySinh.getValue() == null) {
-            RuntimeException ngaySinhException = new RuntimeException("Trường Ngày Sinh không được để trống!");
-            Utility.displayExceptionDialog(ngaySinhException);
-            throw ngaySinhException;
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Trường Ngày Sinh không được để trống!");
+            alert.show();
+            key = false;
         }
 
         if (txtCMND_CCCD.getText().isBlank()) {
-            RuntimeException cmnd_CCCDException = new RuntimeException("Trường CMND_CCCD không được để trống!");
-            Utility.displayExceptionDialog(cmnd_CCCDException);
-            throw cmnd_CCCDException;
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Trường CMND_CCCD không được để trống!");
+            alert.show();
+            key = false;
+        }
+
+        if (!txtCMND_CCCD.getText().matches("[0-9]+")){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Trường CMND_CCCD chỉ được chứa chữ số!");
+            alert.show();
+            key = false;
         }
 
         if (txtMaHoKhau.getText().isBlank()) {
-            RuntimeException maHoKhauException = new RuntimeException("Trường Mã Hộ Khẩu không được để trống!");
-            Utility.displayExceptionDialog(maHoKhauException);
-            throw maHoKhauException;
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Trường Mã Hộ Khẩu không được để trống!");
+            alert.show();
+            key = false;
         }
+        if (lachuhoco.isSelected() && lachuhokhong.isSelected()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Bạn có là chủ hộ không?");
+            alert.show();
+            key = false;
+        }
+        try{
+            if(key) {
+                String hoVaTen = txtHoVaTen.getText();
+                String gioiTinh = txtGioiTinh.getText();
+                LocalDate ngaySinh = pickerNgaySinh.getValue();
+                String cmnd_CCCD_ = txtCMND_CCCD.getText();
+                String quocTich = txtQuocTich.getText();
+                String tonGiao = txtTonGiao.getText();
+                String sDT = txtSDT.getText();
+                String nguyenQuan = txtNguyenQuan.getText();
+                String ngheNghiep = txtNgheNghiep.getText();
+                int maHoKhau = Integer.parseInt(txtMaHoKhau.getText());
+                String quanHeVoiChuHo;
+                // TODO
+                Boolean laChuHo;
+                if (lachuhoco.isSelected()) {
+                    laChuHo = true;
+                    quanHeVoiChuHo = "Chủ hộ";
 
+                } else {
+                    laChuHo = false;
+                    quanHeVoiChuHo = txtQuanHeVoiChuHo.getText();
+                }
 
-        int maNhanKhau = Integer.parseInt(txtMaNhanKhau.getText());
-        String hoVaTen = txtHoVaTen.getText();
-        String gioiTinh = txtGioiTinh.getText();
-        LocalDate ngaySinh = pickerNgaySinh.getValue();
-        String cmnd_CCCD_ = txtCMND_CCCD.getText();
-        String quocTich = txtQuocTich.getText();
-        String tonGiao = txtTonGiao.getText();
-        String sDT = txtSDT.getText();
-        String nguyenQuan = txtNguyenQuan.getText();
-        String ngheNghiep = txtNgheNghiep.getText();
-        int maHoKhau = Integer.parseInt(txtMaHoKhau.getText());
-        String quanHeVoiChuHo = txtQuanHeVoiChuHo.getText();
-        // TODO
-        Boolean laChuHo;
-        if(txtLaChuHo.getText() == "có") laChuHo = true;
-        else laChuHo = false;
-
-
-        try {
-
-            QueryDB queryDB = new QueryDB();
-            PreparedStatement preparedStatement = queryDB.getConnection().prepareStatement(
-                    "INSERT INTO nhankhau(manhankhau, hoten, ngaysinh, gioitinh, cmnd_cccd, sdt, quoctich, tongiao, nguyenquan, mahokhau, lachuho, quanhevoichuho, nghenghiep) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)"
-            );
-            preparedStatement.setInt(1, maNhanKhau);
-            preparedStatement.setString(2, hoVaTen);
-            preparedStatement.setDate(3, Date.valueOf(ngaySinh));
-            preparedStatement.setString(4, gioiTinh);
-            preparedStatement.setString(5, cmnd_CCCD_);
-            preparedStatement.setString(6, sDT);
-            preparedStatement.setString(7, quocTich);
-            preparedStatement.setString(8, tonGiao);
-            preparedStatement.setString(9, nguyenQuan);
-            preparedStatement.setInt(10, maHoKhau);
-            preparedStatement.setBoolean(11, laChuHo);
-            preparedStatement.setString(12, quanHeVoiChuHo);
-            preparedStatement.setString(13, ngheNghiep);
-
-            int result = preparedStatement.executeUpdate();
-            preparedStatement.close();
-            queryDB.close();
-            if(result == 1){
-                RuntimeException thanhCongException = new RuntimeException("Thêm nhân khẩu thành công");
-                Utility.displayExceptionDialog(thanhCongException);
-                throw thanhCongException;
-            } else{
-//                RuntimeException thatBaiException = new RuntimeException("Thêm nhân khẩu thất bại");
-//                Utility.displayExceptionDialog(thatBaiException);
-//                throw thatBaiException;
+                NhanKhauModel.addNhanKhau(hoVaTen, gioiTinh, ngaySinh, cmnd_CCCD_, quocTich, tonGiao,
+                        sDT, nguyenQuan, ngheNghiep, maHoKhau, laChuHo, quanHeVoiChuHo);
+            }
+        }
+        catch (NumberFormatException e) {
+                Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                alert2.setHeaderText("Lỗi khi thêm dữ liệu: " + e.getMessage() + "." + "Vui lòng nhập lại!!");
+                alert2.show();
             }
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
 
     }
+    @FXML
+    void resetActionevent(ActionEvent event) {
+
+        txtMaNhanKhau.setText("");
+        txtHoVaTen.setText("");
+        pickerNgaySinh.setValue(null);
+        txtGioiTinh.setText("");
+        txtCMND_CCCD.setText("");
+        txtQuocTich.setText("");
+        txtTonGiao.setText("");
+        txtSDT.setText("");
+        txtNguyenQuan.setText("");
+        txtNgheNghiep.setText("");
+        txtMaHoKhau.setText("");
+        lachuhoco.setSelected(false);
+        lachuhokhong.setSelected(false);
+        txtQuanHeVoiChuHo.setText("");
 
 
+    }
 }
 
 
