@@ -1,8 +1,6 @@
 package covidmanagement.controller.nhankhaucontroller;
 
 import covidmanagement.Main;
-import covidmanagement.Utility;
-import covidmanagement.controller.xetnghiemcontroller.SuaController;
 import covidmanagement.model.NhanKhauModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
@@ -42,7 +40,7 @@ public class ChinhSuaNhanKhauController implements Initializable {
     private Button btnSua, btnTimKiem, btnXoa, btnReset;
 
     private final ObservableList<NhanKhauModel> nhanKhauList = FXCollections.observableArrayList(NhanKhauModel.getNhanKhauList());
-    private final FilteredList<NhanKhauModel> List = new FilteredList<>(nhanKhauList);
+    private final FilteredList<NhanKhauModel> filteredList = new FilteredList<>(nhanKhauList);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -62,7 +60,7 @@ public class ChinhSuaNhanKhauController implements Initializable {
                 ));
         columnid.setSortable(false);
 
-        tableNhanKhau.setItems(List);
+        tableNhanKhau.setItems(filteredList);
 
     }
 

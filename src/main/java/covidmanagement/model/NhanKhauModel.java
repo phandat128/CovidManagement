@@ -200,7 +200,26 @@ public class NhanKhauModel {
         }
     }
 
-
+    public static NhanKhauModel getInstanceById(int maNhanKhau) throws SQLException{
+        QueryDB queryDB = new QueryDB();
+        ResultSet rs = queryDB.executeQuery("SELECT * FROM NhanKhau WHERE maNhanKhau = " + maNhanKhau + ";");
+        if (!rs.next()) throw new SQLException("Mã nhân khẩu không tồn tại");
+        int _maNhanKhau = rs.getInt("manhankhau");
+        String _hoVaTen = rs.getString("hoten");
+        LocalDate _ngaySinh = rs.getDate("ngaysinh").toLocalDate();
+        String _gioiTinh = rs.getString("gioitinh");
+        String _cmnd_CCCD_ = rs.getString("cmnd_cccd");
+        String _sDT = rs.getString("sdt");
+        String _quocTich = rs.getString("quoctich");
+        String _tonGiao = rs.getString("tongiao");
+        String _nguyenQuan = rs.getString("nguyenquan");
+        int _maHoKhau = rs.getInt("mahokhau");
+        Boolean _laChuHo = rs.getBoolean("lachuho");
+        String _quanHeVoiChuHo = rs.getString("quanhevoichuho");
+        String _ngheNghiep = rs.getString("nghenghiep");
+        return new NhanKhauModel(_maNhanKhau, _hoVaTen, _ngaySinh, _gioiTinh, _cmnd_CCCD_, _sDT, _quocTich,
+                _tonGiao, _nguyenQuan, _maHoKhau, _laChuHo, _quanHeVoiChuHo, _ngheNghiep);
+    }
 
     public int getMaNhanKhau() { return MaNhanKhau; }
     public void setMaNhanKhau(int MaNhanKhau) {

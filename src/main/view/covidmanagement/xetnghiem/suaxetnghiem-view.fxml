@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" spacing="24.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.xetnghiemcontroller.SuaController">
+<VBox alignment="TOP_CENTER" spacing="24.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.xetnghiemcontroller.SuaXetNghiemController">
     <children>
         <HBox alignment="CENTER" prefHeight="30.0">
             <children>

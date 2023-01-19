@@ -3,8 +3,6 @@ package covidmanagement.controller.xetnghiemcontroller;
 import covidmanagement.Utility;
 import covidmanagement.model.XetNghiemModel;
 import covidmanagement.model.XetNghiemModel.KetQuaXetNghiem;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +21,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-public class SuaController implements Initializable {
+public class SuaXetNghiemController implements Initializable {
 
     @FXML TextField idNKField, nameField, placeField;
     @FXML DatePicker dateField;

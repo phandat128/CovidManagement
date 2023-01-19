@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="suanhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.SuaNhanKhauController">
+<AnchorPane fx:id="suanhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.SuaNhanKhauController">
    <children>
       <VBox layoutX="15.0" layoutY="14.0" prefHeight="350.0" prefWidth="440.0">
          <children>
             <HBox prefHeight="40.0" prefWidth="455.0">
                <children>
-                  <Label id="txtMaNhanKhau" prefHeight="40.0" prefWidth="150.0" text="Mã Nhân Khẩu" textAlignment="CENTER" />
+                  <Label id="txtMaNhanKhau" prefHeight="40.0" prefWidth="150.0" text="Mã Nhân Khẩu" textAlignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
                   <TextField fx:id="txtMaNhanKhau" prefHeight="40.0" prefWidth="305.0">
                      <HBox.margin>
                         <Insets />
-                     </HBox.margin></TextField>
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
                </children>
                <VBox.margin>
                   <Insets right="15.0" />
@@ -25,11 +38,17 @@
                   <Label prefHeight="40.0" prefWidth="150.0" text="Họ và Tên">
                      <HBox.margin>
                         <Insets />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
                   <TextField fx:id="txtHoVaTen" prefHeight="40.0" prefWidth="305.0">
                      <HBox.margin>
                         <Insets />
-                     </HBox.margin></TextField>
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
                </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />
@@ -37,7 +56,10 @@
             </HBox>
             <HBox prefHeight="40.0" prefWidth="455.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="150.0" text="Ngày Sinh" />
+                  <Label prefHeight="40.0" prefWidth="150.0" text="Ngày Sinh">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
                   <DatePicker fx:id="pickerNgaySinh" prefHeight="40.0" prefWidth="305.0">
                      <HBox.margin>
                         <Insets />
@@ -49,8 +71,14 @@
             </HBox>
             <HBox prefHeight="40.0" prefWidth="455.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="150.0" text="Giới Tính" />
-                  <TextField fx:id="txtGioiTinh" prefHeight="40.0" prefWidth="305.0" />
+                  <Label prefHeight="40.0" prefWidth="150.0" text="Giới Tính">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <TextField fx:id="txtGioiTinh" prefHeight="40.0" prefWidth="305.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
                </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />
@@ -58,11 +86,17 @@
             </HBox>
             <HBox prefHeight="40.0" prefWidth="455.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="150.0" text="CMND_CCCD" />
+                  <Label prefHeight="40.0" prefWidth="150.0" text="CMND_CCCD">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
                   <TextField fx:id="txtCMND_CCCD" prefHeight="40.0" prefWidth="305.0">
                      <HBox.margin>
                         <Insets />
-                     </HBox.margin></TextField>
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
                </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />
@@ -70,8 +104,14 @@
             </HBox>
             <HBox prefHeight="40.0" prefWidth="455.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="150.0" text="Quốc Tịch" />
-                  <TextField fx:id="txtQuocTich" prefHeight="40.0" prefWidth="305.0" />
+                  <Label prefHeight="40.0" prefWidth="150.0" text="Quốc Tịch">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <TextField fx:id="txtQuocTich" prefHeight="40.0" prefWidth="305.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
                </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />
@@ -82,8 +122,14 @@
                   <Label prefHeight="40.0" prefWidth="150.0" text="Tôn Giáo">
                      <HBox.margin>
                         <Insets />
-                     </HBox.margin></Label>
-                  <TextField fx:id="txtTonGiao" prefHeight="40.0" prefWidth="305.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <TextField fx:id="txtTonGiao" prefHeight="40.0" prefWidth="305.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
                </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />
@@ -95,11 +141,17 @@
          <children>
             <HBox prefHeight="40.0" prefWidth="455.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="150.0" text="Số Điện Thoại" textAlignment="LEFT" />
+                  <Label prefHeight="40.0" prefWidth="150.0" text="Số Điện Thoại" textAlignment="LEFT">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
                   <TextField fx:id="txtSDT" prefHeight="40.0" prefWidth="305.0">
                      <HBox.margin>
                         <Insets />
-                     </HBox.margin></TextField>
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
                </children>
                <VBox.margin>
                   <Insets right="15.0" />
@@ -107,8 +159,14 @@
             </HBox>
             <HBox prefHeight="40.0" prefWidth="455.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="150.0" text="Nguyên Quán" textAlignment="CENTER" />
-                  <TextField fx:id="txtNguyenQuan" prefHeight="40.0" prefWidth="305.0" />
+                  <Label prefHeight="40.0" prefWidth="150.0" text="Nguyên Quán" textAlignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <TextField fx:id="txtNguyenQuan" prefHeight="40.0" prefWidth="305.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
                </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />
@@ -116,8 +174,14 @@
             </HBox>
             <HBox prefHeight="40.0" prefWidth="455.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="150.0" text="Nghề Nghiệp" />
-                  <TextField fx:id="txtNgheNghiep" prefHeight="40.0" prefWidth="305.0" />
+                  <Label prefHeight="40.0" prefWidth="150.0" text="Nghề Nghiệp">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <TextField fx:id="txtNgheNghiep" prefHeight="40.0" prefWidth="305.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
                </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />
@@ -125,8 +189,14 @@
             </HBox>
             <HBox prefHeight="40.0" prefWidth="455.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="150.0" text="Mã Hộ Khẩu" />
-                  <TextField fx:id="txtMaHoKhau" prefHeight="40.0" prefWidth="305.0" />
+                  <Label prefHeight="40.0" prefWidth="150.0" text="Mã Hộ Khẩu">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <TextField fx:id="txtMaHoKhau" prefHeight="40.0" prefWidth="305.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
                </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />
@@ -134,9 +204,18 @@
             </HBox>
             <HBox prefHeight="40.0" prefWidth="455.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="150.0" text="Là Chủ Hộ" />
-                  <RadioButton fx:id="lachuhoco" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Có" />
-                  <RadioButton fx:id="lachuhokhong" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Không" />
+                  <Label prefHeight="40.0" prefWidth="150.0" text="Là Chủ Hộ">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <RadioButton fx:id="lachuhoco" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Có">
+                     <font>
+                        <Font size="14.0" />
+                     </font></RadioButton>
+                  <RadioButton fx:id="lachuhokhong" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Không">
+                     <font>
+                        <Font size="14.0" />
+                     </font></RadioButton>
                </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />
@@ -144,8 +223,14 @@
             </HBox>
             <HBox prefHeight="40.0" prefWidth="455.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="150.0" text="Quan Hệ Với Chủ Hộ" />
-                  <TextField fx:id="txtQuanHeVoiChuHo" prefHeight="40.0" prefWidth="305.0" promptText="Là chủ hộ bỏ qua ô này!!" />
+                  <Label prefHeight="40.0" prefWidth="150.0" text="Quan Hệ Với Chủ Hộ">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <TextField fx:id="txtQuanHeVoiChuHo" prefHeight="40.0" prefWidth="305.0" promptText="Là chủ hộ bỏ qua ô này!!">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
                </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />

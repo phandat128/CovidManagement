@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="316.0" prefWidth="502.0" spacing="24.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.ThemCachLyController">
+<VBox alignment="TOP_CENTER" spacing="24.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.cachlycontroller.ThemCachLyController">
     <children>
         <HBox alignment="CENTER" prefHeight="30.0">
             <children>
-                <Label alignment="CENTER_RIGHT" contentDisplay="BOTTOM" prefHeight="30.0" prefWidth="142.0" text="Mã nhân khẩu">
+                <Label alignment="CENTER_RIGHT" contentDisplay="BOTTOM" prefHeight="30.0" prefWidth="106.0" text="Mã nhân khẩu">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -34,7 +34,7 @@
         </HBox>
         <HBox alignment="CENTER" prefHeight="30.0">
             <children>
-                <Label alignment="CENTER_RIGHT" contentDisplay="BOTTOM" prefHeight="30.0" prefWidth="142.0" text="Họ Tên">
+                <Label alignment="CENTER_RIGHT" contentDisplay="BOTTOM" prefHeight="30.0" prefWidth="106.0" text="Họ Tên">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -51,7 +51,7 @@
         </HBox>
         <HBox alignment="CENTER" prefHeight="30.0">
             <children>
-                <Label alignment="CENTER_RIGHT" contentDisplay="BOTTOM" prefHeight="30.0" prefWidth="142.0" text="Bắt đầu">
+                <Label alignment="CENTER_RIGHT" contentDisplay="BOTTOM" prefHeight="30.0" prefWidth="106.0" text="Bắt đầu">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -65,7 +65,7 @@
         </HBox>
         <HBox alignment="CENTER" prefHeight="30.0">
             <children>
-                <Label alignment="CENTER_RIGHT" contentDisplay="BOTTOM" prefHeight="30.0" prefWidth="142.0" text="Kết thúc">
+                <Label alignment="CENTER_RIGHT" contentDisplay="BOTTOM" prefHeight="30.0" prefWidth="106.0" text="Kết thúc">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -79,7 +79,7 @@
         </HBox>
         <HBox alignment="CENTER" prefHeight="30.0">
             <children>
-                <Label alignment="CENTER_RIGHT" contentDisplay="BOTTOM" prefHeight="30.0" prefWidth="142.0" text="Địa điểm cách ly">
+                <Label alignment="CENTER_RIGHT" contentDisplay="BOTTOM" prefHeight="30.0" prefWidth="106.0" text="Địa điểm cách ly">
                     <font>
                         <Font size="14.0" />
                     </font>

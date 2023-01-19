@@ -1,4 +1,4 @@
-package covidmanagement.controller;
+package covidmanagement.controller.cachlycontroller;
 
 import covidmanagement.Utility;
 import javafx.collections.FXCollections;

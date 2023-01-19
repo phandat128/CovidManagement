@@ -6,12 +6,12 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
 
 import java.net.URL;
@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-public class TimKiemController implements Initializable {
+public class TimKiemXetNghiemController implements Initializable {
     @FXML TextField idNKField, nameField;
 
     @FXML DatePicker dateRangeFrom, dateRangeTo;
@@ -42,6 +42,7 @@ public class TimKiemController implements Initializable {
             XetNghiemModel.getXetNghiemList()
     );
     private final FilteredList<XetNghiemModel> filteredList = new FilteredList<>(xetNghiemList);
+    private final SortedList<XetNghiemModel> sortedList = new SortedList<>(filteredList);
 
     @FXML ChoiceBox<XetNghiemModel.KetQuaXetNghiem> resultSearch;
 
@@ -74,6 +75,11 @@ public class TimKiemController implements Initializable {
         placeColumn.setCellValueFactory(new PropertyValueFactory<>("place"));
         resultColumn.setCellValueFactory(new PropertyValueFactory<>("result"));
 
+        sortedList.setComparator((o1, o2) -> {
+            if (o1.getDate().isBefore(o2.getDate())) return -1;
+            if (o1.getDate().isAfter(o2.getDate())) return 1;
+            return 0;
+        });
         searchTable.setItems(filteredList);
         //set serial number column
         idColumn.setCellValueFactory(
@@ -95,7 +101,7 @@ public class TimKiemController implements Initializable {
             if (!idNKField.getText().isBlank()) idNK = Integer.parseInt(idNKField.getText());
         } catch (NumberFormatException e){
             e.printStackTrace();
-            Utility.displayExceptionDialog(new NumberFormatException("Mã nhân khẩu chỉ được chứa chữ số!"));
+            Utility.displayWarningDialog("Mã nhân khẩu chỉ được chứa chữ số!");
             return;
         }
         final String name = nameField.getText();
@@ -105,16 +111,10 @@ public class TimKiemController implements Initializable {
 
         if (from != null && to != null){
             if (from.isAfter(to)) {
-                Utility.displayExceptionDialog(new RuntimeException("Khoảng thời gian không hợp lệ!"));
+                Utility.displayWarningDialog("Khoảng thời gian không hợp lệ!");
                 return;
             }
         }
-
-        System.out.println(idNK == 0 ? null : idNK);
-        System.out.println(name);
-        System.out.println(from);
-        System.out.println(to);
-        System.out.println(result);
 
         final int finalIdNK = idNK;
         filteredList.setPredicate(xetNghiemRow -> {
