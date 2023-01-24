@@ -1,87 +1,278 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="708.0" prefWidth="721.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.khaibaocontroller.ThemKhaiBaoController">
-   <children>
-      <Label layoutX="37.0" layoutY="148.0" prefHeight="18.0" prefWidth="86.0" text="Ngày khai báo">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
-      <Label layoutX="37.0" layoutY="229.0" prefHeight="18.0" prefWidth="86.0" text="Mã nhân khẩu">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
-      <Label layoutX="38.0" layoutY="86.0" prefHeight="18.0" prefWidth="85.0" text="Điểm khai báo">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
-      <TextField fx:id="nameField" layoutX="154.0" layoutY="225.0" />
-      <DatePicker id="DatePicker" fx:id="declareDate" layoutX="141.0" layoutY="144.0" promptText="Nhập ngày" />
-      <Label layoutX="63.0" layoutY="301.0" prefHeight="18.0" prefWidth="33.0" text="BHYT">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
-      <TextField fx:id="traceField" layoutX="28.0" layoutY="398.0" prefHeight="219.0" prefWidth="316.0" />
-      <Label alignment="TOP_LEFT" layoutX="28.0" layoutY="365.0" prefHeight="30.0" prefWidth="334.0" text="Trong 14 ngày qua, bạn đã đi đén những địa phương nào?">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
-      <Label layoutX="373.0" layoutY="74.0" prefHeight="42.0" prefWidth="316.0" text="Trong 14 ngày qua, bạn có gặp những triệu chứng: sốt, ho, khó thở, đau họng, viêm phổi, mệt mỏi?" wrapText="true">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
-      <Label layoutX="373.0" layoutY="157.0" prefHeight="18.0" prefWidth="316.0" text="Trong 14 ngày qua, bạn có tiếp xúc những người sau?">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
-      <Label alignment="TOP_LEFT" layoutX="373.0" layoutY="416.0" prefHeight="26.0" prefWidth="316.0" text="Hãy cho biết bệnh nền mà bạn đang có?">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
-      <Label layoutX="257.0" layoutY="32.0" prefHeight="30.0" prefWidth="190.0" text="MẪU KHAI BÁO Y TẾ" textAlignment="CENTER">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="saveDeclare" layoutX="303.0" layoutY="651.0" mnemonicParsing="false" onAction="#onAdd" prefHeight="30.0" prefWidth="118.0" text="Lưu khai báo" AnchorPane.topAnchor="651.0" />
-      <Label layoutX="14.0" layoutY="14.0" />
-      <Label layoutX="372.0" layoutY="189.0" text="Người bệnh hoặc nghi ngờ, mắc bệnh COVID-19 " />
-      <Label layoutX="373.0" layoutY="255.0" text="Người từ nước có bệnh COVID-19 " />
-      <Label layoutX="373.0" layoutY="324.0" text="Người có biểu hiện (Sốt, ho, khó thở, Viêm phổi) " />
-      <RadioButton fx:id="symptomYes" layoutX="422.0" layoutY="121.0" mnemonicParsing="false" selected="true" text="Có ">
-         <toggleGroup>
-            <ToggleGroup fx:id="Symptom" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="symptomNo" layoutX="561.0" layoutY="121.0" mnemonicParsing="false" text="Không" toggleGroup="$Symptom" />
-      <RadioButton fx:id="covidContactYes" layoutX="426.0" layoutY="221.0" mnemonicParsing="false" selected="true" text="Có ">
-         <toggleGroup>
-            <ToggleGroup fx:id="COVIDContact" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="covidContactNo" layoutX="565.0" layoutY="221.0" mnemonicParsing="false" text="Không" toggleGroup="$COVIDContact" />
-      <RadioButton fx:id="countryContactYes" layoutX="426.0" layoutY="293.0" mnemonicParsing="false" selected="true" text="Có ">
-         <toggleGroup>
-            <ToggleGroup fx:id="CountryContact" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="countryContactNo" layoutX="568.0" layoutY="293.0" mnemonicParsing="false" text="Không" toggleGroup="$CountryContact" />
-      <RadioButton fx:id="symptomContactYes" layoutX="426.0" layoutY="372.0" mnemonicParsing="false" selected="true" text="Có ">
-         <toggleGroup>
-            <ToggleGroup fx:id="SymptomContact" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="symptomContactNo" layoutX="565.0" layoutY="372.0" mnemonicParsing="false" text="Không" toggleGroup="$SymptomContact" />
-      <RadioButton fx:id="BHYTYes" layoutX="141.0" layoutY="302.0" mnemonicParsing="false" selected="true" text="Có ">
-         <toggleGroup>
-            <ToggleGroup fx:id="BHYT" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="BHYTNo" layoutX="229.0" layoutY="301.0" mnemonicParsing="false" text="Không" toggleGroup="$BHYT" />
-      <TextField fx:id="declareSpotField" layoutX="154.0" layoutY="82.0" promptText="Điểm khai báo" />
-      <TextField fx:id="benhNenField" layoutX="373.0" layoutY="455.0" prefHeight="162.0" prefWidth="316.0" />
-   </children>
-</AnchorPane>
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.khaibaocontroller.ThemKhaiBaoController">
+   <top>
+      <GridPane alignment="CENTER" hgap="8.0" maxWidth="-Infinity" prefWidth="800.0" vgap="12.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <BorderPane GridPane.columnSpan="2">
+               <center>
+                  <Label text="MẪU KHAI BÁO Y TẾ" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </center>
+            </BorderPane>
+            <HBox GridPane.rowIndex="5">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="100.0" text="Điểm khai báo">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="declareSpotField" prefHeight="30.0" prefWidth="200.0" promptText="Điểm khai báo">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="3">
+               <children>
+                  <Label prefHeight="42.0" prefWidth="351.0" text="Trong 14 ngày qua, bạn có gặp những triệu chứng: sốt, ho, khó thở, đau họng, viêm phổi, mệt mỏi?" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox>
+                     <children>
+                        <RadioButton fx:id="symptomYes" mnemonicParsing="false" prefHeight="30.0" selected="true" text="Có ">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="Symptom" />
+                           </toggleGroup>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </HBox.margin>
+                        </RadioButton>
+                        <RadioButton fx:id="symptomNo" mnemonicParsing="false" prefHeight="30.0" text="Không" toggleGroup="$Symptom">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </RadioButton>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="5">
+               <children>
+                  <Label prefHeight="30.0" text="Trong 14 ngày qua, bạn có tiếp xúc những người sau?">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="30.0" text="Người bệnh hoặc nghi ngờ, mắc bệnh COVID-19 ">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox>
+                     <children>
+                        <RadioButton fx:id="covidContactYes" mnemonicParsing="false" prefHeight="30.0" selected="true" text="Có ">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="COVIDContact" />
+                           </toggleGroup>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </HBox.margin>
+                        </RadioButton>
+                        <RadioButton fx:id="covidContactNo" mnemonicParsing="false" prefHeight="30.0" text="Không" toggleGroup="$COVIDContact">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </RadioButton>
+                     </children>
+                  </HBox>
+                  <Label prefHeight="30.0" text="Người từ nước có bệnh COVID-19 ">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox>
+                     <children>
+                        <RadioButton fx:id="countryContactYes" mnemonicParsing="false" prefHeight="30.0" selected="true" text="Có ">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="CountryContact" />
+                           </toggleGroup>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </HBox.margin>
+                        </RadioButton>
+                        <RadioButton fx:id="countryContactNo" mnemonicParsing="false" prefHeight="30.0" text="Không" toggleGroup="$CountryContact">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </RadioButton>
+                     </children>
+                  </HBox>
+                  <Label prefHeight="30.0" text="Người có biểu hiện (Sốt, ho, khó thở, Viêm phổi) ">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox>
+                     <children>
+                        <RadioButton fx:id="symptomContactYes" mnemonicParsing="false" prefHeight="30.0" selected="true" text="Có ">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="SymptomContact" />
+                           </toggleGroup>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </HBox.margin>
+                        </RadioButton>
+                        <RadioButton fx:id="symptomContactNo" mnemonicParsing="false" prefHeight="30.0" text="Không" toggleGroup="$SymptomContact">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </RadioButton>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox GridPane.rowIndex="3">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="100.0" text="Ngày khai báo">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <DatePicker id="DatePicker" fx:id="declareDate" prefHeight="30.0" prefWidth="200.0" promptText="Nhập ngày" />
+               </children>
+            </HBox>
+            <HBox GridPane.rowIndex="7">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="100.0" text="BHYT">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <RadioButton fx:id="BHYTYes" mnemonicParsing="false" prefHeight="30.0" selected="true" text="Có ">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="BHYT" />
+                     </toggleGroup>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="40.0" />
+                     </HBox.margin>
+                  </RadioButton>
+                  <RadioButton fx:id="BHYTNo" mnemonicParsing="false" prefHeight="30.0" text="Không" toggleGroup="$BHYT">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <VBox GridPane.rowIndex="8" GridPane.rowSpan="3">
+               <children>
+                  <Label alignment="TOP_LEFT" prefHeight="30.0" text="Trong 14 ngày qua, bạn đã đi đến những địa phương nào?">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="traceField" maxWidth="-Infinity" prefHeight="100.0" prefWidth="380.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </VBox>
+            <BorderPane GridPane.columnSpan="2" GridPane.rowIndex="11">
+               <center>
+                  <Button fx:id="saveDeclare" mnemonicParsing="false" onAction="#onAdd" prefHeight="30.0" prefWidth="118.0" text="Lưu khai báo">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </center>
+            </BorderPane>
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="8" GridPane.rowSpan="3">
+               <children>
+                  <Label alignment="TOP_LEFT" prefHeight="30.0" text="Hãy cho biết bệnh nền mà bạn đang có?">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="benhNenField" maxWidth="-Infinity" prefHeight="100.0" prefWidth="380.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </VBox>
+            <HBox GridPane.rowIndex="1">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="100.0" text="Mã nhân khẩu">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="nameField" prefHeight="30.0" prefWidth="200.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+   </top>
+</BorderPane>

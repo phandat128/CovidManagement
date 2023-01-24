@@ -2,7 +2,7 @@ package covidmanagement.model;
 
 import covidmanagement.Main;
 import covidmanagement.Utility;
-import covidmanagement.controller.xetnghiemcontroller.SuaController;
+import covidmanagement.controller.xetnghiemcontroller.SuaXetNghiemController;
 import covidmanagement.database.QueryDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -29,16 +29,14 @@ public class XetNghiemModel {
     public XetNghiemModel(int maXN, int maNK, LocalDate date, String place, KetQuaXetNghiem result) {
         this.maXN = maXN;
         this.maNK = maNK;
-        setNameAndCMND(maNK);
         this.date = date;
         this.place = place;
         this.result = result;
         this.changeButton = new Button("Sửa");
         this.deleteButton = new Button("Xóa");
         changeButton.setOnAction(this::handleChangeClick);
-
         deleteButton.setOnAction(this::handleDeleteClick);
-
+        setNameAndCMND(maNK);
     }
 
 
@@ -65,7 +63,9 @@ public class XetNghiemModel {
         return queryList;
     }
 
-    public static void add(int maNK, LocalDate date, String place, KetQuaXetNghiem result) throws SQLException{
+    public static void add(int maNK, String name, LocalDate date, String place, KetQuaXetNghiem result) throws SQLException{
+        NhanKhauModel nhanKhau = NhanKhauModel.getInstanceById(maNK);
+        if (!nhanKhau.getHoTen().equalsIgnoreCase(name)) throw new SQLException("Tên và mã nhân khẩu không trùng khớp");
         QueryDB queryDB = new QueryDB();
         PreparedStatement statement = queryDB.getConnection().prepareStatement(
                 "INSERT INTO XetNghiem(manhankhau, thoigian, diadiem, ketqua) VALUES (?, ?, ?, ?);"
@@ -109,7 +109,7 @@ public class XetNghiemModel {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
-            SuaController controller = fxmlLoader.getController();
+            SuaXetNghiemController controller = fxmlLoader.getController();
             controller.setField(maXN, maNK, name, date, place, result);
         } catch(IOException e){
             e.printStackTrace();
@@ -146,6 +146,13 @@ public class XetNghiemModel {
 
     private void setNameAndCMND(int maNK){
         //TODO
+        try {
+            NhanKhauModel nhanKhau = NhanKhauModel.getInstanceById(maNK);
+            this.name = nhanKhau.getHoTen();
+            this.cmnd = nhanKhau.getCMNDCCCD();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public enum KetQuaXetNghiem{

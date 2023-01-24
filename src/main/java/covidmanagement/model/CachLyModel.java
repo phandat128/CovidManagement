@@ -2,7 +2,7 @@ package covidmanagement.model;
 
 import covidmanagement.Main;
 import covidmanagement.Utility;
-import covidmanagement.controller.SuaCachLyController;
+import covidmanagement.controller.cachlycontroller.SuaCachLyController;
 import covidmanagement.database.QueryDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +33,7 @@ public class CachLyModel {
     public CachLyModel(int maCL, int maNK, LocalDate begindate,LocalDate finishdate, String place) {
         this.maCL = maCL;
         this.maNK = maNK;
-        setNameAndCMNDCl(maNK);
+        setNameAndCMND(maNK);
         this.begindate = begindate;
         this.finishdate = finishdate;
         this.place = place;
@@ -116,34 +116,34 @@ public class CachLyModel {
                 e.printStackTrace();
             }
         }
-    public int getMaNKCl() {
+    public int getMaNK() {
         return maNK;
     }
 
-    public String getNameCl() {
+    public String getName() {
         return name;
     }
 
-    public LocalDate getBegindate() {
+    public LocalDate getBeginDate() {
         return begindate;
     }
-    public LocalDate getFinishdate() {
+    public LocalDate getFinishDate() {
         return finishdate;
     }
 
-    public String getPlaceCl() {
+    public String getPlace() {
         return place;
     }
 
 
-    public Button getChangeButtonCl() {
+    public Button getChangeButton() {
         return changeButton;
     }
 
-    public Button getDeleteButtonCl() {
+    public Button getDeleteButton() {
         return deleteButton;
     }
-    private void setNameAndCMNDCl(int maNK){
+    private void setNameAndCMND(int maNK){
         //TODO
     }
 }

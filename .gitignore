@@ -14,3 +14,5 @@
 # Maven
 log/
 target/
+
+src/main/java/covidmanagement/database/GenerateDB.java

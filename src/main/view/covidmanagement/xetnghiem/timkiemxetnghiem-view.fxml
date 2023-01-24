@@ -15,12 +15,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.xetnghiemcontroller.TimKiemController">
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.xetnghiemcontroller.TimKiemXetNghiemController">
     <top>
         <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.39996337890625" minWidth="10.0" prefWidth="399.1999755859375" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.20004882812503" minWidth="10.0" prefWidth="400.8000244140625" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints maxHeight="193.9999755859375" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
@@ -124,14 +124,14 @@
                         </Button>
                     </center>
                 </BorderPane>
-                <TableView fx:id="searchTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                <TableView fx:id="searchTable" maxWidth="-Infinity" prefWidth="800.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                     <columns>
                         <TableColumn fx:id="idColumn" prefWidth="28.800018310546875" text="STT" />
                         <TableColumn fx:id="idNKColumn" prefWidth="60.0" text="Mã NK" />
                         <TableColumn fx:id="nameColumn" prefWidth="147.20004272460938" text="Họ tên" />
-                        <TableColumn fx:id="dateColumn" prefWidth="120.0" resizable="false" text="Ngày xét nghiệm" />
-                        <TableColumn fx:id="placeColumn" prefWidth="249.5999755859375" resizable="false" text="Địa chỉ xét nghiệm" />
-                        <TableColumn fx:id="resultColumn" prefWidth="83.199951171875" resizable="false" text="Kết quả" />
+                        <TableColumn fx:id="dateColumn" prefWidth="127.19999694824219" resizable="false" text="Ngày xét nghiệm" />
+                        <TableColumn fx:id="placeColumn" prefWidth="319.2000732421875" resizable="false" text="Địa chỉ xét nghiệm" />
+                        <TableColumn fx:id="resultColumn" prefWidth="116.0" resizable="false" text="Kết quả" />
                     </columns>
                     <GridPane.margin>
                         <Insets top="20.0" />

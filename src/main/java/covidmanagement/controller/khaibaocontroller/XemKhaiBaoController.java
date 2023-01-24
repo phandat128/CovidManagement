@@ -20,7 +20,9 @@ import java.util.ResourceBundle;
 
 public class XemKhaiBaoController implements Initializable {
     @FXML
-    TextField declareSpotField, nameField, traceField, benhNenField;
+    TextField declareSpotField, nameField;
+    @FXML
+    TextArea traceField, benhNenField;
     @FXML
     RadioButton BHYTYes, BHYTNo, symptomYes, symptomNo, covidContactYes, covidContactNo, countryContactYes, countryContactNo, symptomContactYes, symptomContactNo;
 

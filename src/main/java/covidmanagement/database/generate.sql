@@ -24,7 +24,8 @@ CREATE TABLE NhanKhau(
 	MaHoKhau int NOT NULL,
 	LaChuHo boolean NOT NULL,
 	QuanHeVoiChuHo varchar(20) DEFAULT 'Chủ hộ',
-	NgheNghiep varchar(20) NULL,
+	NgheNghiep varchar(20),
+	GhiChu varchar(100),
  	CONSTRAINT PK_NhanKhau PRIMARY KEY (MaNhanKhau)
 );
 

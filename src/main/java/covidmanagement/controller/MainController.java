@@ -2,12 +2,6 @@ package covidmanagement.controller;
 
 import covidmanagement.Main;
 import covidmanagement.Utility;
-import covidmanagement.controller.hokhaucontroller.SuaHoKhaucontroller;
-import covidmanagement.controller.khaibaocontroller.SuaKhaiBaoController;
-import covidmanagement.controller.khaibaocontroller.XemKhaiBaoController;
-import covidmanagement.controller.xetnghiemcontroller.SuaController;
-import covidmanagement.model.KhaiBaoModel;
-import covidmanagement.model.XetNghiemModel.KetQuaXetNghiem;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +16,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {

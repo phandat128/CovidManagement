@@ -1,4 +1,4 @@
-package covidmanagement.controller;
+package covidmanagement.controller.cachlycontroller;
 
 import covidmanagement.Utility;
 import covidmanagement.model.CachLyModel;
@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-public class ChinhSuaCachLyController implements Initializable {
+public class TimKiemCachLyController implements Initializable {
     @FXML TextField MaNKCl, nameCl;
 
     @FXML DatePicker dateBeginRangeFromCl, dateBeginRangeToCl, dateFinishRangeFromCl,dateFinishRangeToCl;
@@ -36,10 +36,6 @@ public class ChinhSuaCachLyController implements Initializable {
     @FXML TableColumn<CachLyModel, String> placeColumnCl;
 
 
-    @FXML TableColumn<CachLyModel, Button> changeButtonColumnCl;
-
-    @FXML TableColumn<CachLyModel, Button> deleteButtonColumnCl;
-
     private final ObservableList<CachLyModel> cachLyList = FXCollections.observableArrayList(
             CachLyModel.getCachLyList()
     );
@@ -49,6 +45,7 @@ public class ChinhSuaCachLyController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         StringConverter<LocalDate> dateConverter = new StringConverter<LocalDate>() {
             private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             @Override
@@ -65,15 +62,14 @@ public class ChinhSuaCachLyController implements Initializable {
         dateBeginRangeFromCl.setConverter(dateConverter);
         dateBeginRangeToCl.setConverter(dateConverter);
         dateFinishRangeFromCl.setConverter(dateConverter);
-        dateFinishRangeToCl.setConverter(dateConverter);
+        dateBeginRangeToCl.setConverter(dateConverter);
 
         idNKColumnCl.setCellValueFactory(new PropertyValueFactory<>("maNK"));
         nameColumnCl.setCellValueFactory(new PropertyValueFactory<>("name"));
         dateBeginColumnCl.setCellValueFactory(new PropertyValueFactory<>("beginDate"));
         dateFinishColumnCl.setCellValueFactory(new PropertyValueFactory<>("finishDate"));
         placeColumnCl.setCellValueFactory(new PropertyValueFactory<>("place"));
-        changeButtonColumnCl.setCellValueFactory(new PropertyValueFactory<>("changeButton"));
-        deleteButtonColumnCl.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
+
 
         searchTableCl.setItems(filteredList);
 
@@ -96,11 +92,11 @@ public class ChinhSuaCachLyController implements Initializable {
             Utility.displayExceptionDialog(new NumberFormatException("Mã nhân khẩu chỉ được chứa chữ số!"));
             return;
         }
-        String name = nameCl.getText();
-        LocalDate beginfrom = dateBeginRangeFromCl.getValue();
-        LocalDate beginto = dateBeginRangeToCl.getValue();
-        LocalDate finishfrom =dateFinishRangeFromCl.getValue();
-        LocalDate finishto  =dateFinishRangeToCl.getValue();
+        final String name = nameCl.getText();
+        final LocalDate beginfrom = dateBeginRangeFromCl.getValue();
+        final LocalDate beginto = dateBeginRangeToCl.getValue();
+        final LocalDate finishfrom =dateFinishRangeFromCl.getValue();
+        final LocalDate finishto  =dateFinishRangeToCl.getValue();
 
         if ((beginfrom != null && beginto != null) || (finishfrom != null && finishto != null)){
             if (beginfrom.isAfter(beginto) || (finishfrom.isAfter(finishto))) {
@@ -116,20 +112,17 @@ public class ChinhSuaCachLyController implements Initializable {
         System.out.println(name);
         System.out.println(beginfrom);
         System.out.println(beginto);
-        System.out.println(finishfrom);
-        System.out.println(finishto);
 
-        final int finalMaNkCl = idNK;
+    final int finalIdNK = idNK;
         filteredList.setPredicate(cachLyRow -> {
-            if (finalMaNkCl != 0 && cachLyRow.getMaNKCl() != finalMaNkCl) return false;
-            if (!name.isBlank() && !cachLyRow.getNameCl().contains(name)) return false;
-            if (beginfrom != null && cachLyRow.getBegindate().isBefore(beginfrom)) return false;
-            if (beginto != null && cachLyRow.getBegindate().isAfter(beginto)) return false;
-            if (finishfrom != null && cachLyRow.getFinishdate().isBefore(finishfrom)) return false;
-            if (finishto != null && cachLyRow.getFinishdate().isBefore(finishto)) return false;
-            return true;
-        });
-    }
+        if (finalIdNK != 0 && cachLyRow.getMaNK() != finalIdNK) return false;
+        if (!name.isBlank() && !cachLyRow.getName().contains(name)) return false;
+        if (beginfrom != null && cachLyRow.getBeginDate().isBefore(beginfrom)) return false;
+        if (finishto != null && cachLyRow.getBeginDate().isAfter(finishto)) return false;
+        return true;
+    });
+}
+
     public void resetAllFieldsCl(ActionEvent event){
         MaNKCl.setText("");
         nameCl.setText("");

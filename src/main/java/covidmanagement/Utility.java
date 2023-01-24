@@ -91,4 +91,10 @@ public class Utility {
         alert.setHeaderText(message);
         alert.show();
     }
+    // hiển thị hộp cảnh báo
+    public static void displayWarningDialog(String message){
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setHeaderText(message);
+        alert.show();
+    }
 }

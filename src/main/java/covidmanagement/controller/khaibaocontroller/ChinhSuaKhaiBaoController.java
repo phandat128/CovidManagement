@@ -3,7 +3,6 @@ package covidmanagement.controller.khaibaocontroller;
 import covidmanagement.Main;
 import covidmanagement.Utility;
 import covidmanagement.model.KhaiBaoModel;
-import covidmanagement.model.XetNghiemModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +16,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,12 +36,29 @@ public class ChinhSuaKhaiBaoController implements Initializable {
     @FXML TableColumn<KhaiBaoModel, String> trieuchungColumn;
     @FXML TableColumn<KhaiBaoModel, LocalDate> declareDateColumn;
     @FXML TableColumn<KhaiBaoModel, LocalDate> declareSpotColumn;
-    @FXML TableColumn<KhaiBaoModel, Button> viewColumn;
-
+    @FXML TableColumn<KhaiBaoModel, Button> changeColumn;
+    @FXML TableColumn<KhaiBaoModel, Button> deleteColumn;
     private final ObservableList<KhaiBaoModel> khaiBaoList = FXCollections.observableArrayList(
             KhaiBaoModel.getKhaiBaoList()
     );
     private final FilteredList<KhaiBaoModel> filteredList = new FilteredList<>(khaiBaoList);
+
+    public void switchToMainView(ActionEvent e) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
+        Parent componentScene = fxmlLoader.load();
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(componentScene);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void switchToChangeView(ActionEvent e) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("xetnghiem/suaxetnghiem-view.fxml"));
+        Parent componentScene = fxmlLoader.load();
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(componentScene);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -51,7 +66,8 @@ public class ChinhSuaKhaiBaoController implements Initializable {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("maNhanKhau"));
         declareDateColumn.setCellValueFactory(new PropertyValueFactory<>("ngayKhaiBao"));
         declareSpotColumn.setCellValueFactory(new PropertyValueFactory<>("diemKhaiBao"));
-        viewColumn.setCellValueFactory(new PropertyValueFactory<>("viewButton"));
+        changeColumn.setCellValueFactory(new PropertyValueFactory<>("changeButton"));
+        deleteColumn.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
 
         searchTable.setItems(khaiBaoList);
 
@@ -65,16 +81,16 @@ public class ChinhSuaKhaiBaoController implements Initializable {
     public void onSearch(ActionEvent event) throws RuntimeException{
         int idNK = 0;
         try {
-            if (!nameField.getText().isBlank())
-                idNK = Integer.parseInt(nameField.getText());
+            if (!nameField.getText().isBlank()) idNK = Integer.parseInt(nameField.getText());
         } catch (NumberFormatException e){
             e.printStackTrace();
             Utility.displayExceptionDialog(new NumberFormatException("Mã nhân khẩu chỉ được chứa chữ số!"));
             return;
         }
-        LocalDate from = dateRangeFrom.getValue();
-        LocalDate to = dateRangeTo.getValue();
         final String diemKhaiBao = declareSpot.getText();
+        final LocalDate from = dateRangeFrom.getValue();
+        final LocalDate to = dateRangeTo.getValue();
+
 
         if (from != null && to != null){
             if (from.isAfter(to)) {

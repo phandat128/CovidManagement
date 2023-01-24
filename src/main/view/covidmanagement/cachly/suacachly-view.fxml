@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="316.0" prefWidth="502.0" spacing="24.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.SuaCachLyController">
+<VBox alignment="TOP_CENTER" prefHeight="316.0" prefWidth="502.0" spacing="24.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.cachlycontroller.SuaCachLyController">
    <children>
       <HBox alignment="CENTER" prefHeight="30.0">
          <children>

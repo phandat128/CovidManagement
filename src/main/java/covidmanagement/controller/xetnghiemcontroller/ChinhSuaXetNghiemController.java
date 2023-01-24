@@ -6,20 +6,21 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
-public class ChinhSuaController implements Initializable {
+public class ChinhSuaXetNghiemController implements Initializable {
     @FXML TextField idNKField, nameField;
 
     @FXML DatePicker dateRangeFrom, dateRangeTo;
@@ -42,10 +43,11 @@ public class ChinhSuaController implements Initializable {
 
     @FXML TableColumn<XetNghiemModel, Button> deleteButtonColumn;
 
-    private final ObservableList<XetNghiemModel> xetNghiemList = FXCollections.observableArrayList(
+    private ObservableList<XetNghiemModel> xetNghiemList = FXCollections.observableArrayList(
             XetNghiemModel.getXetNghiemList()
     );
-    private final FilteredList<XetNghiemModel> filteredList = new FilteredList<>(xetNghiemList);
+    private FilteredList<XetNghiemModel> filteredList = new FilteredList<>(xetNghiemList);
+    private SortedList<XetNghiemModel> sortedList = new SortedList<>(filteredList);
 
     @FXML ChoiceBox<XetNghiemModel.KetQuaXetNghiem> resultSearch;
 
@@ -80,7 +82,12 @@ public class ChinhSuaController implements Initializable {
         changeButtonColumn.setCellValueFactory(new PropertyValueFactory<>("changeButton"));
         deleteButtonColumn.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
 
-        searchTable.setItems(filteredList);
+        sortedList.setComparator((o1, o2) -> {
+            if (o1.getDate().isBefore(o2.getDate())) return -1;
+            if (o1.getDate().isAfter(o2.getDate())) return 1;
+            return 0;
+        });
+        searchTable.setItems(sortedList);
         // set serial number column
         idColumn.setCellValueFactory(
                 cellDataFeatures -> new ReadOnlyObjectWrapper<>(
@@ -90,7 +97,6 @@ public class ChinhSuaController implements Initializable {
     }
 
     public void getResultChoice(ActionEvent event){
-        // TODO here
         XetNghiemModel.KetQuaXetNghiem choice = resultSearch.getValue();
         System.out.println(choice);
     }
@@ -102,7 +108,7 @@ public class ChinhSuaController implements Initializable {
                 idNK = Integer.parseInt(idNKField.getText());
         } catch (NumberFormatException e){
             e.printStackTrace();
-            Utility.displayExceptionDialog(new NumberFormatException("Mã nhân khẩu chỉ được chứa chữ số!"));
+            Utility.displayWarningDialog("Mã nhân khẩu chỉ được chứa chữ số!");
             return;
         }
         String name = nameField.getText();
@@ -112,16 +118,10 @@ public class ChinhSuaController implements Initializable {
 
         if (from != null && to != null){
             if (from.isAfter(to)) {
-                Utility.displayExceptionDialog(new RuntimeException("Khoảng thời gian không hợp lệ!"));
+                Utility.displayWarningDialog("Khoảng thời gian không hợp lệ!");
                 return;
             }
         }
-
-        System.out.println(idNK == 0 ? null : idNK);
-        System.out.println(name);
-        System.out.println(from);
-        System.out.println(to);
-        System.out.println(result);
 
         final int finalIdNK = idNK;
         filteredList.setPredicate(xetNghiemRow -> {
@@ -132,6 +132,20 @@ public class ChinhSuaController implements Initializable {
             if (result != null && xetNghiemRow.getResult() != result) return false;
             return true;
         });
+    }
+
+    public void reload(ActionEvent event){
+        xetNghiemList = FXCollections.observableArrayList(
+                XetNghiemModel.getXetNghiemList()
+        );
+        filteredList = new FilteredList<>(xetNghiemList);
+        sortedList = new SortedList<>(filteredList);
+        sortedList.setComparator((o1, o2) -> {
+            if (o1.getDate().isBefore(o2.getDate())) return -1;
+            if (o1.getDate().isAfter(o2.getDate())) return 1;
+            return 0;
+        });
+        searchTable.setItems(sortedList);
     }
 
     public void resetAllFields(ActionEvent event){
