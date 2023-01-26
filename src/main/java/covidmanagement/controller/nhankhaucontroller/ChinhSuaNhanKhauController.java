@@ -115,28 +115,42 @@ public class ChinhSuaNhanKhauController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Are you sure?");
             alert.setHeaderText("Xác nhận xóa?");
-
             alert.showAndWait();
 
             if (alert.getResult() == ButtonType.OK) {
+                Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                alert1.setTitle("Are you sure?");
+                alert1.setHeaderText("Xóa nhân khẩu sẽ xóa tất cả mọi dữ liệu bao gồm cả hộ khẩu, khai báo, cách ly, xét nghiệm của nhân khẩu."
+                        +" Bạn vẫn chắc chắn muốn xóa?");
+                alert1.showAndWait();
 
+                if (alert1.getResult() == ButtonType.OK)
                 //delete in database
-                NhanKhauModel nhankhau = tableNhanKhau.getSelectionModel().getSelectedItem();
-                int manhankhau = nhankhau.getMaNhanKhau();
-                NhanKhauModel.deleteNhanKhau(manhankhau);
+                {
+                    NhanKhauModel nhankhau = tableNhanKhau.getSelectionModel().getSelectedItem();
+                    int manhankhau = nhankhau.getMaNhanKhau();
 
-                // delete in table
-                FilteredList<NhanKhauModel> filteredData = (FilteredList<NhanKhauModel>) tableNhanKhau.getItems();
-                NhanKhauModel selectedItem = filteredData.get(selectedIndex);
-                ObservableList<NhanKhauModel> sourceData = (ObservableList<NhanKhauModel>) filteredData.getSource();
-                boolean removed = sourceData.remove(selectedItem);
-                if (removed) {
-                    tableNhanKhau.getSelectionModel().clearSelection();
-                    Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-                    alert1.setHeaderText("Xóa nhân khẩu thành công!!");
-                    alert1.show();
-                } else {
-                    System.out.println("Thất bại!");
+                    NhanKhauModel.deleteCahLy(manhankhau);
+                    NhanKhauModel.deleteKhaiBao(manhankhau);
+                    NhanKhauModel.deleteXetNghiem(manhankhau);
+                    NhanKhauModel.deleteNhanKhau(manhankhau);
+
+
+                    // delete in table
+                    FilteredList<NhanKhauModel> filteredData = (FilteredList<NhanKhauModel>) tableNhanKhau.getItems();
+                    NhanKhauModel selectedItem = filteredData.get(selectedIndex);
+                    ObservableList<NhanKhauModel> sourceData = (ObservableList<NhanKhauModel>) filteredData.getSource();
+                    boolean removed = sourceData.remove(selectedItem);
+                    if (removed) {
+                        tableNhanKhau.getSelectionModel().clearSelection();
+                        Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                        alert2.setHeaderText("Xóa nhân khẩu thành công!!");
+                        alert2.show();
+                    } else {
+                        Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                        alert2.setHeaderText("Xóa nhân khẩu thất bại!!");
+                        alert2.show();
+                    }
                 }
             }
         } else {
