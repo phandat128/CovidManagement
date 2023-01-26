@@ -2,8 +2,6 @@ package covidmanagement.controller.hokhaucontroller;
 
 import covidmanagement.Utility;
 import covidmanagement.model.HoKhauModel;
-import covidmanagement.model.XetNghiemModel;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,12 +9,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class SuaHoKhaucontroller implements Initializable {
