@@ -85,9 +85,9 @@ public class TimKiemHoKhauController implements Initializable {
         System.out.println(d);
         filteredList.setPredicate(hoKhauRow -> {
             if (!tp.isBlank() && !hoKhauRow.getThanhPho().contains(tp)) return false;
-            if (!qu.isBlank() && hoKhauRow.getQuan().contains(qu)) return false;
-            if (!ph.isBlank() && hoKhauRow.getPhuong().contains(ph)) return false;
-            if (!d.isBlank() && hoKhauRow.getDuong().contains(d)) return false;
+            if (!qu.isBlank() && !hoKhauRow.getQuan().contains(qu)) return false;
+            if (!ph.isBlank() && !hoKhauRow.getPhuong().contains(ph)) return false;
+            if (!d.isBlank() && !hoKhauRow.getDuong().contains(d)) return false;
 
             return true;
         });
@@ -97,5 +97,6 @@ public class TimKiemHoKhauController implements Initializable {
         quan.setText("");
         phuong.setText("");
         duong.setText("");
+        timKiem(event);
     }
 }
