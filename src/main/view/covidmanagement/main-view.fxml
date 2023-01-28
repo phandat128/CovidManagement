@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="mainBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.MainController">
@@ -28,4 +39,86 @@
          </right>
       </BorderPane>
    </top>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <top>
+            <GridPane alignment="CENTER" prefHeight="800.0" prefWidth="1667.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints fillHeight="false" maxHeight="387.1999938964844" minHeight="10.0" prefHeight="342.4" vgrow="SOMETIMES" />
+                <RowConstraints fillHeight="false" maxHeight="577.5999755859375" minHeight="0.0" prefHeight="457.6" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER" style="-fx-border-color: #00b8e5; -fx-border-radius: 5px;">
+                     <children>
+                        <FontAwesomeIconView fill="#00b8e5" glyphName="USER_CIRCLE_ALT" size="200" />
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="154.0">
+                           <children>
+                              <Label fx:id="totalNhankhau" alignment="TOP_LEFT" text="0" textFill="#00b8e5">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Nhân khẩu" textFill="#00b8e5">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <GridPane.margin>
+                        <Insets left="60.0" />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" style="-fx-border-color: #00b8e5; -fx-border-radius: 5px;" GridPane.columnIndex="1">
+                     <children>
+                        <FontAwesomeIconView fill="#00b8e5" glyphName="HOME" size="200" />
+                        <VBox alignment="CENTER">
+                           <children>
+                              <Label fx:id="totalHokhau" text="0" textFill="#00b8e5">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font></Label>
+                              <Label text="Hộ khẩu" textFill="#00b8e5">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <GridPane.margin>
+                        <Insets left="60.0" />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+                  <PieChart fx:id="genderPieChart" legendSide="TOP" legendVisible="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" stylesheets="@../css/style.css" title="Tỉ lệ nam/nữ" titleSide="BOTTOM" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <BarChart fx:id="ageRangeBarChart" legendSide="TOP" legendVisible="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" stylesheets="@../css/style.css" title="Khảo sát về độ tuổi" titleSide="BOTTOM" GridPane.rowIndex="1">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+               </children>
+            </GridPane>
+         </top>
+      </BorderPane>
+   </center>
 </BorderPane>
