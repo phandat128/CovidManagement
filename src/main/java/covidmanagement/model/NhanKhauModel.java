@@ -281,6 +281,31 @@ public class NhanKhauModel {
                 _tonGiao, _nguyenQuan, _maHoKhau, _laChuHo, _quanHeVoiChuHo, _ngheNghiep);
     }
 
+    public static List<NhanKhauModel> getNhanKhauListByMaHK(int maHoKhau) throws SQLException{
+        QueryDB queryDB = new QueryDB();
+        ResultSet rs = queryDB.executeQuery("SELECT * FROM NhanKhau WHERE maHoKhau = " + maHoKhau + ";");
+        if (!rs.isBeforeFirst()) throw new SQLException("Mã nhân khẩu không tồn tại");
+        List<NhanKhauModel> nhanKhauList = new ArrayList<>();
+        while (rs.next()) {
+            int _maNhanKhau = rs.getInt("manhankhau");
+            String _hoVaTen = rs.getString("hoten");
+            LocalDate _ngaySinh = rs.getDate("ngaysinh").toLocalDate();
+            String _gioiTinh = rs.getString("gioitinh");
+            String _cmnd_CCCD_ = rs.getString("cmnd_cccd");
+            String _sDT = rs.getString("sdt");
+            String _quocTich = rs.getString("quoctich");
+            String _tonGiao = rs.getString("tongiao");
+            String _nguyenQuan = rs.getString("nguyenquan");
+            int _maHoKhau = rs.getInt("mahokhau");
+            Boolean _laChuHo = rs.getBoolean("lachuho");
+            String _quanHeVoiChuHo = rs.getString("quanhevoichuho");
+            String _ngheNghiep = rs.getString("nghenghiep");
+            nhanKhauList.add(new NhanKhauModel(_maNhanKhau, _hoVaTen, _ngaySinh, _gioiTinh, _cmnd_CCCD_, _sDT, _quocTich,
+                    _tonGiao, _nguyenQuan, _maHoKhau, _laChuHo, _quanHeVoiChuHo, _ngheNghiep));
+        }
+        return nhanKhauList;
+    }
+
     public int getMaNhanKhau() { return MaNhanKhau; }
     public void setMaNhanKhau(int MaNhanKhau) {
         this.MaNhanKhau = MaNhanKhau;

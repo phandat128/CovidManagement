@@ -20,7 +20,7 @@ import java.util.List;
 public class HoKhauModel {
     private int stt;
     private int maHK;
-    private int maCH;
+    private String tenChuHo;
     private String soNha;
     private String ngach;
     private String ngo;
@@ -43,6 +43,7 @@ public class HoKhauModel {
         this.xoaButton = new Button("Xóa");
         suaButton.setOnAction(this::suaClick);
         xoaButton.setOnAction(this::xoaClick);
+        setTenChuHo( maHK);
     }
 
     public static List<HoKhauModel> getHoKhauList(){
@@ -136,8 +137,8 @@ public class HoKhauModel {
         return maHK;
     }
 
-    public int getMaCH() {
-        return maCH;
+    public String getTenChuHo() {
+        return tenChuHo;
     }
 
     public String getSoNha() {
@@ -174,6 +175,20 @@ public class HoKhauModel {
 
     public Button getXoaButton() {
         return xoaButton;
+    }
+    private void setTenChuHo(int maHK){
+        //TODO
+        try {
+            List<NhanKhauModel> list = NhanKhauModel.getNhanKhauListByMaHK(maHK);
+            for (NhanKhauModel nhankhau: list){
+                if (nhankhau.getLaChuHo()) {
+                    this.tenChuHo = nhankhau.getHoTen();
+                    break;
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 }
 

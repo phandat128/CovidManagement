@@ -28,7 +28,7 @@ public class TimKiemHoKhauController implements Initializable {
     @FXML
     TableColumn<HoKhauModel, String> maHoKhauColumn;
     @FXML
-    TableColumn<HoKhauModel, String> maChuHoColumn;
+    TableColumn<HoKhauModel, String> tenChuHoColumn;
     @FXML
     TableColumn<HoKhauModel, String> soNhaColumn;
     @FXML
@@ -53,7 +53,7 @@ public class TimKiemHoKhauController implements Initializable {
 
 
         maHoKhauColumn.setCellValueFactory(new PropertyValueFactory<>("maHK"));
-        maChuHoColumn.setCellValueFactory(new PropertyValueFactory<>("maCH"));
+        tenChuHoColumn.setCellValueFactory(new PropertyValueFactory<>("tenChuHo"));
         soNhaColumn.setCellValueFactory(new PropertyValueFactory<>("soNha"));
         ngachColumn.setCellValueFactory(new PropertyValueFactory<>("ngach"));
         ngoColumn.setCellValueFactory(new PropertyValueFactory<>("ngo"));

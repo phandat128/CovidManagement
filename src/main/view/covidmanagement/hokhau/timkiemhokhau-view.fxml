@@ -122,7 +122,7 @@
                     <columns>
                         <TableColumn fx:id="sttColumn" prefWidth="28.800018310546875" text="STT" />
                         <TableColumn fx:id="maHoKhauColumn" prefWidth="71.20001220703125" text="Mã hộ khẩu" />
-                        <TableColumn fx:id="maChuHoColumn" prefWidth="69.60006713867188" text="Mã chủ hộ" />
+                        <TableColumn fx:id="tenChuHoColumn" prefWidth="69.60006713867188" text="Tên chủ hộ" />
                         <TableColumn fx:id="soNhaColumn" prefWidth="63.20001220703125" resizable="false" text="Số nhà" />
                         <TableColumn fx:id="ngachColumn" prefWidth="55.20001220703125" resizable="false" text="Ngách " />
                         <TableColumn fx:id="ngoColumn" prefWidth="55.199951171875" resizable="false" text="Ngõ " />
