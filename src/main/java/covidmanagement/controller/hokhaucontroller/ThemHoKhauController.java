@@ -2,13 +2,10 @@ package covidmanagement.controller.hokhaucontroller;
 
 import covidmanagement.Utility;
 import covidmanagement.model.HoKhauModel;
-import covidmanagement.model.XetNghiemModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class ThemHoKhauController {
     @FXML
@@ -25,16 +22,6 @@ public class ThemHoKhauController {
         }
         if (soNha.getText().isBlank()){
             RuntimeException idNKException = new RuntimeException("Trường số nhà không được để trống!");
-            Utility.displayExceptionDialog(idNKException);
-            throw idNKException;
-        }
-        if (ngach.getText().isBlank()){
-            RuntimeException idNKException = new RuntimeException("Trường ngách không được để trống!");
-            Utility.displayExceptionDialog(idNKException);
-            throw idNKException;
-        }
-        if (ngo.getText().isBlank()){
-            RuntimeException idNKException = new RuntimeException("Trường ngõ không được để trống!");
             Utility.displayExceptionDialog(idNKException);
             throw idNKException;
         }

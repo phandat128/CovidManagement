@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -11,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="suanhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.SuaNhanKhauController">
+<AnchorPane fx:id="suanhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.SuaNhanKhauController">
    <children>
       <VBox layoutX="15.0" layoutY="14.0" prefHeight="350.0" prefWidth="440.0">
          <children>
@@ -75,10 +80,19 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <TextField fx:id="txtGioiTinh" prefHeight="40.0" prefWidth="305.0">
+                  <RadioButton fx:id="gioitinhnam" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Nam">
                      <font>
                         <Font size="14.0" />
-                     </font></TextField>
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="GioiTinh" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="gioitinhnu" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Nữ" toggleGroup="$GioiTinh">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
                </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />
@@ -209,10 +223,13 @@
                         <Font size="14.0" />
                      </font></Label>
                   <RadioButton fx:id="lachuhoco" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Có">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="LaChuHo" />
+                     </toggleGroup>
                      <font>
                         <Font size="14.0" />
                      </font></RadioButton>
-                  <RadioButton fx:id="lachuhokhong" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Không">
+                  <RadioButton fx:id="lachuhokhong" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Không" toggleGroup="$LaChuHo">
                      <font>
                         <Font size="14.0" />
                      </font></RadioButton>

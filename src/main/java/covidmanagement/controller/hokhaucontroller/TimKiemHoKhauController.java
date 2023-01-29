@@ -2,7 +2,6 @@ package covidmanagement.controller.hokhaucontroller;
 
 import covidmanagement.Utility;
 import covidmanagement.model.HoKhauModel;
-import covidmanagement.model.XetNghiemModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,14 +9,12 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class TimKiemHoKhauController implements Initializable {
@@ -31,7 +28,7 @@ public class TimKiemHoKhauController implements Initializable {
     @FXML
     TableColumn<HoKhauModel, String> maHoKhauColumn;
     @FXML
-    TableColumn<HoKhauModel, String> maChuHoColumn;
+    TableColumn<HoKhauModel, String> tenChuHoColumn;
     @FXML
     TableColumn<HoKhauModel, String> soNhaColumn;
     @FXML
@@ -56,7 +53,7 @@ public class TimKiemHoKhauController implements Initializable {
 
 
         maHoKhauColumn.setCellValueFactory(new PropertyValueFactory<>("maHK"));
-        maChuHoColumn.setCellValueFactory(new PropertyValueFactory<>("maCH"));
+        tenChuHoColumn.setCellValueFactory(new PropertyValueFactory<>("tenChuHo"));
         soNhaColumn.setCellValueFactory(new PropertyValueFactory<>("soNha"));
         ngachColumn.setCellValueFactory(new PropertyValueFactory<>("ngach"));
         ngoColumn.setCellValueFactory(new PropertyValueFactory<>("ngo"));
@@ -88,9 +85,9 @@ public class TimKiemHoKhauController implements Initializable {
         System.out.println(d);
         filteredList.setPredicate(hoKhauRow -> {
             if (!tp.isBlank() && !hoKhauRow.getThanhPho().contains(tp)) return false;
-            if (!qu.isBlank() && hoKhauRow.getQuan().contains(qu)) return false;
-            if (!ph.isBlank() && hoKhauRow.getPhuong().contains(ph)) return false;
-            if (!d.isBlank() && hoKhauRow.getDuong().contains(d)) return false;
+            if (!qu.isBlank() && !hoKhauRow.getQuan().contains(qu)) return false;
+            if (!ph.isBlank() && !hoKhauRow.getPhuong().contains(ph)) return false;
+            if (!d.isBlank() && !hoKhauRow.getDuong().contains(d)) return false;
 
             return true;
         });
@@ -100,5 +97,6 @@ public class TimKiemHoKhauController implements Initializable {
         quan.setText("");
         phuong.setText("");
         duong.setText("");
+        timKiem(event);
     }
 }

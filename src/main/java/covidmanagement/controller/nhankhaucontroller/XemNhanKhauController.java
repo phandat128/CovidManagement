@@ -20,14 +20,14 @@ public class XemNhanKhauController implements Initializable {
     private Button btnDong;
 
     @FXML
-    private TextField txtHoVaTen, txtQuocTich, txtGioiTinh, txtSDT, txtQuanHeVoiChuHo, txtCMND_CCCD, txtMaHoKhau,
+    private TextField txtHoVaTen, txtQuocTich, txtSDT, txtQuanHeVoiChuHo, txtCMND_CCCD, txtMaHoKhau,
             txtMaNhanKhau, txtNguyenQuan, txtNgheNghiep, txtTonGiao;
 
     @FXML
     private DatePicker pickerNgaySinh;
 
     @FXML
-    private RadioButton lachuhoco, lachuhokhong;
+    private RadioButton lachuhoco, lachuhokhong, gioitinhnam, gioitinhnu;
 
     @FXML
     private AnchorPane xemnhankhauView;
@@ -44,7 +44,10 @@ public class XemNhanKhauController implements Initializable {
 
         txtMaNhanKhau.setText(String.valueOf(maNhanKhau));
         txtHoVaTen.setText(hoVaTen);
-        txtGioiTinh.setText(gioiTinh);
+
+        if (gioiTinh.equalsIgnoreCase("Nam")) gioitinhnam.setSelected(true);
+        if (gioiTinh.equalsIgnoreCase("Nữ"))gioitinhnu.setSelected(true);
+
         pickerNgaySinh.setValue(ngaySinh);
         txtCMND_CCCD.setText(cmnd_CCCD_);
         txtQuocTich.setText(quocTich);

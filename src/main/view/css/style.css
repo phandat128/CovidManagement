@@ -2,3 +2,15 @@
     -fx-font-size: 14;
     -fx-font-family: "System";
 }
+
+.default-color0.chart-bar {
+    -fx-bar-fill: #8fce00;
+}
+
+.default-color0.chart-pie {
+    -fx-pie-color: #00b8e5;
+}
+
+.default-color1.chart-pie {
+    -fx-pie-color: #ffff32;
+}

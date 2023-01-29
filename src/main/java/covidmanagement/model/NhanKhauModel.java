@@ -192,7 +192,67 @@ public class NhanKhauModel {
 //            }
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Lỗi khi Xóa dữ liệu: " + e.getMessage() + "." + "Vui lòng nhập lại!!");
+            alert.setHeaderText("Lỗi khi Xóa dữ liệu: " + e.getMessage() + "." + "Vui lòng thực hiện lại!!");
+            alert.show();
+        } finally {
+            preparedStatement.close();
+            queryDB.close();
+        }
+    }
+
+    public static void deleteCahLy(int maNhanKhau) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        QueryDB queryDB = null;
+        try {
+            queryDB = new QueryDB();
+            preparedStatement = queryDB.getConnection().prepareStatement(
+                    "DELETE FROM cachly WHERE MaNhankhau = ?;");
+            preparedStatement.setInt(1, maNhanKhau);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Lỗi khi Xóa dữ liệu: " + e.getMessage() + "." + "Vui lòng thực hiện lại!!");
+            alert.show();
+        } finally {
+            preparedStatement.close();
+            queryDB.close();
+        }
+    }
+
+    public static void deleteKhaiBao(int maNhanKhau) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        QueryDB queryDB = null;
+        try {
+            queryDB = new QueryDB();
+            preparedStatement = queryDB.getConnection().prepareStatement(
+                    "DELETE FROM khaibao WHERE MaNhankhau = ?;");
+            preparedStatement.setInt(1, maNhanKhau);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Lỗi khi Xóa dữ liệu: " + e.getMessage() + "." + "Vui lòng thực hiện lại!!");
+            alert.show();
+        } finally {
+            preparedStatement.close();
+            queryDB.close();
+        }
+    }
+
+    public static void deleteXetNghiem(int maNhanKhau) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        QueryDB queryDB = null;
+        try {
+            queryDB = new QueryDB();
+            preparedStatement = queryDB.getConnection().prepareStatement(
+                    "DELETE FROM xetnghiem WHERE MaNhankhau = ?;");
+            preparedStatement.setInt(1, maNhanKhau);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Lỗi khi Xóa dữ liệu: " + e.getMessage() + "." + "Vui lòng thực hiện lại!!");
             alert.show();
         } finally {
             preparedStatement.close();
@@ -219,6 +279,31 @@ public class NhanKhauModel {
         String _ngheNghiep = rs.getString("nghenghiep");
         return new NhanKhauModel(_maNhanKhau, _hoVaTen, _ngaySinh, _gioiTinh, _cmnd_CCCD_, _sDT, _quocTich,
                 _tonGiao, _nguyenQuan, _maHoKhau, _laChuHo, _quanHeVoiChuHo, _ngheNghiep);
+    }
+
+    public static List<NhanKhauModel> getNhanKhauListByMaHK(int maHoKhau) throws SQLException{
+        QueryDB queryDB = new QueryDB();
+        ResultSet rs = queryDB.executeQuery("SELECT * FROM NhanKhau WHERE maHoKhau = " + maHoKhau + ";");
+//        if (!rs.isBeforeFirst()) throw new SQLException("Mã nhân khẩu không tồn tại");
+        List<NhanKhauModel> nhanKhauList = new ArrayList<>();
+        while (rs.next()) {
+            int _maNhanKhau = rs.getInt("manhankhau");
+            String _hoVaTen = rs.getString("hoten");
+            LocalDate _ngaySinh = rs.getDate("ngaysinh").toLocalDate();
+            String _gioiTinh = rs.getString("gioitinh");
+            String _cmnd_CCCD_ = rs.getString("cmnd_cccd");
+            String _sDT = rs.getString("sdt");
+            String _quocTich = rs.getString("quoctich");
+            String _tonGiao = rs.getString("tongiao");
+            String _nguyenQuan = rs.getString("nguyenquan");
+            int _maHoKhau = rs.getInt("mahokhau");
+            Boolean _laChuHo = rs.getBoolean("lachuho");
+            String _quanHeVoiChuHo = rs.getString("quanhevoichuho");
+            String _ngheNghiep = rs.getString("nghenghiep");
+            nhanKhauList.add(new NhanKhauModel(_maNhanKhau, _hoVaTen, _ngaySinh, _gioiTinh, _cmnd_CCCD_, _sDT, _quocTich,
+                    _tonGiao, _nguyenQuan, _maHoKhau, _laChuHo, _quanHeVoiChuHo, _ngheNghiep));
+        }
+        return nhanKhauList;
     }
 
     public int getMaNhanKhau() { return MaNhanKhau; }
