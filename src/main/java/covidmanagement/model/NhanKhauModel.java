@@ -284,7 +284,7 @@ public class NhanKhauModel {
     public static List<NhanKhauModel> getNhanKhauListByMaHK(int maHoKhau) throws SQLException{
         QueryDB queryDB = new QueryDB();
         ResultSet rs = queryDB.executeQuery("SELECT * FROM NhanKhau WHERE maHoKhau = " + maHoKhau + ";");
-        if (!rs.isBeforeFirst()) throw new SQLException("Mã nhân khẩu không tồn tại");
+//        if (!rs.isBeforeFirst()) throw new SQLException("Mã nhân khẩu không tồn tại");
         List<NhanKhauModel> nhanKhauList = new ArrayList<>();
         while (rs.next()) {
             int _maNhanKhau = rs.getInt("manhankhau");

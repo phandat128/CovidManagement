@@ -123,12 +123,19 @@
                             </font>
                         </Button>
                     </center>
+               <right>
+                  <Button fx:id="lamMoiButton" mnemonicParsing="false" onAction="#lamMoi" prefHeight="30.0" prefWidth="100.0" text="Làm mới" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </right>
                 </BorderPane>
                 <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                     <columns>
                         <TableColumn fx:id="sttColumn" prefWidth="28.800018310546875" text="STT" />
-                        <TableColumn fx:id="tenHoKhauColumn" prefWidth="71.20001220703125" text="Tên chủ hộ" />
-                        <TableColumn fx:id="maChuHoColumn" prefWidth="69.60006713867188" text="Mã chủ hộ" />
+                        <TableColumn fx:id="maHoKhauColumn" prefWidth="71.20001220703125" text="Mã hộ khẩu" />
+                        <TableColumn fx:id="tenChuHoColumn" prefWidth="69.60006713867188" text="Tên chủ hộ" />
                         <TableColumn fx:id="soNhaColumn" prefWidth="53.5999755859375" resizable="false" text="Số nhà" />
                         <TableColumn fx:id="ngachColumn" prefWidth="45.5999755859375" resizable="false" text="Ngách " />
                         <TableColumn fx:id="ngoColumn" prefWidth="36.0" resizable="false" text="Ngõ " />

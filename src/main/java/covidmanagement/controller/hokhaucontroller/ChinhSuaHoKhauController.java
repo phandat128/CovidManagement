@@ -2,10 +2,13 @@ package covidmanagement.controller.hokhaucontroller;
 
 import covidmanagement.Utility;
 import covidmanagement.model.HoKhauModel;
+import covidmanagement.model.NhanKhauModel;
+import covidmanagement.model.XetNghiemModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,7 +31,7 @@ public class ChinhSuaHoKhauController implements Initializable {
     @FXML
     TableColumn<HoKhauModel, String> maHoKhauColumn;
     @FXML
-    TableColumn<HoKhauModel, String> maChuHoColumn;
+    TableColumn<HoKhauModel, String> tenChuHoColumn;
     @FXML
     TableColumn<HoKhauModel, String> soNhaColumn;
     @FXML
@@ -56,7 +59,7 @@ public class ChinhSuaHoKhauController implements Initializable {
 
 
         maHoKhauColumn.setCellValueFactory(new PropertyValueFactory<>("maHK"));
-        maChuHoColumn.setCellValueFactory(new PropertyValueFactory<>("maCH"));
+        tenChuHoColumn.setCellValueFactory(new PropertyValueFactory<>("tenChuHo"));
         soNhaColumn.setCellValueFactory(new PropertyValueFactory<>("soNha"));
         ngachColumn.setCellValueFactory(new PropertyValueFactory<>("ngach"));
         ngoColumn.setCellValueFactory(new PropertyValueFactory<>("ngo"));
@@ -95,6 +98,18 @@ public class ChinhSuaHoKhauController implements Initializable {
 
             return true;
         });
+    }
+    public void lamMoi(ActionEvent event) {
+        phuong.setText("");
+        thanhPho.setText("");
+        quan.setText("");
+        duong.setText("");
+
+        final ObservableList<HoKhauModel> hoKhauList = FXCollections.observableArrayList(HoKhauModel.getHoKhauList());
+        final FilteredList<HoKhauModel> List1 = new FilteredList<>(hoKhauList);
+
+        table.setItems(List1);
+
     }
     public void xoaTimKiem (ActionEvent event){
         thanhPho.setText("");
