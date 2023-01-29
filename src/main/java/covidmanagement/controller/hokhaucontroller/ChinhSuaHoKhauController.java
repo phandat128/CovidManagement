@@ -106,9 +106,9 @@ public class ChinhSuaHoKhauController implements Initializable {
         duong.setText("");
 
         final ObservableList<HoKhauModel> hoKhauList = FXCollections.observableArrayList(HoKhauModel.getHoKhauList());
-        final FilteredList<HoKhauModel> List1 = new FilteredList<>(hoKhauList);
+        final FilteredList<HoKhauModel> List = new FilteredList<>(hoKhauList);
 
-        table.setItems(List1);
+        table.setItems(List);
 
     }
     public void xoaTimKiem (ActionEvent event){
