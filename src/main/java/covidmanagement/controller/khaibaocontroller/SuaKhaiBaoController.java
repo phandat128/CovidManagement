@@ -115,7 +115,7 @@ public class SuaKhaiBaoController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    public void onUpdate() throws SQLException {
+    public void onUpdate(ActionEvent event) throws SQLException {
         final LocalDate date = declareDate.getValue();
         final String place = declareSpotField.getText();
         final String trace = traceField.getText();
@@ -127,5 +127,8 @@ public class SuaKhaiBaoController implements Initializable {
         final String benhNen = benhNenField.getText();
         KhaiBaoModel.update(idKB, place, date, BHYT, trace, symptom, covidContact, countryContact, symptomContact, benhNen);
         //TODO: đóng cửa sổ, thông báo thành công/thất bại, chuyển đến trang tìm kiếm
+        Utility.displaySuccessDialog("Chỉnh sửa thành công!");
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.close();
     }
 }

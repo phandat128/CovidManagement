@@ -97,7 +97,6 @@ public class KhaiBaoModel {
     public KhaiBaoModel(int maKhaiBao, int maNhanKhau, String diemkhaibao, LocalDate ngayKhaiBao,
                         boolean bhyt, String lichTrinh, boolean trieuchung, boolean tiepXucNguoiBenh,
                         boolean tiepXucNguoiTuVungDich, boolean tiepXucNguoiCoBieuHien, String benhNen) {
-        setName(maNhanKhau);
         this.maKhaiBao = maKhaiBao;
         this.maNhanKhau = maNhanKhau;
         this.diemKhaiBao = diemkhaibao;
@@ -115,6 +114,7 @@ public class KhaiBaoModel {
         changeButton.setOnAction(this::handleChangeClick);
         deleteButton.setOnAction(this::handleDeleteClick);
         viewButton.setOnAction(this::handleViewClick);
+        setName(maNhanKhau);
     }
 
     private void handleDeleteClick(ActionEvent actionEvent) {
@@ -212,14 +212,14 @@ public class KhaiBaoModel {
         );
         statement.setString(1, diemkhaibao);
         statement.setDate(2, Date.valueOf(ngayKhaiBao));
-        statement.setString(3, String.valueOf(bhyt));
+        statement.setBoolean(3, bhyt);
         statement.setString(4, lichTrinh);
-        statement.setString(5, String.valueOf(trieuchung));
-        statement.setString(6, String.valueOf(tiepXucNguoiBenh));
-        statement.setString(7, String.valueOf(tiepXucNguoiTuVungDich));
-        statement.setString(8, String.valueOf(tiepXucNguoiCoBieuHien));
+        statement.setBoolean(5, trieuchung);
+        statement.setBoolean(6, tiepXucNguoiBenh);
+        statement.setBoolean(7, tiepXucNguoiTuVungDich);
+        statement.setBoolean(8, tiepXucNguoiCoBieuHien);
         statement.setString(9, benhNen);
-        statement.setString(10, String.valueOf(maKhaiBao));
+        statement.setInt(10, maKhaiBao);
         statement.executeUpdate();
         statement.close();
         queryDB.close();

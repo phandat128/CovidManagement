@@ -29,26 +29,24 @@ public class XemKhaiBaoController implements Initializable {
 
     @FXML
     DatePicker declareDate;
-    @FXML
-    Button OK;
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        OK.setDisable(false);
-        declareDate.valueProperty().addListener((observableValue, currentValue, newValue) -> {
-            if (currentValue == null) return;
-            if (!currentValue.isEqual(newValue)) OK.setDisable(false);
-        });
-        declareSpotField.textProperty().addListener((observableValue, currentValue, newValue) -> {
-            if (currentValue.isBlank()) return;
-            if (!currentValue.equals(newValue)) {
-                OK.setDisable(false);
-            }
-        });
-        nameField.textProperty().addListener((observableValue, currentValue, newValue) -> {
-            if (currentValue.isBlank()) return;
-            if (!currentValue.equals(newValue)) {
-                OK.setDisable(false);
-            }
-        });
+//        OK.setDisable(false);
+//        declareDate.valueProperty().addListener((observableValue, currentValue, newValue) -> {
+//            if (currentValue == null) return;
+//            if (!currentValue.isEqual(newValue)) OK.setDisable(false);
+//        });
+//        declareSpotField.textProperty().addListener((observableValue, currentValue, newValue) -> {
+//            if (currentValue.isBlank()) return;
+//            if (!currentValue.equals(newValue)) {
+//                OK.setDisable(false);
+//            }
+//        });
+//        nameField.textProperty().addListener((observableValue, currentValue, newValue) -> {
+//            if (currentValue.isBlank()) return;
+//            if (!currentValue.equals(newValue)) {
+//                OK.setDisable(false);
+//            }
+//        });
     }
     public void setField(String declareSpotField, LocalDate declareDate, int nameField, String traceField,
                          boolean BHYT, boolean symptom, boolean covidContact, boolean countryContact, boolean symptomContact,
