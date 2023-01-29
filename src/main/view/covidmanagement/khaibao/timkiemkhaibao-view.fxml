@@ -111,12 +111,13 @@
             </BorderPane>
             <TableView fx:id="searchTable" maxWidth="-Infinity" prefWidth="800.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
                <columns>
-                  <TableColumn fx:id="countColumn" prefWidth="57.60000991821289" text="STT" />
-                  <TableColumn fx:id="nameColumn" prefWidth="107.99996948242188" text="Mã nhân khẩu" />
-                  <TableColumn fx:id="declareDateColumn" prefWidth="102.39996337890625" text="Ngày khai báo" />
-                  <TableColumn fx:id="declareSpotColumn" prefWidth="159.20001220703125" text="Điểm khai báo" />
-                  <TableColumn fx:id="trieuchungColumn" prefWidth="276.00006103515625" text="Triệu chứng" />
-                  <TableColumn fx:id="viewColumn" prefWidth="95.99993896484375" text="Xem thêm" />
+                  <TableColumn fx:id="countColumn" prefWidth="42.39999312162399" text="STT" />
+                  <TableColumn fx:id="nameColumn" prefWidth="104.80002212524414" text="Mã nhân khẩu" />
+                  <TableColumn fx:id="hotenColumn" prefWidth="137.59996032714844" text="Họ tên" />
+                  <TableColumn fx:id="declareDateColumn" prefWidth="124.800048828125" text="Ngày khai báo" />
+                  <TableColumn fx:id="declareSpotColumn" prefWidth="128.0" text="Điểm khai báo" />
+                  <TableColumn fx:id="trieuchungColumn" prefWidth="185.5999755859375" text="Triệu chứng" />
+                  <TableColumn fx:id="viewColumn" prefWidth="78.4000244140625" text="Xem thêm" />
                </columns>
             </TableView>
          </children>

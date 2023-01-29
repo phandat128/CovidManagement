@@ -109,15 +109,16 @@
                   </Button>
                </center>
             </BorderPane>
-            <TableView fx:id="searchTable" prefHeight="413.0" prefWidth="615.0" GridPane.columnSpan="2" GridPane.rowIndex="5">
+            <TableView fx:id="searchTable" prefHeight="372.0" prefWidth="801.0" GridPane.columnSpan="2" GridPane.rowIndex="5">
                <columns>
                   <TableColumn fx:id="countColumn" prefWidth="44.79995805025101" text="STT" />
-                  <TableColumn fx:id="nameColumn" prefWidth="94.39999389648438" text="Mã nhân khẩu" />
-                  <TableColumn fx:id="declareDateColumn" prefWidth="112.79998779296875" text="Ngày khai báo" />
-                  <TableColumn fx:id="declareSpotColumn" prefWidth="155.99993896484375" text="Điểm khai báo" />
-                  <TableColumn fx:id="trieuchungColumn" prefWidth="84.79998779296875" text="Triệu chứng" />
-                  <TableColumn fx:id="changeColumn" prefWidth="51.20001220703125" text="Sửa" />
-                  <TableColumn fx:id="deleteColumn" prefWidth="65.5999755859375" text="Xóa" />
+                  <TableColumn fx:id="nameColumn" prefWidth="112.80002212524414" text="Mã nhân khẩu" />
+                  <TableColumn fx:id="hotenColumn" prefWidth="151.19993591308594" text="Họ tên" />
+                  <TableColumn fx:id="declareDateColumn" prefWidth="128.800048828125" text="Ngày khai báo" />
+                  <TableColumn fx:id="declareSpotColumn" prefWidth="151.20001220703125" text="Điểm khai báo" />
+                  <TableColumn fx:id="trieuchungColumn" prefWidth="85.5999755859375" text="Triệu chứng" />
+                  <TableColumn fx:id="changeColumn" prefWidth="68.8001708984375" text="Sửa" />
+                  <TableColumn fx:id="deleteColumn" prefWidth="61.60009765625" text="Xóa" />
                </columns>
             </TableView>
          </children>

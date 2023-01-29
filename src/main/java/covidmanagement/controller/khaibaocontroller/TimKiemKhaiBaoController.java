@@ -6,6 +6,7 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TimKiemKhaiBaoController implements Initializable {
@@ -26,6 +28,7 @@ public class TimKiemKhaiBaoController implements Initializable {
     @FXML
     TableColumn<KhaiBaoModel, Integer> countColumn;
     @FXML TableColumn<KhaiBaoModel, String> nameColumn;
+    @FXML TableColumn<KhaiBaoModel, String> hotenColumn;
     @FXML TableColumn<KhaiBaoModel, String> trieuchungColumn;
     @FXML TableColumn<KhaiBaoModel, LocalDate> declareDateColumn;
     @FXML TableColumn<KhaiBaoModel, LocalDate> declareSpotColumn;
@@ -43,7 +46,7 @@ public class TimKiemKhaiBaoController implements Initializable {
         declareDateColumn.setCellValueFactory(new PropertyValueFactory<>("ngayKhaiBao"));
         declareSpotColumn.setCellValueFactory(new PropertyValueFactory<>("diemKhaiBao"));
         viewColumn.setCellValueFactory(new PropertyValueFactory<>("viewButton"));
-
+        hotenColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         searchTable.setItems(khaiBaoList);
 
         //set serial number column
@@ -65,7 +68,8 @@ public class TimKiemKhaiBaoController implements Initializable {
         }
         LocalDate from = dateRangeFrom.getValue();
         LocalDate to = dateRangeTo.getValue();
-        final String diemKhaiBao = declareSpot.getText();
+        String diemKhaiBao = declareSpot.getText();
+        String hoTen = hotenColumn.getText();
 
         if (from != null && to != null){
             if (from.isAfter(to)) {
@@ -79,8 +83,12 @@ public class TimKiemKhaiBaoController implements Initializable {
             if (finalIdNK != 0 && khaiBaoRow.getMaNhanKhau() != finalIdNK) return false;
             if (from != null && khaiBaoRow.getNgayKhaiBao().isBefore(from)) return false;
             if (to != null && khaiBaoRow.getNgayKhaiBao().isAfter(to)) return false;
-            if (diemKhaiBao != null && khaiBaoRow.getDiemKhaiBao() != diemKhaiBao) return false;
+            if (hoTen != null && !Objects.equals(khaiBaoRow.getTen(), hoTen)) return false;
+            if (diemKhaiBao != null && !Objects.equals(khaiBaoRow.getDiemKhaiBao(), diemKhaiBao)) return false;
             return true;
         });
+        SortedList<KhaiBaoModel> sortedData = new SortedList<>(filteredList);
+        sortedData.comparatorProperty().bind(searchTable.comparatorProperty());
+        searchTable.setItems(sortedData);
     }
 }

@@ -1,6 +1,7 @@
 package covidmanagement.controller.khaibaocontroller;
 
 import covidmanagement.Main;
+import covidmanagement.Utility;
 import covidmanagement.model.KhaiBaoModel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -100,13 +101,5 @@ public class XemKhaiBaoController implements Initializable {
             this.symptomContactNo.setSelected(true);
             this.symptomContactYes.setSelected(false);
         }
-    }
-    public void switchToSearchView(ActionEvent e) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("khaibao/timkiemkhaibao-view.fxml"));
-        Parent componentScene = fxmlLoader.load();
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Scene scene = new Scene(componentScene);
-        stage.setScene(scene);
-        stage.show();
     }
 }

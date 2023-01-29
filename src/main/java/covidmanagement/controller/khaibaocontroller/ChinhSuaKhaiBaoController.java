@@ -33,6 +33,7 @@ public class ChinhSuaKhaiBaoController implements Initializable {
     @FXML
     TableColumn<KhaiBaoModel, Integer> countColumn;
     @FXML TableColumn<KhaiBaoModel, String> nameColumn;
+    @FXML TableColumn<KhaiBaoModel, String> hotenColumn;
     @FXML TableColumn<KhaiBaoModel, String> trieuchungColumn;
     @FXML TableColumn<KhaiBaoModel, LocalDate> declareDateColumn;
     @FXML TableColumn<KhaiBaoModel, LocalDate> declareSpotColumn;
@@ -66,6 +67,7 @@ public class ChinhSuaKhaiBaoController implements Initializable {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("maNhanKhau"));
         declareDateColumn.setCellValueFactory(new PropertyValueFactory<>("ngayKhaiBao"));
         declareSpotColumn.setCellValueFactory(new PropertyValueFactory<>("diemKhaiBao"));
+        hotenColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         changeColumn.setCellValueFactory(new PropertyValueFactory<>("changeButton"));
         deleteColumn.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
 

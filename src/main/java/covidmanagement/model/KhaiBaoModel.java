@@ -20,13 +20,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KhaiBaoModel {
+    public String getTen() {
+        return ten;
+    }
+
+    private String ten;
     private int maKhaiBao;
 
     private int maNhanKhau;
     //private static KhaiBaoModel.gioiTinh gioiTinh;
     private String diemKhaiBao;
     private LocalDate ngayKhaiBao;
-    //private String cmnd;
     private boolean BHYT;
     private String lichTrinh;
     private boolean trieuChung;
@@ -93,6 +97,7 @@ public class KhaiBaoModel {
     public KhaiBaoModel(int maKhaiBao, int maNhanKhau, String diemkhaibao, LocalDate ngayKhaiBao,
                         boolean bhyt, String lichTrinh, boolean trieuchung, boolean tiepXucNguoiBenh,
                         boolean tiepXucNguoiTuVungDich, boolean tiepXucNguoiCoBieuHien, String benhNen) {
+        setName(maNhanKhau);
         this.maKhaiBao = maKhaiBao;
         this.maNhanKhau = maNhanKhau;
         this.diemKhaiBao = diemkhaibao;
@@ -118,9 +123,9 @@ public class KhaiBaoModel {
 
     private void handleChangeClick(ActionEvent event){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("khaibao/suakhaibao-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
             SuaKhaiBaoController mainController = fxmlLoader.getController();
@@ -133,9 +138,10 @@ public class KhaiBaoModel {
     }
     private void handleViewClick(ActionEvent event){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("khaibao/xemkhaibao-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+//            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
             XemKhaiBaoController mainController = fxmlLoader.getController();
@@ -217,5 +223,13 @@ public class KhaiBaoModel {
         statement.executeUpdate();
         statement.close();
         queryDB.close();
+    }
+    private void setName(int maNK) {
+        try {
+            NhanKhauModel nhanKhau = NhanKhauModel.getInstanceById(maNK);
+            this.ten = nhanKhau.getHoTen();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 }
