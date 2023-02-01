@@ -3,10 +3,12 @@ package covidmanagement.controller.cachlycontroller;
 import covidmanagement.Utility;
 import javafx.collections.FXCollections;
 import covidmanagement.model.CachLyModel;
+import covidmanagement.model.CachLyModel.MucDoCachLy;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
@@ -23,11 +25,15 @@ public class ThemCachLyController implements Initializable {
     @FXML
     DatePicker beginDateCl, finishDateCl;
     @FXML
+    ChoiceBox<CachLyModel.MucDoCachLy> mucdoCl;
+    @FXML
     Button addButtonCl;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        mucdoCl.setItems(FXCollections.observableArrayList(CachLyModel.MucDoCachLy.values()));
+        mucdoCl.setValue(CachLyModel.MucDoCachLy.UNDEFINED);
 
         // set date format to DD/MM/yyyy
         beginDateCl.setConverter(new StringConverter<>() {
@@ -114,16 +120,12 @@ public class ThemCachLyController implements Initializable {
         LocalDate begindate = beginDateCl.getValue();
         LocalDate finishdate = finishDateCl.getValue();
         String place = placeCl.getText();
+        MucDoCachLy mucdo = mucdoCl.getValue();
 
-        System.out.println(idNK);
-        System.out.println(name);
-        System.out.println(begindate);
-        System.out.println(finishdate);
-        System.out.println(place);
 
 
         try {
-            CachLyModel.addCl(idNK,begindate ,begindate ,place );
+            CachLyModel.addCl(idNK,name, begindate ,finishdate ,place, mucdo);
 
             Utility.displaySuccessDialog("Thêm thành công!");
         } catch (SQLException e){
