@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.khaibaocontroller.ChinhSuaKhaiBaoController">
+<BorderPane maxWidth="-Infinity" prefHeight="600.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.khaibaocontroller.ChinhSuaKhaiBaoController">
    <top>
-      <GridPane prefHeight="600.0" prefWidth="800.0" vgap="12.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="600.0" prefWidth="1143.0" vgap="12.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="565.6000244140625" minWidth="10.0" prefWidth="400.7999755859375" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="499.0000366210937" minWidth="10.0" prefWidth="399.2000244140625" />
@@ -52,9 +52,9 @@
                   <TextField fx:id="declareSpot" prefHeight="30.0" prefWidth="240.0" />
                </children>
             </HBox>
-            <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <HBox minWidth="-Infinity" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="100.0" text="Mã nhân khẩu">
+                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="97.0" text="Họ tên">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -67,7 +67,7 @@
             </HBox>
             <BorderPane GridPane.columnSpan="2" GridPane.rowIndex="2">
                <center>
-                  <Label prefHeight="30.0" prefWidth="100.0" text="Ngày khai báo">
+                  <Label prefHeight="30.0" prefWidth="102.0" text="Ngày khai báo">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -87,7 +87,7 @@
                   <DatePicker id="DatePicker" fx:id="dateRangeFrom" prefHeight="30.0" prefWidth="240.0" promptText="Nhập ngày" />
                </children>
             </HBox>
-            <HBox GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <HBox prefHeight="30.0" prefWidth="554.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
                   <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="100.0" text="Đến">
                      <font>
@@ -97,7 +97,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Label>
-                  <DatePicker id="DatePicker" fx:id="dateRangeTo" prefHeight="30.0" prefWidth="240.0" promptText="Nhập ngày" />
+                  <DatePicker id="DatePicker" fx:id="dateRangeTo" prefHeight="30.0" prefWidth="238.0" promptText="Nhập ngày" />
                </children>
             </HBox>
             <BorderPane GridPane.columnSpan="2" GridPane.rowIndex="4">
@@ -106,18 +106,32 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <BorderPane.margin>
+                        <Insets left="230.0" />
+                     </BorderPane.margin>
                   </Button>
                </center>
+               <right>
+                  <Button mnemonicParsing="false" onAction="#reload" prefHeight="46.0" prefWidth="94.0" text="Làm mới" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets right="150.0" />
+                     </BorderPane.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </right>
             </BorderPane>
-            <TableView fx:id="searchTable" prefHeight="413.0" prefWidth="615.0" GridPane.columnSpan="2" GridPane.rowIndex="5">
+            <TableView fx:id="searchTable" prefHeight="388.0" prefWidth="799.0" GridPane.columnSpan="2" GridPane.rowIndex="5">
                <columns>
                   <TableColumn fx:id="countColumn" prefWidth="44.79995805025101" text="STT" />
-                  <TableColumn fx:id="nameColumn" prefWidth="94.39999389648438" text="Mã nhân khẩu" />
-                  <TableColumn fx:id="declareDateColumn" prefWidth="112.79998779296875" text="Ngày khai báo" />
-                  <TableColumn fx:id="declareSpotColumn" prefWidth="155.99993896484375" text="Điểm khai báo" />
-                  <TableColumn fx:id="trieuchungColumn" prefWidth="84.79998779296875" text="Triệu chứng" />
-                  <TableColumn fx:id="changeColumn" prefWidth="51.20001220703125" text="Sửa" />
-                  <TableColumn fx:id="deleteColumn" prefWidth="65.5999755859375" text="Xóa" />
+                  <TableColumn fx:id="nameColumn" prefWidth="112.80002212524414" text="Mã nhân khẩu" />
+                  <TableColumn fx:id="hotenColumn" prefWidth="151.19993591308594" text="Họ tên" />
+                  <TableColumn fx:id="declareDateColumn" prefWidth="128.800048828125" text="Ngày khai báo" />
+                  <TableColumn fx:id="declareSpotColumn" prefWidth="151.20001220703125" text="Điểm khai báo" />
+                  <TableColumn fx:id="trieuchungColumn" prefWidth="85.5999755859375" text="Triệu chứng" />
+                  <TableColumn fx:id="changeColumn" prefWidth="68.8001708984375" text="Sửa" />
+                  <TableColumn fx:id="deleteColumn" prefWidth="76.0" text="Xóa" />
                </columns>
             </TableView>
          </children>

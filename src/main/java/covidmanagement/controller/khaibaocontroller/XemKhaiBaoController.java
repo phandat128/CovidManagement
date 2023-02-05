@@ -1,6 +1,7 @@
 package covidmanagement.controller.khaibaocontroller;
 
 import covidmanagement.Main;
+import covidmanagement.Utility;
 import covidmanagement.model.KhaiBaoModel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -28,26 +29,24 @@ public class XemKhaiBaoController implements Initializable {
 
     @FXML
     DatePicker declareDate;
-    @FXML
-    Button OK;
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        OK.setDisable(false);
-        declareDate.valueProperty().addListener((observableValue, currentValue, newValue) -> {
-            if (currentValue == null) return;
-            if (!currentValue.isEqual(newValue)) OK.setDisable(false);
-        });
-        declareSpotField.textProperty().addListener((observableValue, currentValue, newValue) -> {
-            if (currentValue.isBlank()) return;
-            if (!currentValue.equals(newValue)) {
-                OK.setDisable(false);
-            }
-        });
-        nameField.textProperty().addListener((observableValue, currentValue, newValue) -> {
-            if (currentValue.isBlank()) return;
-            if (!currentValue.equals(newValue)) {
-                OK.setDisable(false);
-            }
-        });
+//        OK.setDisable(false);
+//        declareDate.valueProperty().addListener((observableValue, currentValue, newValue) -> {
+//            if (currentValue == null) return;
+//            if (!currentValue.isEqual(newValue)) OK.setDisable(false);
+//        });
+//        declareSpotField.textProperty().addListener((observableValue, currentValue, newValue) -> {
+//            if (currentValue.isBlank()) return;
+//            if (!currentValue.equals(newValue)) {
+//                OK.setDisable(false);
+//            }
+//        });
+//        nameField.textProperty().addListener((observableValue, currentValue, newValue) -> {
+//            if (currentValue.isBlank()) return;
+//            if (!currentValue.equals(newValue)) {
+//                OK.setDisable(false);
+//            }
+//        });
     }
     public void setField(String declareSpotField, LocalDate declareDate, int nameField, String traceField,
                          boolean BHYT, boolean symptom, boolean covidContact, boolean countryContact, boolean symptomContact,
@@ -100,13 +99,5 @@ public class XemKhaiBaoController implements Initializable {
             this.symptomContactNo.setSelected(true);
             this.symptomContactYes.setSelected(false);
         }
-    }
-    public void switchToSearchView(ActionEvent e) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("khaibao/timkiemkhaibao-view.fxml"));
-        Parent componentScene = fxmlLoader.load();
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Scene scene = new Scene(componentScene);
-        stage.setScene(scene);
-        stage.show();
     }
 }
