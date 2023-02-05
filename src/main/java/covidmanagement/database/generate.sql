@@ -1,5 +1,5 @@
 CREATE TABLE HoKhau(
-	MaHoKhau serial NOT NULL,
+	MaHoKhau serial NOT NULL PRIMARY KEY,
 	SoNha varchar(20),
 	Ngach varchar(20),
 	Ngo varchar(20),
@@ -12,7 +12,7 @@ CREATE TABLE HoKhau(
 );
 
 CREATE TABLE NhanKhau(
-	MaNhanKhau serial NOT NULL,
+	MaNhanKhau serial NOT NULL PRIMARY KEY,
 	HoTen varchar(50) NOT NULL,
 	NgaySinh date NOT NULL,
 	GioiTinh varchar(10) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE NhanKhau(
 );
 
 CREATE TABLE CachLy(
-	MaCachLy serial NOT NULL,
+	MaCachLy serial NOT NULL PRIMARY KEY,
 	MaNhanKhau int NOT NULL,
 	BatDau date NOT NULL,
 	KetThuc date NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE CachLy(
 
 
 CREATE TABLE KhaiBao(
-	MaKhaiBao serial NOT NULL,
+	MaKhaiBao serial NOT NULL PRIMARY KEY,
 	MaNhanKhau int NOT NULL,
 	Diemkhaibao varchar(50) NOT NULL,
 	NgayKhaiBao date NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE KhaiBao(
 
 
 CREATE TABLE XetNghiem(
-	MaXetNghiem serial NOT NULL,
+	MaXetNghiem serial NOT NULL PRIMARY KEY,
 	MaNhanKhau int NOT NULL,
 	ThoiGian date NOT NULL,
 	DiaDiem varchar(100) NOT NULL,
@@ -67,10 +67,15 @@ CREATE TABLE XetNghiem(
 );
 
 CREATE TABLE TaiKhoan(
-    username varchar(100) NOT NULL UNIQUE,
+    username varchar(100) NOT NULL UNIQUE PRIMARY KEY,
     password varchar(100) NOT NULL,
     CONSTRAINT PK_TaiKhoan PRIMARY KEY(username)
 );
+
+CREATE TABLE LichSu(
+    ThoiGian timestamp DEFAULT NOW() PRIMARY KEY,
+    ThongTin varchar(200) NOT NULL
+)
 
 ALTER TABLE CachLy   ADD  CONSTRAINT FK_CachLy_NhanKhau FOREIGN KEY(MaNhanKhau)
 REFERENCES NhanKhau (MaNhanKhau);

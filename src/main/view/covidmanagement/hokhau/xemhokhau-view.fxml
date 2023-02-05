@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+      <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="316.79998779296875" minWidth="10.0" prefWidth="232.79998779296875" />
+      <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="326.20000000000005" minWidth="10.0" prefWidth="273.40000000000003" />
+    <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="275.0" />
+      <ColumnConstraints />
+      <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints fillHeight="false" maxHeight="194.8000244140625" minHeight="10.0" prefHeight="65.00000114440918" vgrow="SOMETIMES" />
+    <RowConstraints fillHeight="false" maxHeight="194.8000244140625" minHeight="0.0" prefHeight="65.00000114440918" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="556.7999961853027" minHeight="10.0" prefHeight="434.5999988555908" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Button fx:id="btnXem" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Xem" GridPane.rowIndex="1">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="40.0" />
+         </GridPane.margin>
+      </Button>
+      <TableView fx:id="tableNhanKhau" maxWidth="-Infinity" prefHeight="441.0" prefWidth="800.0" GridPane.columnSpan="5" GridPane.rowIndex="2">
+         <columns>
+            <TableColumn fx:id="columnid" prefWidth="20.79998779296875" text="#" />
+            <TableColumn fx:id="columnMaNhanKhau" prefWidth="94.4000244140625" text="Mã Nhân Khẩu" />
+            <TableColumn fx:id="columnHoVaTen" prefWidth="136.79995727539062" text="Họ và Tên" />
+            <TableColumn fx:id="columnNgaySinh" prefWidth="105.0" text="Ngày Sinh" />
+            <TableColumn fx:id="columnGioiTinh" prefWidth="62.4000244140625" text="Giới Tính" />
+            <TableColumn fx:id="columnCMND_CCCD" prefWidth="88.79998779296875" text="CMND_CCCD" />
+            <TableColumn fx:id="columnSDT" prefWidth="93.59991455078125" text="Số Điện Thoại" />
+            <TableColumn fx:id="columnNgheNghiep" prefWidth="105.60003662109375" text="Nghề Nghiệp" />
+            <TableColumn fx:id="columnQuanHe" prefWidth="88.800048828125" text="Quan hệ" />
+         </columns>
+      </TableView>
+      <Button id="themButton" fx:id="btnSua" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Sửa" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="40.0" />
+         </GridPane.margin>
+      </Button>
+      <Button id="themButton" fx:id="btnXoa" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Xóa" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="40.0" />
+         </GridPane.margin>
+      </Button>
+      <HBox GridPane.columnSpan="3">
+         <children>
+            <Label text="Thông tin nhân khẩu trong hộ ">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="maHoKhauLabel">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label text="Tên chủ hộ: ">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="80.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="tenChuHoLabel">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</GridPane>

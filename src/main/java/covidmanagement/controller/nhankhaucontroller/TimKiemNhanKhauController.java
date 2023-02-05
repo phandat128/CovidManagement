@@ -2,7 +2,6 @@ package covidmanagement.controller.nhankhaucontroller;
 
 import covidmanagement.Main;
 import covidmanagement.model.NhanKhauModel;
-import covidmanagement.model.XetNghiemModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -71,7 +70,7 @@ public class TimKiemNhanKhauController implements Initializable {
 
 
     @FXML
-    void xemActionevent(ActionEvent event) {
+    public void xemActionevent(ActionEvent event) {
 
         int selectedIndex = tableNhanKhau.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
@@ -158,5 +157,9 @@ public class TimKiemNhanKhauController implements Initializable {
         txtMaHoKhau.setText("");
         tableNhanKhau.setItems(filteredList);
 
+    }
+
+    public void setTableNhanKhau(TableView<NhanKhauModel> tableNhanKhau) {
+        this.tableNhanKhau = tableNhanKhau;
     }
 }

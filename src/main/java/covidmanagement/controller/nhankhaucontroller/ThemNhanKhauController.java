@@ -1,11 +1,18 @@
 package covidmanagement.controller.nhankhaucontroller;
 
+import covidmanagement.Main;
+import covidmanagement.controller.hokhaucontroller.ThemHoKhauController;
+import covidmanagement.model.HoKhauModel;
 import covidmanagement.model.NhanKhauModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -29,7 +36,7 @@ public class ThemNhanKhauController implements Initializable {
     private DatePicker pickerNgaySinh;
 
     @FXML
-    private RadioButton lachuhoco, lachuhokhong, gioitinhnam, gioitinhnu;
+    private RadioButton lachuho, khonglachuho, gioitinhnam, gioitinhnu;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -48,7 +55,7 @@ public class ThemNhanKhauController implements Initializable {
             alert.setHeaderText("Trường Ngày Sinh không được để trống!");
             alert.show();
             return;
-        }else if (!pickerNgaySinh.getValue().isBefore(LocalDate.now())) {
+        }else if (pickerNgaySinh.getValue().isAfter(LocalDate.now())) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText("Vui lòng nhập lại ngày sinh!");
             alert.show();
@@ -91,21 +98,20 @@ public class ThemNhanKhauController implements Initializable {
             alert.show();
             return;
         }
-        if (lachuhokhong.isSelected() && txtQuanHeVoiChuHo.getText().isBlank()) {
+        if (khonglachuho.isSelected() && txtQuanHeVoiChuHo.getText().isBlank()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText("Vui lòng nhập trường Quan Hệ Với Chủ Hộ!");
             alert.show();
             return;
         }
-        if (lachuhokhong.isSelected() && txtQuanHeVoiChuHo.getText().equalsIgnoreCase("Chủ hộ")) {
+        if (khonglachuho.isSelected() && txtQuanHeVoiChuHo.getText().equalsIgnoreCase("Chủ hộ")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText("Vui lòng chọn lại trường quan hệ với chủ hộ!!");
             alert.show();
             return;
         }
-        if (lachuhoco.isSelected() && !txtQuanHeVoiChuHo.getText().isBlank()){
-            if (!txtQuanHeVoiChuHo.getText().equalsIgnoreCase("Chủ hộ"))
-            {
+        if (lachuho.isSelected() && !txtQuanHeVoiChuHo.getText().isBlank()){
+            if (!txtQuanHeVoiChuHo.getText().equalsIgnoreCase("Chủ hộ")){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setHeaderText("Vui lòng điền lại trường quan hệ với chủ hộ!!");
                 alert.show();
@@ -122,7 +128,7 @@ public class ThemNhanKhauController implements Initializable {
                 LocalDate ngaySinh = pickerNgaySinh.getValue();
                 String cmnd_CCCD_ = txtCMND_CCCD.getText();
                 String quocTich = txtQuocTich.getText();
-                String tonGiao = txtTonGiao.getText();
+                String tonGiao = txtTonGiao.getText().isBlank() ? "Không" : txtTonGiao.getText();
                 String sDT = txtSDT.getText();
                 String nguyenQuan = txtNguyenQuan.getText();
                 String ngheNghiep = txtNgheNghiep.getText();
@@ -137,8 +143,8 @@ public class ThemNhanKhauController implements Initializable {
                 String quanHeVoiChuHo;
 
                 // TODO
-                Boolean laChuHo;
-                if (lachuhoco.isSelected()) {
+                boolean laChuHo;
+                if (lachuho.isSelected()) {
                     laChuHo = true;
                     quanHeVoiChuHo = "Chủ hộ";
 
@@ -147,6 +153,28 @@ public class ThemNhanKhauController implements Initializable {
                     quanHeVoiChuHo = txtQuanHeVoiChuHo.getText();
                 }
 
+                if (!HoKhauModel.isExistedHoKhau(maHoKhau)){
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setHeaderText("Mã hộ khẩu chưa tồn tại trong dữ liệu. Bạn có muốn tạo mới?");
+                    alert.showAndWait();
+                    if (alert.getResult() == ButtonType.OK){
+                        try {
+                            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hokhau/themhokhau-view.fxml"));
+                            Scene scene = new Scene(fxmlLoader.load());
+                            Stage stage = new Stage();
+                            ThemHoKhauController controller = fxmlLoader.getController();
+                            controller.setMaHoKhau(maHoKhau);
+                            stage.setTitle("Thêm hộ khẩu mới");
+                            stage.setScene(scene);
+                            stage.showAndWait();
+                        } catch (IOException e){
+                            e.printStackTrace();
+                            return;
+                        }
+                    } else {
+                        return;
+                    }
+                }
                 NhanKhauModel.addNhanKhau(hoVaTen, gioiTinh, ngaySinh, cmnd_CCCD_, quocTich, tonGiao,
                         sDT, nguyenQuan, ngheNghiep, maHoKhau, laChuHo, quanHeVoiChuHo);
             }
@@ -158,7 +186,7 @@ public class ThemNhanKhauController implements Initializable {
         txtHoVaTen.setText("");
         pickerNgaySinh.setValue(null);
 
-        gioitinhnam.setSelected(false);
+        gioitinhnam.setSelected(true);
         gioitinhnu.setSelected(false);
 
         txtCMND_CCCD.setText("");
@@ -168,8 +196,8 @@ public class ThemNhanKhauController implements Initializable {
         txtNguyenQuan.setText("");
         txtNgheNghiep.setText("");
         txtMaHoKhau.setText("");
-        lachuhoco.setSelected(false);
-        lachuhokhong.setSelected(false);
+        lachuho.setSelected(true);
+        khonglachuho.setSelected(false);
         txtQuanHeVoiChuHo.setText("");
 
 

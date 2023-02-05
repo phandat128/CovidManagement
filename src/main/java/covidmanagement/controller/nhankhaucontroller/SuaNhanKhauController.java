@@ -1,7 +1,5 @@
 package covidmanagement.controller.nhankhaucontroller;
 
-import covidmanagement.Utility;
-import covidmanagement.database.QueryDB;
 import covidmanagement.model.NhanKhauModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,11 +8,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.zone.ZoneRulesProvider;
 import java.util.ResourceBundle;
 
 public class SuaNhanKhauController implements Initializable  {
@@ -75,7 +70,7 @@ public class SuaNhanKhauController implements Initializable  {
                         alert.setHeaderText("Trường Ngày Sinh không được để trống!");
                         alert.show();
                         return;
-                }else if (!pickerNgaySinh.getValue().isBefore(LocalDate.now())) {
+                }else if (pickerNgaySinh.getValue().isAfter(LocalDate.now())) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setHeaderText("Vui lòng nhập lại ngày sinh!");
                         alert.show();

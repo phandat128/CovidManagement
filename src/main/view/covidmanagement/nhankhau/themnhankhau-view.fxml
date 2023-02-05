@@ -232,7 +232,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <RadioButton fx:id="lachuhoco" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Có">
+                        <RadioButton fx:id="lachuho" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Có">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -240,7 +240,7 @@
                               <ToggleGroup fx:id="LaChuHo" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="lachuhokhong" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" selected="true" text="Không" toggleGroup="$LaChuHo">
+                        <RadioButton fx:id="khonglachuho" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" selected="true" text="Không" toggleGroup="$LaChuHo">
                            <font>
                               <Font size="14.0" />
                            </font>

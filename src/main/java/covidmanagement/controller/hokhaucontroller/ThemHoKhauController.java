@@ -81,5 +81,10 @@ public class ThemHoKhauController {
         //TODO: chuyển đến trang
 
     }
+
+    public void setMaHoKhau(int maHoKhau) {
+        this.maHoKhau.setText(String.valueOf(maHoKhau));
+        this.maHoKhau.setDisable(true);
+    }
 }
 

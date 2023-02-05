@@ -1,6 +1,5 @@
 package covidmanagement.controller.hokhaucontroller;
 
-import covidmanagement.Utility;
 import covidmanagement.model.HoKhauModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
@@ -9,6 +8,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -43,6 +43,8 @@ public class TimKiemHoKhauController implements Initializable {
     TableColumn<HoKhauModel, String> quanColumn;
     @FXML
     TableColumn<HoKhauModel, String> thanhPhoColumn;
+    @FXML
+    TableColumn<HoKhauModel, Button> xemthemColumn;
     private final ObservableList<HoKhauModel> hoKhauList = FXCollections.observableArrayList(
             HoKhauModel.getHoKhauList()
     );
@@ -61,6 +63,7 @@ public class TimKiemHoKhauController implements Initializable {
         phuongColumn.setCellValueFactory(new PropertyValueFactory<>("phuong"));
         quanColumn.setCellValueFactory(new PropertyValueFactory<>("quan"));
         thanhPhoColumn.setCellValueFactory(new PropertyValueFactory<>("thanhPho"));
+        xemthemColumn.setCellValueFactory(new PropertyValueFactory<>("xemButton"));
 
 
         table.setItems(filteredList);

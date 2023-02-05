@@ -76,12 +76,7 @@ public class Utility {
             } catch (SQLException e){
                 e.printStackTrace();
                 //TODO: hiển thị thông báo xóa không thành công
-                displayExceptionDialog(e);
-            }
-
-            if (tableName.equalsIgnoreCase("hokhau")){
-                //TODO here: đặt mã hộ khẩu của các nhân khẩu trong hộ về 0
-
+                Utility.displayWarningDialog("Hộ khẩu đang chứa nhân khẩu. Hãy thay đổi mã hộ khẩu của các nhân khẩu trong hộ trước");
             }
         }
     }

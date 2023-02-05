@@ -15,7 +15,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.hokhaucontroller.TimKiemHoKhauController">
     <top>
-        <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+        <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" BorderPane.alignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -129,7 +129,8 @@
                         <TableColumn fx:id="duongColumn" minWidth="0.0" prefWidth="123.20001220703125" resizable="false" text="Đường " />
                         <TableColumn fx:id="phuongColumn" minWidth="0.0" prefWidth="128.0" resizable="false" text="Phường" />
                   <TableColumn fx:id="quanColumn" prefWidth="105.60003662109375" resizable="false" text="Quận" />
-                  <TableColumn fx:id="thanhPhoColumn" prefWidth="99.199951171875" resizable="false" text="Thành phố" />
+                  <TableColumn fx:id="thanhPhoColumn" prefWidth="118.4000244140625" resizable="false" text="Thành phố" />
+                  <TableColumn prefWidth="75.199951171875" text="Xem thêm" fx:id="xemthemColumn" />
                     </columns>
                     <GridPane.margin>
                         <Insets top="20.0" />

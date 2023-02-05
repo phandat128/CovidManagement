@@ -107,7 +107,7 @@ public class ChinhSuaNhanKhauController implements Initializable {
     }
 
     @FXML
-    void xoaActionevent(ActionEvent event) throws SQLException {
+    public void xoaActionevent(ActionEvent event) {
 
         int selectedIndex = tableNhanKhau.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
@@ -129,12 +129,17 @@ public class ChinhSuaNhanKhauController implements Initializable {
                 {
                     NhanKhauModel nhankhau = tableNhanKhau.getSelectionModel().getSelectedItem();
                     int manhankhau = nhankhau.getMaNhanKhau();
-
+                try {
                     NhanKhauModel.deleteCahLy(manhankhau);
                     NhanKhauModel.deleteKhaiBao(manhankhau);
                     NhanKhauModel.deleteXetNghiem(manhankhau);
                     NhanKhauModel.deleteNhanKhau(manhankhau);
-
+                } catch (SQLException e){
+                    e.printStackTrace();
+                    Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                    alert2.setHeaderText("Xóa nhân khẩu thất bại!!");
+                    alert2.show();
+                }
 
                     // delete in table
                     FilteredList<NhanKhauModel> filteredData = (FilteredList<NhanKhauModel>) tableNhanKhau.getItems();
@@ -145,10 +150,6 @@ public class ChinhSuaNhanKhauController implements Initializable {
                         tableNhanKhau.getSelectionModel().clearSelection();
                         Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                         alert2.setHeaderText("Xóa nhân khẩu thành công!!");
-                        alert2.show();
-                    } else {
-                        Alert alert2 = new Alert(Alert.AlertType.ERROR);
-                        alert2.setHeaderText("Xóa nhân khẩu thất bại!!");
                         alert2.show();
                     }
                 }
@@ -163,9 +164,9 @@ public class ChinhSuaNhanKhauController implements Initializable {
     }
 
     @FXML
-    void suaActionevent(ActionEvent event) throws IOException {
+    public void suaActionevent(ActionEvent event) {
 
-        int selectedIndex = tableNhanKhau.getSelectionModel().getSelectedIndex();
+        int selectedIndex = this.tableNhanKhau.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
 
             NhanKhauModel nhankhau = tableNhanKhau.getSelectionModel().getSelectedItem();
@@ -215,5 +216,9 @@ public class ChinhSuaNhanKhauController implements Initializable {
 
         tableNhanKhau.setItems(List1);
 
+    }
+
+    public void setTableNhanKhau(TableView<NhanKhauModel> tableNhanKhau) {
+        this.tableNhanKhau = tableNhanKhau;
     }
 }

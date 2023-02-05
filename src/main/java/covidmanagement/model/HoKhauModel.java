@@ -3,6 +3,7 @@ package covidmanagement.model;
 import covidmanagement.Main;
 import covidmanagement.Utility;
 import covidmanagement.controller.hokhaucontroller.SuaHoKhaucontroller;
+import covidmanagement.controller.hokhaucontroller.XemHoKhauController;
 import covidmanagement.database.QueryDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +29,7 @@ public class HoKhauModel {
     private String phuong;
     private String quan;
     private String thanhPho;
-    private Button suaButton, xoaButton;
+    private Button suaButton, xoaButton, xemButton;
 
     public HoKhauModel(  int maHK, String soNha, String ngach, String ngo, String duong, String phuong, String quan, String thanhPho) {
         this.maHK = maHK;
@@ -41,8 +42,10 @@ public class HoKhauModel {
         this.thanhPho = thanhPho;
         this.suaButton = new Button("Sửa");
         this.xoaButton = new Button("Xóa");
+        this.xemButton = new Button("Xem");
         suaButton.setOnAction(this::suaClick);
         xoaButton.setOnAction(this::xoaClick);
+        xemButton.setOnAction(this::xemClick);
         setTenChuHo( maHK);
     }
 
@@ -70,6 +73,18 @@ public class HoKhauModel {
             e.printStackTrace();
         }
         return queryList;
+    }
+
+    public static boolean isExistedHoKhau(int maHK){
+        try {
+            QueryDB queryDB = new QueryDB();
+            String sql = "select mahokhau from hokhau where mahokhau = " + maHK;
+            ResultSet rs = queryDB.executeQuery(sql);
+            if (rs.isBeforeFirst()) return true;
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public static void add(int maHK, String soNha, String ngach, String ngo, String duong, String phuong, String quan, String thanhPho) throws SQLException{
@@ -110,14 +125,6 @@ public class HoKhauModel {
         Utility.displayConfirmDeleteDialog("Xác nhận xóa?", this.maHK, "HoKhau");
     }
     private void suaClick(ActionEvent event){
-        System.out.println(maHK);
-        System.out.println(soNha);
-        System.out.println(ngach);
-        System.out.println(ngo);
-        System.out.println(duong);
-        System.out.println(phuong);
-        System.out.println(quan);
-        System.out.println(thanhPho);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hokhau/suahokhau-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
@@ -131,7 +138,20 @@ public class HoKhauModel {
         }
     }
 
-
+    private void xemClick(ActionEvent event){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hokhau/xemhokhau-view.fxml"));
+            XemHoKhauController controller = new XemHoKhauController();
+            controller.setMaHoKhau(this.maHK);
+            fxmlLoader.setController(controller);
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 
     public int getMaHK() {
         return maHK;
@@ -176,6 +196,11 @@ public class HoKhauModel {
     public Button getXoaButton() {
         return xoaButton;
     }
+
+    public Button getXemButton() {
+        return xemButton;
+    }
+
     private void setTenChuHo(int maHK){
         //TODO
         try {
