@@ -3,8 +3,6 @@ package covidmanagement.controller.khaibaocontroller;
 import covidmanagement.Main;
 import covidmanagement.Utility;
 import covidmanagement.model.KhaiBaoModel;
-import covidmanagement.model.XetNghiemModel;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -49,6 +46,43 @@ public class SuaKhaiBaoController implements Initializable {
         });
         nameField.textProperty().addListener((observableValue, currentValue, newValue) -> {
             if (currentValue.isBlank()) return;
+            if (!currentValue.equals(newValue)) {
+                saveDeclare.setDisable(false);
+            }
+        });
+        traceField.textProperty().addListener((observableValue, currentValue, newValue) -> {
+            if (currentValue.isBlank()) return;
+            if (!currentValue.equals(newValue)) {
+                saveDeclare.setDisable(false);
+            }
+        });
+        benhNenField.textProperty().addListener((observableValue, currentValue, newValue) -> {
+            if (currentValue.isBlank()) return;
+            if (!currentValue.equals(newValue)) {
+                saveDeclare.setDisable(false);
+            }
+        });
+        BHYTYes.selectedProperty().addListener((observableValue, currentValue, newValue) -> {
+            if (!currentValue.equals(newValue)) {
+                saveDeclare.setDisable(false);
+            }
+        });
+        symptomYes.selectedProperty().addListener((observableValue, currentValue, newValue) -> {
+            if (!currentValue.equals(newValue)) {
+                saveDeclare.setDisable(false);
+            }
+        });
+        countryContactYes.selectedProperty().addListener((observableValue, currentValue, newValue) -> {
+            if (!currentValue.equals(newValue)) {
+                saveDeclare.setDisable(false);
+            }
+        });
+        covidContactYes.selectedProperty().addListener((observableValue, currentValue, newValue) -> {
+            if (!currentValue.equals(newValue)) {
+                saveDeclare.setDisable(false);
+            }
+        });
+        symptomContactYes.selectedProperty().addListener((observableValue, currentValue, newValue) -> {
             if (!currentValue.equals(newValue)) {
                 saveDeclare.setDisable(false);
             }
