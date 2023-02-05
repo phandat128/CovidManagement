@@ -35,6 +35,7 @@ CREATE TABLE CachLy(
 	BatDau date NOT NULL,
 	KetThuc date NOT NULL,
 	DiaDiem varchar(100) NOT NULL,
+	MucDo varchar(20) NOT NULL,
  	CONSTRAINT PK_CachLy PRIMARY KEY (MaCachLy)
 );
 

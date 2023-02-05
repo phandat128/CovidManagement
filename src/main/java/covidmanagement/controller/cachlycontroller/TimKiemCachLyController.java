@@ -2,10 +2,12 @@ package covidmanagement.controller.cachlycontroller;
 
 import covidmanagement.Utility;
 import covidmanagement.model.CachLyModel;
+import covidmanagement.model.CachLyModel.MucDoCachLy;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,17 +37,24 @@ public class TimKiemCachLyController implements Initializable {
     @FXML TableColumn<CachLyModel, LocalDate> dateFinishColumnCl;
     @FXML TableColumn<CachLyModel, String> placeColumnCl;
 
+    @FXML TableColumn<CachLyModel, CachLyModel.MucDoCachLy> mucdoColumCl;
+
 
     private final ObservableList<CachLyModel> cachLyList = FXCollections.observableArrayList(
             CachLyModel.getCachLyList()
     );
     private final FilteredList<CachLyModel> filteredList = new FilteredList<>(cachLyList);
 
+    private SortedList<CachLyModel> sortedList = new SortedList<>(filteredList);
 
+    @FXML ChoiceBox<CachLyModel.MucDoCachLy> mucdoClSearch;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        mucdoClSearch.setItems(FXCollections.observableArrayList(
+                CachLyModel.MucDoCachLy.values()
+        ));
+        mucdoClSearch.setOnAction(this::getMucdoChoice);
         StringConverter<LocalDate> dateConverter = new StringConverter<LocalDate>() {
             private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             @Override
@@ -69,8 +78,13 @@ public class TimKiemCachLyController implements Initializable {
         dateBeginColumnCl.setCellValueFactory(new PropertyValueFactory<>("beginDate"));
         dateFinishColumnCl.setCellValueFactory(new PropertyValueFactory<>("finishDate"));
         placeColumnCl.setCellValueFactory(new PropertyValueFactory<>("place"));
+        mucdoColumCl.setCellValueFactory(new PropertyValueFactory<>("mucdo"));
 
-
+        sortedList.setComparator((o1, o2) -> {
+            if (o1.getBeginDate().isBefore(o2.getBeginDate())) return -1;
+            if (o1.getBeginDate().isAfter(o2.getBeginDate())) return 1;
+            return 0;
+        });
         searchTableCl.setItems(filteredList);
 
         //set serial number column
@@ -79,6 +93,11 @@ public class TimKiemCachLyController implements Initializable {
                         searchTableCl.getItems().indexOf(cellDataFeatures.getValue()) + 1
                 ));
         idColumnCl.setSortable(false);
+    }
+    public void getMucdoChoice(ActionEvent event){
+        //TODO here
+        CachLyModel.MucDoCachLy choice = mucdoClSearch.getValue();
+        System.out.println(choice);
     }
 
 
@@ -97,29 +116,43 @@ public class TimKiemCachLyController implements Initializable {
         final LocalDate beginto = dateBeginRangeToCl.getValue();
         final LocalDate finishfrom =dateFinishRangeFromCl.getValue();
         final LocalDate finishto  =dateFinishRangeToCl.getValue();
+        final CachLyModel.MucDoCachLy mucdo = mucdoClSearch.getValue();
 
-        if ((beginfrom != null && beginto != null) || (finishfrom != null && finishto != null)){
-            if (beginfrom.isAfter(beginto) || (finishfrom.isAfter(finishto))) {
-                Utility.displayExceptionDialog(new RuntimeException("Khoảng thời gian không hợp lệ!"));
+
+        if (beginfrom != null && beginto != null){
+            if (beginfrom.isAfter(beginto)) {
+                Utility.displayWarningDialog("Khoảng thời gian không hợp lệ!");
+                return;
+            }
+        }
+
+        if (finishfrom != null && finishto != null){
+            if (finishfrom.isAfter(finishto)) {
+                Utility.displayWarningDialog("Khoảng thời gian không hợp lệ!");
+                return;
+            }
+        }
+
+        if (beginfrom != null && finishto != null){
+            if (beginfrom.isAfter(finishto)) {
+                Utility.displayWarningDialog("Khoảng thời gian không hợp lệ!");
                 return;
             }
         }
 
 
 
-
-        System.out.println(idNK == 0 ? null : idNK);
-        System.out.println(name);
-        System.out.println(beginfrom);
-        System.out.println(beginto);
-
-    final int finalIdNK = idNK;
+        final int finalIdNK = idNK;
         filteredList.setPredicate(cachLyRow -> {
         if (finalIdNK != 0 && cachLyRow.getMaNK() != finalIdNK) return false;
         if (!name.isBlank() && !cachLyRow.getName().contains(name)) return false;
         if (beginfrom != null && cachLyRow.getBeginDate().isBefore(beginfrom)) return false;
-        if (finishto != null && cachLyRow.getBeginDate().isAfter(finishto)) return false;
-        return true;
+        if (beginto != null && cachLyRow.getBeginDate().isAfter(beginto)) return false;
+        if (finishfrom != null && cachLyRow.getFinishDate().isBefore(finishfrom)) return false;
+        if (finishto != null && cachLyRow.getFinishDate().isAfter(finishto)) return false;
+        if (mucdo != null && cachLyRow.getMucdo() != mucdo) return false;
+
+            return true;
     });
 }
 
@@ -130,6 +163,7 @@ public class TimKiemCachLyController implements Initializable {
         dateBeginRangeToCl.setValue(null);
         dateFinishRangeFromCl.setValue(null);
         dateFinishRangeToCl.setValue(null);
+        mucdoClSearch.setValue(null);
         onSearchCl(event);
     }
 }

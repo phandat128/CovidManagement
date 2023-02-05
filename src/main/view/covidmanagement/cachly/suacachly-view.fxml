@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="TOP_CENTER" prefHeight="316.0" prefWidth="502.0" spacing="24.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.cachlycontroller.SuaCachLyController">
+<VBox alignment="TOP_CENTER" prefHeight="381.0" prefWidth="502.0" spacing="24.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.cachlycontroller.SuaCachLyController">
    <children>
       <HBox alignment="CENTER" prefHeight="30.0">
          <children>
@@ -22,7 +17,7 @@
                   <Insets top="3.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="MaNKCl" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="320.0" >
+            <TextField fx:id="MaNKCl" editable="false" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="320.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -39,7 +34,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="nameCl" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="320.0" >
+            <TextField fx:id="nameCl" editable="false" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="320.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -56,7 +51,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <DatePicker fx:id="beginDateCl" prefHeight="30.0" prefWidth="320.0" >
+            <DatePicker fx:id="beginDateCl" prefHeight="30.0" prefWidth="320.0">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>
@@ -70,7 +65,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <DatePicker fx:id="finishDateCl" prefHeight="30.0" prefWidth="320.0" >
+            <DatePicker fx:id="finishDateCl" prefHeight="30.0" prefWidth="320.0">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>
@@ -95,14 +90,25 @@
          </children>
       </HBox>
 
-      <BorderPane prefHeight="42.0" prefWidth="482.0">
-         <center>
-            <Button fx:id="updateButtonCl" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#upDateCl" prefHeight="30.0" prefWidth="100.0" text="Xác Nhận">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-         </center>
-      </BorderPane>
+            <HBox alignment="CENTER" prefWidth="30">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="153.0" text="Mức độ cách ly">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="mucdoCl" prefHeight="30.0" prefWidth="318.0">
+                     <HBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </HBox.margin>
+                  </ChoiceBox>
+               </children>
+            </HBox>
+
+      <Button fx:id="updateButtonCl" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#upDateCl" prefHeight="35.0" prefWidth="100.0" text="Cập nhật">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </VBox>

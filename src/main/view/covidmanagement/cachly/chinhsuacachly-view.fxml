@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.cachlycontroller.ChinhSuaCachLyController">
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.cachlycontroller.ChinhSuaCachLyController">
     <top>
-        <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+        <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="816.0" BorderPane.alignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -74,17 +65,10 @@
                 </HBox>
 
                 <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="3">
-                    <center>
-                        <Button fx:id="searchButtonCl" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSearchCl" text="Tìm kiếm" BorderPane.alignment="CENTER">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Button>
-                    </center>
                <left>
                   <BorderPane prefHeight="42.0" prefWidth="217.0" BorderPane.alignment="CENTER">
                      <right>
-                        <Button mnemonicParsing="false" onAction="#resetAllFieldsCl" prefHeight="35.0" prefWidth="180.0" text="Xóa các mục tìm kiếm" BorderPane.alignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#resetAllFieldsCl" prefHeight="30.0" prefWidth="173.0" text="Xóa các mục tìm kiếm" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -92,17 +76,35 @@
                      </right>
                   </BorderPane>
                </left>
+               <center>
+                        <Button fx:id="searchButtonCl" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSearchCl" text="Tìm kiếm" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+               </center>
+               <right>
+                  <Button fx:id="reloadButtonCl" mnemonicParsing="false" onAction="#reloadCl" prefHeight="30.0" prefWidth="78.0" text="làm mới" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets right="5.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </right>
                 </BorderPane>
                 <TableView fx:id="searchTableCl" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
                     <columns>
                         <TableColumn fx:id="idColumnCl" prefWidth="28.800018310546875" text="STT" />
                         <TableColumn fx:id="idNKColumnCl" prefWidth="60.0" text="Mã NK" />
                         <TableColumn fx:id="nameColumnCl" prefWidth="147.20004272460938" text="Họ tên" />
-                        <TableColumn fx:id="dateBeginColumnCl" prefWidth="109.5999755859375" resizable="false" text="Bắt Đầu" />
-                        <TableColumn fx:id="dateFinishColumnCl" prefWidth="109.5999755859375" resizable="false" text="Kết Thúc" />
-                        <TableColumn fx:id="placeColumnCl" prefWidth="243.20001220703125" resizable="false" text="Địa chỉ Cách Ly" />
-                        <TableColumn fx:id="changeButtonColumnCl" minWidth="0.0" prefWidth="60.800048828125" resizable="false" text="Sửa" />
-                        <TableColumn fx:id="deleteButtonColumnCl" prefWidth="61.599853515625" resizable="false" text="Xóa" />
+                        <TableColumn fx:id="dateBeginColumnCl" prefWidth="91.80000305175781" resizable="false" text="Bắt Đầu" />
+                        <TableColumn fx:id="dateFinishColumnCl" prefWidth="112.20001220703125" resizable="false" text="Kết Thúc" />
+                        <TableColumn fx:id="placeColumnCl" prefWidth="206.4000244140625" resizable="false" text="Địa chỉ Cách Ly" />
+                        <TableColumn fx:id="mucdoColumCl" prefWidth="76.0" resizable="false" text="Mức Độ" />
+                        <TableColumn fx:id="changeButtonColumnCl" minWidth="0.0" prefWidth="45.5999755859375" resizable="false" text="Sửa" />
+                        <TableColumn fx:id="deleteButtonColumnCl" prefWidth="51.20001220703125" resizable="false" text="Xóa" />
                     </columns>
                     <GridPane.margin>
                         <Insets top="20.0" />
@@ -145,6 +147,20 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="146.0" text="Mức độ cách ly">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="mucdoClSearch" prefHeight="29.0" prefWidth="170.0">
+                     <HBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </HBox.margin>
+                  </ChoiceBox>
+               </children>
+            </HBox>
             </children>
         </GridPane>
     </top>

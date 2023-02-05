@@ -27,21 +27,25 @@ public class CachLyModel {
     private LocalDate begindate;
     private LocalDate finishdate;
     private String place;
+
+    private MucDoCachLy mucdo;
+
     private Button changeButton, deleteButton;
 
 
-    public CachLyModel(int maCL, int maNK, LocalDate begindate,LocalDate finishdate, String place) {
+    public CachLyModel(int maCL, int maNK, LocalDate begindate,LocalDate finishdate, String place, MucDoCachLy mucdo) {
         this.maCL = maCL;
         this.maNK = maNK;
-        setNameAndCMND(maNK);
+
         this.begindate = begindate;
         this.finishdate = finishdate;
         this.place = place;
+        this.mucdo = mucdo;
         this.changeButton = new Button("Sửa");
         this.deleteButton = new Button("Xóa");
         changeButton.setOnAction(this::handleChangeClickCl);
-
         deleteButton.setOnAction(this::handleDeleteClickCl);
+        setNameAndCMND(maNK);
     }
         public static List<CachLyModel> getCachLyList(){
             List<CachLyModel> queryList = new ArrayList<>();
@@ -56,7 +60,9 @@ public class CachLyModel {
                     LocalDate _beginDate = rs.getDate("batdau").toLocalDate();
                     LocalDate _finishDate = rs.getDate("ketthuc").toLocalDate();
                     String _place = rs.getString("diadiem");
-                    queryList.add(new CachLyModel(_maCL, _maNK, _beginDate, _finishDate, _place));
+                    MucDoCachLy _mucdo = MucDoCachLy.valueOf(rs.getString("mucdo"));
+
+                    queryList.add(new CachLyModel(_maCL, _maNK, _beginDate, _finishDate, _place, _mucdo));
                 }
                 rs.close();
                 queryDB.close();
@@ -66,29 +72,33 @@ public class CachLyModel {
             return queryList;
         }
 
-        public static void addCl(int MaNK, LocalDate beginDate, LocalDate finishDate, String place) throws SQLException{
+        public static void addCl(int maNK,String name, LocalDate beginDate, LocalDate finishDate, String place, MucDoCachLy mucdo) throws SQLException{
+            NhanKhauModel nhanKhau = NhanKhauModel.getInstanceById(maNK);
+            if (!nhanKhau.getHoTen().equalsIgnoreCase(name)) throw new SQLException("Tên và mã nhân khẩu không trùng khớp");
             QueryDB queryDB = new QueryDB();
             PreparedStatement statement = queryDB.getConnection().prepareStatement(
-                    "INSERT INTO CachLy(manhankhau, batdau, ketthuc, diadiem) VALUES (?, ?, ?, ?);"
+                    "INSERT INTO CachLy(manhankhau, batdau, ketthuc, diadiem, mucdo) VALUES (?, ?, ?, ?, ?);"
             );
-            statement.setInt(1, MaNK);
+            statement.setInt(1, maNK);
             statement.setDate(2, Date.valueOf(beginDate));
             statement.setDate(3, Date.valueOf(finishDate));
             statement.setString(4, place);
+            statement.setString(5, mucdo.toString());
             statement.executeUpdate();
             statement.close();
             queryDB.close();
         }
 
-        public static void updateCl(int maCachLy, LocalDate begindate, LocalDate finishdate, String place) throws SQLException{
+        public static void updateCl(int maCachLy, LocalDate begindate, LocalDate finishdate, String place, MucDoCachLy mucdo) throws SQLException{
             QueryDB queryDB = new QueryDB();
             PreparedStatement statement = queryDB.getConnection().prepareStatement(
-                    "UPDATE CachLy SET (batdau ,ketthuc, diadiem) = (?, ?, ?) WHERE macachly = ?;"
+                    "UPDATE CachLy SET (batdau ,ketthuc, diadiem, mucdo) = (?, ?, ?, ?) WHERE macachly = ?;"
             );
             statement.setDate(1, Date.valueOf(begindate));
-            statement.setDate(1, Date.valueOf(finishdate));
-            statement.setString(2, place);
-            statement.setInt(4, maCachLy);
+            statement.setDate(2, Date.valueOf(finishdate));
+            statement.setString(3, place);
+            statement.setString(4, mucdo.toString());
+            statement.setInt(5, maCachLy);
             statement.executeUpdate();
             statement.close();
             queryDB.close();
@@ -103,6 +113,8 @@ public class CachLyModel {
             System.out.println(begindate);
             System.out.println(finishdate);
             System.out.println(place);
+            System.out.println(mucdo);
+
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("cachly/suacachly-view.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
@@ -110,7 +122,7 @@ public class CachLyModel {
                 stage.setScene(scene);
                 stage.show();
                 SuaCachLyController Controller = fxmlLoader.getController();
-                Controller.setFieldCl ( maCL, maNK, name, begindate, finishdate, place);
+                Controller.setFieldCl(maCL, maNK, name, begindate, finishdate, place, mucdo);
 
             } catch(IOException e){
                 e.printStackTrace();
@@ -135,6 +147,9 @@ public class CachLyModel {
         return place;
     }
 
+    public MucDoCachLy getMucdo() {
+        return mucdo;
+    }
 
     public Button getChangeButton() {
         return changeButton;
@@ -145,6 +160,17 @@ public class CachLyModel {
     }
     private void setNameAndCMND(int maNK){
         //TODO
+        try {
+            NhanKhauModel nhanKhau = NhanKhauModel.getInstanceById(maNK);
+            this.name = nhanKhau.getHoTen();
+            this.cmnd = nhanKhau.getCMNDCCCD();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public enum MucDoCachLy{
+        UNDEFINED, F0, F1, F2, F3
     }
 }
 
