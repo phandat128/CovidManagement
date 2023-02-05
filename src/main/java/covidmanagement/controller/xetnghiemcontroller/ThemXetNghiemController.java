@@ -1,7 +1,6 @@
 package covidmanagement.controller.xetnghiemcontroller;
 
 import covidmanagement.Utility;
-import covidmanagement.model.NhanKhauModel;
 import covidmanagement.model.XetNghiemModel;
 import covidmanagement.model.XetNghiemModel.KetQuaXetNghiem;
 import javafx.collections.FXCollections;
@@ -32,7 +31,7 @@ public class ThemXetNghiemController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         resultField.setItems(FXCollections.observableArrayList(KetQuaXetNghiem.values()));
-        resultField.setValue(KetQuaXetNghiem.UNDEFINED);
+        resultField.setValue(KetQuaXetNghiem.CHƯA_XÁC_ĐỊNH);
         dateField.setValue(LocalDate.now());
         // set date format to DD/MM/yyyy
         dateField.setConverter(new StringConverter<>() {

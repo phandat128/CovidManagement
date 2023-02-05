@@ -156,6 +156,6 @@ public class XetNghiemModel {
     }
 
     public enum KetQuaXetNghiem{
-        POSITIVE, NEGATIVE, UNDEFINED
+        DƯƠNG_TÍNH, ÂM_TÍNH, CHƯA_XÁC_ĐỊNH
     }
 }
