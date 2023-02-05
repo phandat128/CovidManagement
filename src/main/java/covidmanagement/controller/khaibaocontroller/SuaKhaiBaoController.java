@@ -53,6 +53,43 @@ public class SuaKhaiBaoController implements Initializable {
                 saveDeclare.setDisable(false);
             }
         });
+        traceField.textProperty().addListener((observableValue, currentValue, newValue) -> {
+            if (currentValue.isBlank()) return;
+            if (!currentValue.equals(newValue)) {
+                saveDeclare.setDisable(false);
+            }
+        });
+        benhNenField.textProperty().addListener((observableValue, currentValue, newValue) -> {
+            if (currentValue.isBlank()) return;
+            if (!currentValue.equals(newValue)) {
+                saveDeclare.setDisable(false);
+            }
+        });
+        BHYTYes.selectedProperty().addListener((observableValue, currentValue, newValue) -> {
+            if (!currentValue.equals(newValue)) {
+                saveDeclare.setDisable(false);
+            }
+        });
+        symptomYes.selectedProperty().addListener((observableValue, currentValue, newValue) -> {
+            if (!currentValue.equals(newValue)) {
+                saveDeclare.setDisable(false);
+            }
+        });
+        countryContactYes.selectedProperty().addListener((observableValue, currentValue, newValue) -> {
+            if (!currentValue.equals(newValue)) {
+                saveDeclare.setDisable(false);
+            }
+        });
+        covidContactYes.selectedProperty().addListener((observableValue, currentValue, newValue) -> {
+            if (!currentValue.equals(newValue)) {
+                saveDeclare.setDisable(false);
+            }
+        });
+        symptomContactYes.selectedProperty().addListener((observableValue, currentValue, newValue) -> {
+            if (!currentValue.equals(newValue)) {
+                saveDeclare.setDisable(false);
+            }
+        });
     }
     public void setField(int idKB, String declareSpotField, LocalDate declareDate, int nameField, String traceField,
                         boolean BHYT, boolean symptom, boolean covidContact, boolean countryContact, boolean symptomContact,
