@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -10,13 +14,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.ChinhSuaNhanKhauController">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.ChinhSuaNhanKhauController">
    <top>
       <AnchorPane fx:id="chinhsuanhankhauView" maxWidth="-Infinity" prefHeight="440.0" prefWidth="910.0" BorderPane.alignment="CENTER">
           <children>
               <AnchorPane layoutX="0.0" layoutY="350.0" prefHeight="200.0" prefWidth="910.0">
                   <children>
-                      <TableView fx:id="tableNhanKhau" layoutX="16.0" layoutY="-66.0" prefHeight="200.0" prefWidth="880.0" AnchorPane.leftAnchor="16.0">
+                      <TableView fx:id="tableNhanKhau" layoutX="16.0" layoutY="-66.0" prefWidth="880.0" AnchorPane.leftAnchor="16.0">
                           <columns>
                               <TableColumn fx:id="columnid" prefWidth="40.0" text="#" />
                               <TableColumn fx:id="columnMaNhanKhau" prefWidth="105.0" text="Mã Nhân Khẩu" />

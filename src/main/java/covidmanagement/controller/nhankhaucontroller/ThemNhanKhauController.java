@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -119,62 +121,107 @@ public class ThemNhanKhauController implements Initializable {
             }
         }
 
-                String hoVaTen = txtHoVaTen.getText();
+        String hoVaTen = txtHoVaTen.getText();
 
-                String gioiTinh = null;
-                if (gioitinhnam.isSelected()) gioiTinh = "Nam";
-                if (gioitinhnu.isSelected()) gioiTinh = "Nữ";
+        String gioiTinh = null;
+        if (gioitinhnam.isSelected()) gioiTinh = "Nam";
+        if (gioitinhnu.isSelected()) gioiTinh = "Nữ";
 
-                LocalDate ngaySinh = pickerNgaySinh.getValue();
-                String cmnd_CCCD_ = txtCMND_CCCD.getText();
-                String quocTich = txtQuocTich.getText();
-                String tonGiao = txtTonGiao.getText().isBlank() ? "Không" : txtTonGiao.getText();
-                String sDT = txtSDT.getText();
-                String nguyenQuan = txtNguyenQuan.getText();
-                String ngheNghiep = txtNgheNghiep.getText();
-                try{
-                    Integer.parseInt(txtMaHoKhau.getText());
-                }catch(NumberFormatException e){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText("Lỗi: " + e.getMessage() + ".\n" + "Mã nhân khẩu chỉ chứa chữ số. Vui lòng nhập lại!!");
-                    alert.show();
+        LocalDate ngaySinh = pickerNgaySinh.getValue();
+        String cmnd_CCCD_ = txtCMND_CCCD.getText();
+        String quocTich = txtQuocTich.getText();
+        String tonGiao = txtTonGiao.getText().isBlank() ? "Không" : txtTonGiao.getText();
+        String sDT = txtSDT.getText();
+        String nguyenQuan = txtNguyenQuan.getText();
+        String ngheNghiep = txtNgheNghiep.getText();
+        try{
+            Integer.parseInt(txtMaHoKhau.getText());
+        }catch(NumberFormatException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Lỗi: " + e.getMessage() + ".\n" + "Mã nhân khẩu chỉ chứa chữ số. Vui lòng nhập lại!!");
+            alert.show();
+        }
+        int maHoKhau = Integer.parseInt(txtMaHoKhau.getText());
+        String quanHeVoiChuHo;
+
+        // TODO
+        boolean laChuHo;
+        if (lachuho.isSelected()) {
+            laChuHo = true;
+            quanHeVoiChuHo = "Chủ hộ";
+
+        } else {
+            laChuHo = false;
+            quanHeVoiChuHo = txtQuanHeVoiChuHo.getText();
+        }
+
+        if (!HoKhauModel.isExistedHoKhau(maHoKhau)){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText("Mã hộ khẩu chưa tồn tại trong dữ liệu. Bạn có muốn tạo mới?");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK){
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hokhau/themhokhau-view.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load());
+                    Stage stage = new Stage();
+                    ThemHoKhauController controller = fxmlLoader.getController();
+                    controller.setMaHoKhau(maHoKhau);
+                    stage.setTitle("Thêm hộ khẩu mới");
+                    stage.setScene(scene);
+                    stage.showAndWait();
+                } catch (IOException e){
+                    e.printStackTrace();
+                    return;
                 }
-                int maHoKhau = Integer.parseInt(txtMaHoKhau.getText());
-                String quanHeVoiChuHo;
+            } else {
+                return;
+            }
+        }
 
-                // TODO
-                boolean laChuHo;
-                if (lachuho.isSelected()) {
-                    laChuHo = true;
-                    quanHeVoiChuHo = "Chủ hộ";
+        if(NhanKhauModel.isExistedChuHo(maHoKhau) && lachuho.isSelected()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Hộ " + maHoKhau + " đã có chủ hộ");
+            alert.show();
+            return;
+        };
 
-                } else {
-                    laChuHo = false;
-                    quanHeVoiChuHo = txtQuanHeVoiChuHo.getText();
-                }
+        if( txtQuanHeVoiChuHo.getText().equalsIgnoreCase("con") || txtQuanHeVoiChuHo.getText().equalsIgnoreCase("cháu")){
+            List<String> S = NhanKhauModel.getQHVCHByMaHK(maHoKhau);
 
-                if (!HoKhauModel.isExistedHoKhau(maHoKhau)){
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setHeaderText("Mã hộ khẩu chưa tồn tại trong dữ liệu. Bạn có muốn tạo mới?");
-                    alert.showAndWait();
-                    if (alert.getResult() == ButtonType.OK){
-                        try {
-                            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hokhau/themhokhau-view.fxml"));
-                            Scene scene = new Scene(fxmlLoader.load());
-                            Stage stage = new Stage();
-                            ThemHoKhauController controller = fxmlLoader.getController();
-                            controller.setMaHoKhau(maHoKhau);
-                            stage.setTitle("Thêm hộ khẩu mới");
-                            stage.setScene(scene);
-                            stage.showAndWait();
-                        } catch (IOException e){
-                            e.printStackTrace();
-                            return;
-                        }
-                    } else {
+            for(String s:S) {
+                if(s.equalsIgnoreCase("con") || s.equalsIgnoreCase("cháu")){
+                    //khong lam gi>
+                }else {
+                    LocalDate ns = NhanKhauModel.getNgaySinhByQuanHe(maHoKhau, s);
+                    if (ngaySinh.isBefore(ns)) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setHeaderText("Vui lòng kiểm tra lại ngày sinh của " + quanHeVoiChuHo + ".");
+                        alert.show();
                         return;
                     }
                 }
+            }
+        }
+
+        if( txtQuanHeVoiChuHo.getText().equalsIgnoreCase("bố") || txtQuanHeVoiChuHo.getText().equalsIgnoreCase("mẹ")){
+            List<String> S = NhanKhauModel.getQHVCHByMaHK(maHoKhau);
+
+            for(String s:S) {
+                if(s.equalsIgnoreCase("bố") || s.equalsIgnoreCase("mẹ")){
+                    //khong lam gi>
+                }else {
+                    LocalDate ns = NhanKhauModel.getNgaySinhByQuanHe(maHoKhau, s);
+                    if (ngaySinh.isAfter(ns)) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setHeaderText("Vui lòng kiểm tra lại ngày sinh của " + quanHeVoiChuHo + ".");
+                        alert.show();
+                        return;
+                    }
+                }
+            }
+        }
+
+
                 NhanKhauModel.addNhanKhau(hoVaTen, gioiTinh, ngaySinh, cmnd_CCCD_, quocTich, tonGiao,
                         sDT, nguyenQuan, ngheNghiep, maHoKhau, laChuHo, quanHeVoiChuHo);
             }
