@@ -1,13 +1,19 @@
 package covidmanagement.controller.nhankhaucontroller;
 
+import covidmanagement.Main;
 import covidmanagement.Utility;
+import covidmanagement.controller.hokhaucontroller.ThemHoKhauController;
+import covidmanagement.model.HoKhauModel;
 import covidmanagement.model.NhanKhauModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -169,6 +175,28 @@ public class SuaNhanKhauController implements Initializable  {
                 } else {
                         laChuHo = false;
                         quanHeVoiChuHo = txtQuanHeVoiChuHo.getText();
+                }
+                if (!HoKhauModel.isExistedHoKhau(maHoKhau)){
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setHeaderText("Mã hộ khẩu chưa tồn tại trong dữ liệu. Bạn có muốn tạo mới?");
+                        alert.showAndWait();
+                        if (alert.getResult() == ButtonType.OK){
+                                try {
+                                        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hokhau/themhokhau-view.fxml"));
+                                        Scene scene = new Scene(fxmlLoader.load());
+                                        Stage stage = new Stage();
+                                        ThemHoKhauController controller = fxmlLoader.getController();
+                                        controller.setMaHoKhau(maHoKhau);
+                                        stage.setTitle("Thêm hộ khẩu mới");
+                                        stage.setScene(scene);
+                                        stage.showAndWait();
+                                } catch (IOException e){
+                                        e.printStackTrace();
+                                        return;
+                                }
+                        } else {
+                                return;
+                        }
                 }
                 NhanKhauModel.updateNhanKhau(maNhanKhau, hoVaTen, gioiTinh, ngaySinh, cmnd_CCCD_, quocTich, tonGiao,
                                         sDT, nguyenQuan, ngheNghiep, maHoKhau, laChuHo, quanHeVoiChuHo, ghiChu);

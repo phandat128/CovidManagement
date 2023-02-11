@@ -22,7 +22,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                        <TextField fx:id="txtMaNhanKhau" prefHeight="40.0" prefWidth="305.0">
+                        <TextField fx:id="txtMaNhanKhau" editable="false" prefHeight="40.0" prefWidth="305.0">
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>
@@ -43,7 +43,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                        <TextField fx:id="txtHoVaTen" prefHeight="40.0" prefWidth="305.0">
+                        <TextField fx:id="txtHoVaTen" editable="false" prefHeight="40.0" prefWidth="305.0">
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>
@@ -61,7 +61,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                        <DatePicker fx:id="pickerNgaySinh" prefHeight="40.0" prefWidth="305.0">
+                        <DatePicker fx:id="pickerNgaySinh" editable="false" prefHeight="40.0" prefWidth="305.0">
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin></DatePicker>
@@ -76,7 +76,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <RadioButton fx:id="gioitinhnam" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Nam">
+                  <RadioButton fx:id="gioitinhnam" disable="true" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Nam">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -84,7 +84,7 @@
                         <ToggleGroup fx:id="GioiTinh" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="gioitinhnu" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Nữ" toggleGroup="$GioiTinh">
+                  <RadioButton fx:id="gioitinhnu" disable="true" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Nữ" toggleGroup="$GioiTinh">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -100,7 +100,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                        <TextField fx:id="txtCMND_CCCD" prefHeight="40.0" prefWidth="305.0">
+                        <TextField fx:id="txtCMND_CCCD" editable="false" prefHeight="40.0" prefWidth="305.0">
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>
@@ -118,7 +118,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                        <TextField fx:id="txtQuocTich" prefHeight="40.0" prefWidth="305.0">
+                        <TextField fx:id="txtQuocTich" editable="false" prefHeight="40.0" prefWidth="305.0">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
@@ -136,7 +136,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                        <TextField fx:id="txtTonGiao" prefHeight="40.0" prefWidth="305.0">
+                        <TextField fx:id="txtTonGiao" editable="false" prefHeight="40.0" prefWidth="305.0">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
@@ -155,7 +155,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                        <TextField fx:id="txtSDT" prefHeight="40.0" prefWidth="305.0">
+                        <TextField fx:id="txtSDT" editable="false" prefHeight="40.0" prefWidth="305.0">
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>
@@ -173,7 +173,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                        <TextField fx:id="txtNguyenQuan" prefHeight="40.0" prefWidth="305.0">
+                        <TextField fx:id="txtNguyenQuan" editable="false" prefHeight="40.0" prefWidth="305.0">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
@@ -188,7 +188,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                        <TextField fx:id="txtNgheNghiep" prefHeight="40.0" prefWidth="305.0">
+                        <TextField fx:id="txtNgheNghiep" editable="false" prefHeight="40.0" prefWidth="305.0">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
@@ -203,7 +203,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                        <TextField fx:id="txtMaHoKhau" prefHeight="40.0" prefWidth="305.0">
+                        <TextField fx:id="txtMaHoKhau" editable="false" prefHeight="40.0" prefWidth="305.0">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
@@ -218,11 +218,11 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                        <RadioButton fx:id="lachuhoco" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Có">
+                        <RadioButton fx:id="lachuhoco" disable="true" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Có">
                      <font>
                         <Font size="14.0" />
                      </font></RadioButton>
-                        <RadioButton fx:id="lachuhokhong" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Không">
+                        <RadioButton fx:id="lachuhokhong" disable="true" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Không">
                      <font>
                         <Font size="14.0" />
                      </font></RadioButton>
@@ -237,7 +237,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                        <TextField fx:id="txtQuanHeVoiChuHo" prefHeight="40.0" prefWidth="305.0">
+                        <TextField fx:id="txtQuanHeVoiChuHo" editable="false" prefHeight="40.0" prefWidth="305.0">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
@@ -253,7 +253,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtGhiChu" prefHeight="40.0" prefWidth="305.0">
+                  <TextField fx:id="txtGhiChu" editable="false" prefHeight="40.0" prefWidth="305.0">
                      <font>
                         <Font size="14.0" />
                      </font>
