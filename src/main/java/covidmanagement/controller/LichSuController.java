@@ -54,6 +54,8 @@ public class LichSuController implements Initializable {
         for (CheckBox checkBox: checkBoxList){
             checkBox.selectedProperty().addListener((observableValue, oldValue, newValue) -> onSearch());
         }
+
+        lichSuTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     private void onSearch(){

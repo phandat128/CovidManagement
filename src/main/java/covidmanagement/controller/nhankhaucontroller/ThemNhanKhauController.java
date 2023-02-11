@@ -31,7 +31,7 @@ public class ThemNhanKhauController implements Initializable {
     private Button btnThem;
 
     @FXML
-    private TextField txtMaNhanKhau, txtHoVaTen, txtCMND_CCCD, txtQuocTich, txtTonGiao, txtSDT, txtNguyenQuan, txtNgheNghiep, txtMaHoKhau, txtQuanHeVoiChuHo;
+    private TextField txtMaNhanKhau, txtHoVaTen, txtCMND_CCCD, txtQuocTich, txtTonGiao, txtSDT, txtNguyenQuan, txtNgheNghiep, txtMaHoKhau, txtQuanHeVoiChuHo, txtGhiChu;
 
     @FXML
     private DatePicker pickerNgaySinh;
@@ -128,6 +128,7 @@ public class ThemNhanKhauController implements Initializable {
                 String sDT = txtSDT.getText();
                 String nguyenQuan = txtNguyenQuan.getText();
                 String ngheNghiep = txtNgheNghiep.getText();
+                String ghiChu = txtGhiChu.getText();
                 try{
                     Integer.parseInt(txtMaHoKhau.getText());
                 }catch(NumberFormatException e){
@@ -172,7 +173,7 @@ public class ThemNhanKhauController implements Initializable {
                     }
                 }
                 NhanKhauModel.addNhanKhau(hoVaTen, gioiTinh, ngaySinh, cmnd_CCCD_, quocTich, tonGiao,
-                        sDT, nguyenQuan, ngheNghiep, maHoKhau, laChuHo, quanHeVoiChuHo);
+                        sDT, nguyenQuan, ngheNghiep, maHoKhau, laChuHo, quanHeVoiChuHo, ghiChu);
             }
 
     @FXML
@@ -195,7 +196,7 @@ public class ThemNhanKhauController implements Initializable {
         lachuho.setSelected(true);
         khonglachuho.setSelected(false);
         txtQuanHeVoiChuHo.setText("");
-
+        txtGhiChu.setText("");
 
     }
 }

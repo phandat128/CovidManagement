@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.ThemNhanKhauController">
+<BorderPane stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.ThemNhanKhauController">
    <center>
       <AnchorPane fx:id="themnhankhauView" maxWidth="-Infinity" prefWidth="900.0" BorderPane.alignment="CENTER">
           <children>
@@ -168,7 +168,7 @@
                       </HBox>
                   </children>
               </VBox>
-              <VBox layoutX="470.0" layoutY="73.0" prefHeight="300.0" prefWidth="440.0">
+              <VBox layoutX="470.0" layoutY="73.0" prefHeight="344.0" prefWidth="440.0">
                   <children>
                       <HBox prefHeight="40.0" prefWidth="455.0">
                           <children>
@@ -280,6 +280,23 @@
                         <Insets right="15.0" top="10.0" />
                      </VBox.margin>
                       </HBox>
+                  <HBox layoutX="10.0" layoutY="161.0" prefHeight="40.0" prefWidth="455.0">
+                     <children>
+                        <Label prefHeight="40.0" prefWidth="150.0" text="Ghi chú">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtGhiChu" prefHeight="40.0" prefWidth="305.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets right="15.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
                   </children>
               </VBox>
               <Button fx:id="btnThem" layoutX="567.0" layoutY="439.0" mnemonicParsing="false" onAction="#addActionevent" prefHeight="40.0" prefWidth="150.0" text="Thêm">

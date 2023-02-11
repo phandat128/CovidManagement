@@ -22,7 +22,7 @@ public class XemNhanKhauController implements Initializable {
 
     @FXML
     private TextField txtHoVaTen, txtQuocTich, txtSDT, txtQuanHeVoiChuHo, txtCMND_CCCD, txtMaHoKhau,
-            txtMaNhanKhau, txtNguyenQuan, txtNgheNghiep, txtTonGiao;
+            txtMaNhanKhau, txtNguyenQuan, txtNgheNghiep, txtTonGiao, txtGhiChu;
 
     @FXML
     private DatePicker pickerNgaySinh;
@@ -41,7 +41,7 @@ public class XemNhanKhauController implements Initializable {
 
     public void setField(int maNhanKhau, String hoVaTen, String gioiTinh, LocalDate ngaySinh, String cmnd_CCCD_,
                          String quocTich, String tonGiao, String sDT, String nguyenQuan, String ngheNghiep,
-                         int maHoKhau, Boolean laChuHo, String quanHeVoiChuHo){
+                         int maHoKhau, Boolean laChuHo, String quanHeVoiChuHo, String ghiChu){
 
         txtMaNhanKhau.setText(String.valueOf(maNhanKhau));
         txtHoVaTen.setText(hoVaTen);
@@ -62,6 +62,7 @@ public class XemNhanKhauController implements Initializable {
         else lachuhokhong.setSelected(true);
 
         txtQuanHeVoiChuHo.setText(quanHeVoiChuHo);
+        txtGhiChu.setText(ghiChu);
     }
 
     @FXML

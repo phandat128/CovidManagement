@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="suanhankhauView" prefHeight="440.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.SuaNhanKhauController">
+<AnchorPane fx:id="suanhankhauView" prefHeight="440.0" prefWidth="910.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.nhankhaucontroller.SuaNhanKhauController">
    <children>
       <VBox layoutX="15.0" layoutY="14.0" prefHeight="350.0" prefWidth="440.0">
          <children>
@@ -147,7 +147,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="469.0" layoutY="14.0" prefHeight="300.0" prefWidth="440.0">
+      <VBox layoutX="469.0" layoutY="14.0" prefHeight="341.0" prefWidth="440.0">
          <children>
             <HBox prefHeight="40.0" prefWidth="455.0">
                <children>
@@ -244,6 +244,23 @@
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
+               </children>
+               <VBox.margin>
+                  <Insets right="15.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="111.0" prefHeight="40.0" prefWidth="455.0">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="150.0" text="Ghi chú">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtGhiChu" prefHeight="40.0" prefWidth="305.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
                </children>
                <VBox.margin>
                   <Insets right="15.0" top="10.0" />

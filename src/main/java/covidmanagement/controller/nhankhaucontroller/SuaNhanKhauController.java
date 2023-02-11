@@ -21,7 +21,7 @@ public class SuaNhanKhauController implements Initializable  {
 
         @FXML
         private TextField txtHoVaTen, txtMaNhanKhau, txtTonGiao, txtNguyenQuan, txtNgheNghiep, txtQuocTich,
-                txtSDT, txtQuanHeVoiChuHo, txtCMND_CCCD, txtMaHoKhau;
+                txtSDT, txtQuanHeVoiChuHo, txtCMND_CCCD, txtMaHoKhau, txtGhiChu;
         @FXML
         private DatePicker pickerNgaySinh;
 
@@ -35,7 +35,7 @@ public class SuaNhanKhauController implements Initializable  {
 
         public void setField(int maNhanKhau, String hoVaTen, String gioiTinh, LocalDate ngaySinh, String cmnd_CCCD_,
                              String quocTich, String tonGiao, String sDT, String nguyenQuan, String ngheNghiep,
-                             int maHoKhau, Boolean laChuHo, String quanHeVoiChuHo){
+                             int maHoKhau, Boolean laChuHo, String quanHeVoiChuHo, String ghiChu){
 
                 txtMaNhanKhau.setText(String.valueOf(maNhanKhau));
                 txtMaNhanKhau.setDisable(true);
@@ -57,6 +57,7 @@ public class SuaNhanKhauController implements Initializable  {
                 else lachuhokhong.setSelected(true);
 
                 txtQuanHeVoiChuHo.setText(quanHeVoiChuHo);
+                txtGhiChu.setText(ghiChu);
         }
 
         @FXML
@@ -147,6 +148,7 @@ public class SuaNhanKhauController implements Initializable  {
                 String sDT = txtSDT.getText();
                 String nguyenQuan = txtNguyenQuan.getText();
                 String ngheNghiep = txtNgheNghiep.getText();
+                String ghiChu = txtGhiChu.getText();
 
 //                try{
 //                        Integer.parseInt(txtMaHoKhau.getText());
@@ -169,7 +171,7 @@ public class SuaNhanKhauController implements Initializable  {
                         quanHeVoiChuHo = txtQuanHeVoiChuHo.getText();
                 }
                 NhanKhauModel.updateNhanKhau(maNhanKhau, hoVaTen, gioiTinh, ngaySinh, cmnd_CCCD_, quocTich, tonGiao,
-                                        sDT, nguyenQuan, ngheNghiep, maHoKhau, laChuHo, quanHeVoiChuHo);
+                                        sDT, nguyenQuan, ngheNghiep, maHoKhau, laChuHo, quanHeVoiChuHo, ghiChu);
         }
 
         @FXML

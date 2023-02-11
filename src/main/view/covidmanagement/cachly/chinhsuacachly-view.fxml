@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.cachlycontroller.ChinhSuaCachLyController">
+<BorderPane stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.cachlycontroller.ChinhSuaCachLyController">
     <top>
         <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="816.0" BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -104,7 +104,7 @@
                   </Button>
                </right>
                 </BorderPane>
-                <TableView fx:id="searchTableCl" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../css/style.css" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                <TableView fx:id="searchTableCl" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
                     <columns>
                         <TableColumn fx:id="idColumnCl" prefWidth="28.800018310546875" text="STT" />
                         <TableColumn fx:id="idNKColumnCl" prefWidth="60.0" text="Mã NK" />
