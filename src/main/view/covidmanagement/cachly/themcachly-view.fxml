@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="374.0" prefWidth="504.0" spacing="24.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.cachlycontroller.ThemCachLyController">
+<VBox stylesheets="@../../css/style.css" alignment="TOP_CENTER" prefHeight="374.0" prefWidth="504.0" spacing="24.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.cachlycontroller.ThemCachLyController">
     <children>
       <Label text="KHAI BÁO CÁCH LY Y TẾ">
          <font>

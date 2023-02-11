@@ -25,7 +25,8 @@ import java.util.ResourceBundle;
 public class TimKiemNhanKhauController implements Initializable {
 
     @FXML
-    private TableColumn<NhanKhauModel, String> columnHoVaTen, columnGioiTinh, columnNgheNghiep, columnCMND_CCCD, columnSDT, columnNgaySinh;
+    private TableColumn<NhanKhauModel, String> columnHoVaTen, columnGioiTinh, columnNgheNghiep, columnCMND_CCCD,
+                                                columnSDT, columnNgaySinh, columnGhiChu;
 
     @FXML
     private TableColumn<NhanKhauModel, Integer> columnMaNhanKhau, columnMaChuHo, columnid;
@@ -59,6 +60,7 @@ public class TimKiemNhanKhauController implements Initializable {
         columnCMND_CCCD.setCellValueFactory(new PropertyValueFactory<>("CMNDCCCD"));
         columnNgheNghiep.setCellValueFactory(new PropertyValueFactory<>("NgheNghiep"));
         columnMaChuHo.setCellValueFactory(new PropertyValueFactory<>("MaHoKhau"));
+        columnGhiChu.setCellValueFactory(new PropertyValueFactory<>("GhiChu"));
 
         columnid.setCellValueFactory(
                 cellDataFeatures -> new ReadOnlyObjectWrapper<>(
@@ -90,6 +92,7 @@ public class TimKiemNhanKhauController implements Initializable {
             int machuho = nhankhau.getMaHoKhau();
             Boolean lachuho = nhankhau.getLaChuHo();
             String quanhevoichuho = nhankhau.getQuanHeVoiChuHo();
+            String ghiChu = nhankhau.getGhiChu();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("nhankhau/xemnhankhau-view.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
@@ -99,7 +102,7 @@ public class TimKiemNhanKhauController implements Initializable {
                 stage.show();
                 XemNhanKhauController controller = fxmlLoader.getController();
                 controller.setField(manhankhau, hoten, gioitinh, ngaysinh, cmnd, quoctich, tongiao, sdt, nguyenquan,
-                        nghenghiep, machuho, lachuho, quanhevoichuho);
+                        nghenghiep, machuho, lachuho, quanhevoichuho, ghiChu);
             } catch (IOException e) {
                 e.printStackTrace();
             }

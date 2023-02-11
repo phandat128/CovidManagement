@@ -4,6 +4,7 @@ import covidmanagement.Main;
 import covidmanagement.Utility;
 import covidmanagement.model.KhaiBaoModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -69,7 +70,7 @@ public class ChinhSuaKhaiBaoController implements Initializable {
         dateRangeFrom.setConverter(Utility.LOCAL_DATE_CONVERTER);
         dateRangeTo.setConverter(Utility.LOCAL_DATE_CONVERTER);
 
-        trieuchungColumn.setCellValueFactory(new PropertyValueFactory<>("trieuChung"));
+        trieuchungColumn.setCellValueFactory(trieuchung -> new SimpleStringProperty(trieuchung.getValue().isTrieuChung() ? "Có" : "Không"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("maNhanKhau"));
         declareDateColumn.setCellValueFactory(new PropertyValueFactory<>("ngayKhaiBao"));
         declareSpotColumn.setCellValueFactory(new PropertyValueFactory<>("diemKhaiBao"));

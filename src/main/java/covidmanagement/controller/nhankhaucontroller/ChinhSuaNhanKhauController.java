@@ -33,7 +33,7 @@ public class ChinhSuaNhanKhauController implements Initializable {
     @FXML
     private TableView<NhanKhauModel> tableNhanKhau;
     @FXML
-    private TableColumn<NhanKhauModel, String> columnHoVaTen, columnNgheNghiep, columnCMND_CCCD, columnGioiTinh, columnNgaySinh, columnSDT;
+    private TableColumn<NhanKhauModel, String> columnHoVaTen, columnNgheNghiep, columnCMND_CCCD, columnGioiTinh, columnNgaySinh, columnSDT, columnGhiChu;
     @FXML
     private TableColumn<NhanKhauModel, Integer> columnMaChuHo,columnMaNhanKhau, columnid;
     @FXML
@@ -58,6 +58,7 @@ public class ChinhSuaNhanKhauController implements Initializable {
         columnCMND_CCCD.setCellValueFactory(new PropertyValueFactory<>("CMNDCCCD"));
         columnNgheNghiep.setCellValueFactory(new PropertyValueFactory<>("NgheNghiep"));
         columnMaChuHo.setCellValueFactory(new PropertyValueFactory<>("MaHoKhau"));
+        columnGhiChu.setCellValueFactory(new PropertyValueFactory<>("ghichu"));
 
         columnid.setCellValueFactory(
                 cellDataFeatures -> new ReadOnlyObjectWrapper<>(
@@ -188,6 +189,7 @@ public class ChinhSuaNhanKhauController implements Initializable {
             int machuho = nhankhau.getMaHoKhau();
             Boolean lachuho = nhankhau.getLaChuHo();
             String quanhevoichuho = nhankhau.getQuanHeVoiChuHo();
+            String ghiChu = nhankhau.getGhiChu();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("nhankhau/suanhankhau-view.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
@@ -197,7 +199,7 @@ public class ChinhSuaNhanKhauController implements Initializable {
                 stage.show();
                 SuaNhanKhauController controller = fxmlLoader.getController();
                 controller.setField(manhankhau, hoten, gioitinh, ngaysinh, cmnd, quoctich, tongiao, sdt, nguyenquan,
-                        nghenghiep, machuho, lachuho, quanhevoichuho);
+                        nghenghiep, machuho, lachuho, quanhevoichuho, ghiChu);
             } catch (IOException e) {
                 e.printStackTrace();
             }

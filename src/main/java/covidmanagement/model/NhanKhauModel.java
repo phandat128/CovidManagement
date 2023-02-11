@@ -27,9 +27,10 @@ public class NhanKhauModel {
     private int MaHoKhau;
     private Boolean LaChuHo;
     private String QuanHeVoiChuHo;
+    private String ghiChu;
 
     public NhanKhauModel(int MaNhanKhau, String HoTen, LocalDate NgaySinh, String GioiTinh, String CMNDCCCD, String SDT,
-                         String QuocTich, String TonGiao, String NguyenQuan, int MaHoKhau, Boolean LaChuHo, String QuanHeVoiChuHo, String NgheNghiep){
+                         String QuocTich, String TonGiao, String NguyenQuan, int MaHoKhau, Boolean LaChuHo, String QuanHeVoiChuHo, String NgheNghiep, String ghiChu){
         this.MaNhanKhau = MaNhanKhau;
         this.HoTen = HoTen;
         this.NgaySinh = NgaySinh;
@@ -43,6 +44,7 @@ public class NhanKhauModel {
         this.LaChuHo = LaChuHo;
         this.QuanHeVoiChuHo = QuanHeVoiChuHo;
         this.NgheNghiep = NgheNghiep;
+        this.ghiChu = ghiChu;
     }
 
     public static List<NhanKhauModel> getNhanKhauList(){
@@ -66,8 +68,9 @@ public class NhanKhauModel {
                 Boolean _laChuHo = rs.getBoolean("lachuho");
                 String _quanHeVoiChuHo = rs.getString("quanhevoichuho");
                 String _ngheNghiep = rs.getString("nghenghiep");
+                String _ghiChu = rs.getString("ghichu");
                 NhanKhauList.add(new NhanKhauModel(_maNhanKhau, _hoVaTen, _ngaySinh, _gioiTinh, _cmnd_CCCD_, _sDT, _quocTich,
-                        _tonGiao, _nguyenQuan, _maHoKhau, _laChuHo, _quanHeVoiChuHo, _ngheNghiep));
+                        _tonGiao, _nguyenQuan, _maHoKhau, _laChuHo, _quanHeVoiChuHo, _ngheNghiep, _ghiChu));
 
             }
             rs.close();
@@ -80,13 +83,13 @@ public class NhanKhauModel {
 
     public static void addNhanKhau( String hoVaTen, String gioiTinh, LocalDate ngaySinh, String cmnd_CCCD_,
                                    String quocTich, String tonGiao, String sDT, String nguyenQuan, String ngheNghiep,
-                                   int maHoKhau, Boolean laChuHo, String quanHeVoiChuHo) throws SQLException {
+                                   int maHoKhau, Boolean laChuHo, String quanHeVoiChuHo, String ghiChu) throws SQLException {
         PreparedStatement preparedStatement = null;
         QueryDB queryDB = null;
         try {
             queryDB = new QueryDB();
             preparedStatement = queryDB.getConnection().prepareStatement(
-                    "INSERT INTO nhankhau(hoten, ngaysinh, gioitinh, cmnd_cccd, sdt, quoctich, tongiao, nguyenquan, mahokhau, lachuho, quanhevoichuho, nghenghiep) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"
+                    "INSERT INTO nhankhau(hoten, ngaysinh, gioitinh, cmnd_cccd, sdt, quoctich, tongiao, nguyenquan, mahokhau, lachuho, quanhevoichuho, nghenghiep, ghichu) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)"
             );
             preparedStatement.setString(1, hoVaTen);
             preparedStatement.setDate(2, Date.valueOf(ngaySinh));
@@ -100,6 +103,7 @@ public class NhanKhauModel {
             preparedStatement.setBoolean(10, laChuHo);
             preparedStatement.setString(11, quanHeVoiChuHo);
             preparedStatement.setString(12, ngheNghiep);
+            preparedStatement.setString(13, ghiChu);
 
             int result = preparedStatement.executeUpdate();
             if (result == 1) {
@@ -125,14 +129,14 @@ public class NhanKhauModel {
 
     public static void updateNhanKhau(int maNhanKhau, String hoVaTen, String gioiTinh, LocalDate ngaySinh, String cmnd_CCCD_,
                                       String quocTich, String tonGiao, String sDT, String nguyenQuan, String ngheNghiep,
-                                      int maHoKhau, Boolean laChuHo, String quanHeVoiChuHo) throws SQLException {
+                                      int maHoKhau, Boolean laChuHo, String quanHeVoiChuHo, String ghiChu) throws SQLException {
         PreparedStatement preparedStatement = null;
         QueryDB queryDB = null;
         try {
             queryDB = new QueryDB();
             preparedStatement = queryDB.getConnection().prepareStatement(
                     "UPDATE nhankhau SET (hoten, ngaysinh, gioitinh, cmnd_cccd, sdt, quoctich, tongiao, " +
-                            "nguyenquan, mahokhau, lachuho, quanhevoichuho, nghenghiep) = (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " +
+                            "nguyenquan, mahokhau, lachuho, quanhevoichuho, nghenghiep, ghiChu) = (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " +
                             "WHERE manhankhau = ?;"
             );
             preparedStatement.setString(1, hoVaTen);
@@ -147,7 +151,8 @@ public class NhanKhauModel {
             preparedStatement.setBoolean(10, laChuHo);
             preparedStatement.setString(11, quanHeVoiChuHo);
             preparedStatement.setString(12, ngheNghiep);
-            preparedStatement.setInt(13, maNhanKhau);
+            preparedStatement.setString(13, ghiChu);
+            preparedStatement.setInt(14, maNhanKhau);
             int result = preparedStatement.executeUpdate();
             if (result == 1) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -215,8 +220,9 @@ public class NhanKhauModel {
         Boolean _laChuHo = rs.getBoolean("lachuho");
         String _quanHeVoiChuHo = rs.getString("quanhevoichuho");
         String _ngheNghiep = rs.getString("nghenghiep");
+        String _ghiChu = rs.getString("ghichu");
         return new NhanKhauModel(_maNhanKhau, _hoVaTen, _ngaySinh, _gioiTinh, _cmnd_CCCD_, _sDT, _quocTich,
-                _tonGiao, _nguyenQuan, _maHoKhau, _laChuHo, _quanHeVoiChuHo, _ngheNghiep);
+                _tonGiao, _nguyenQuan, _maHoKhau, _laChuHo, _quanHeVoiChuHo, _ngheNghiep, _ghiChu);
     }
 
     public static List<NhanKhauModel> getNhanKhauListByMaHK(int maHoKhau) throws SQLException{
@@ -238,8 +244,9 @@ public class NhanKhauModel {
             Boolean _laChuHo = rs.getBoolean("lachuho");
             String _quanHeVoiChuHo = rs.getString("quanhevoichuho");
             String _ngheNghiep = rs.getString("nghenghiep");
+            String _ghiChu = rs.getString("ghichu");
             nhanKhauList.add(new NhanKhauModel(_maNhanKhau, _hoVaTen, _ngaySinh, _gioiTinh, _cmnd_CCCD_, _sDT, _quocTich,
-                    _tonGiao, _nguyenQuan, _maHoKhau, _laChuHo, _quanHeVoiChuHo, _ngheNghiep));
+                    _tonGiao, _nguyenQuan, _maHoKhau, _laChuHo, _quanHeVoiChuHo, _ngheNghiep, _ghiChu));
         }
         return nhanKhauList;
     }
@@ -378,5 +385,9 @@ public class NhanKhauModel {
     }
     public void setQuanHeVoiChuHo(String QuanHeVoiChuHo) {
         this.QuanHeVoiChuHo = QuanHeVoiChuHo;
+    }
+
+    public String getGhiChu() {
+        return ghiChu;
     }
 }

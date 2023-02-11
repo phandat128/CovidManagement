@@ -33,7 +33,7 @@ public class ThemNhanKhauController implements Initializable {
     private Button btnThem;
 
     @FXML
-    private TextField txtMaNhanKhau, txtHoVaTen, txtCMND_CCCD, txtQuocTich, txtTonGiao, txtSDT, txtNguyenQuan, txtNgheNghiep, txtMaHoKhau, txtQuanHeVoiChuHo;
+    private TextField txtMaNhanKhau, txtHoVaTen, txtCMND_CCCD, txtQuocTich, txtTonGiao, txtSDT, txtNguyenQuan, txtNgheNghiep, txtMaHoKhau, txtQuanHeVoiChuHo, txtGhiChu;
 
     @FXML
     private DatePicker pickerNgaySinh;
@@ -123,6 +123,7 @@ public class ThemNhanKhauController implements Initializable {
         if (gioitinhnam.isSelected()) gioiTinh = "Nam";
         if (gioitinhnu.isSelected()) gioiTinh = "Nữ";
 
+//<<<<<<< HEAD
         LocalDate ngaySinh = pickerNgaySinh.getValue();
         String cmnd_CCCD_ = txtCMND_CCCD.getText();
         String quocTich = txtQuocTich.getText();
@@ -130,6 +131,7 @@ public class ThemNhanKhauController implements Initializable {
         String sDT = txtSDT.getText();
         String nguyenQuan = txtNguyenQuan.getText();
         String ngheNghiep = txtNgheNghiep.getText();
+        String ghiChu = txtGhiChu.getText();
         try{
             Integer.parseInt(txtMaHoKhau.getText());
         }catch(NumberFormatException e){
@@ -168,6 +170,22 @@ public class ThemNhanKhauController implements Initializable {
                 } catch (IOException e){
                     e.printStackTrace();
                     return;
+//=======
+//                LocalDate ngaySinh = pickerNgaySinh.getValue();
+//                String cmnd_CCCD_ = txtCMND_CCCD.getText();
+//                String quocTich = txtQuocTich.getText();
+//                String tonGiao = txtTonGiao.getText().isBlank() ? "Không" : txtTonGiao.getText();
+//                String sDT = txtSDT.getText();
+//                String nguyenQuan = txtNguyenQuan.getText();
+//                String ngheNghiep = txtNgheNghiep.getText();
+//                String ghiChu = txtGhiChu.getText();
+//                try{
+//                    Integer.parseInt(txtMaHoKhau.getText());
+//                }catch(NumberFormatException e){
+//                    Alert alert = new Alert(Alert.AlertType.ERROR);
+//                    alert.setHeaderText("Lỗi: " + e.getMessage() + ".\n" + "Mã nhân khẩu chỉ chứa chữ số. Vui lòng nhập lại!!");
+//                    alert.show();
+//>>>>>>> main
                 }
             } else {
                 return;
@@ -219,7 +237,7 @@ public class ThemNhanKhauController implements Initializable {
 
 
                 NhanKhauModel.addNhanKhau(hoVaTen, gioiTinh, ngaySinh, cmnd_CCCD_, quocTich, tonGiao,
-                        sDT, nguyenQuan, ngheNghiep, maHoKhau, laChuHo, quanHeVoiChuHo);
+                        sDT, nguyenQuan, ngheNghiep, maHoKhau, laChuHo, quanHeVoiChuHo, ghiChu);
             }
 
     @FXML
@@ -242,7 +260,7 @@ public class ThemNhanKhauController implements Initializable {
         lachuho.setSelected(true);
         khonglachuho.setSelected(false);
         txtQuanHeVoiChuHo.setText("");
-
+        txtGhiChu.setText("");
 
     }
 }
