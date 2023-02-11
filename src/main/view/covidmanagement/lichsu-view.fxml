@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.LichSuController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="67.0" spacing="20.0">
+         <children>
+            <Label text="Lịch sử thay đổi về">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="selectAll" mnemonicParsing="false" selected="true" text="Tất cả">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="selectHoKhau" mnemonicParsing="false" selected="true" text="Hộ khẩu">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="selectNhanKhau" mnemonicParsing="false" selected="true" text="Nhân khẩu">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="selectKhaiBao" mnemonicParsing="false" selected="true" text="Khai báo">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="selectXetNghiem" mnemonicParsing="false" selected="true" text="Xét nghiệm">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="selectCachLy" mnemonicParsing="false" selected="true" text="Cách ly">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </HBox>
+      <TableView fx:id="lichSuTable" maxWidth="-Infinity" prefHeight="537.0" prefWidth="800.0" stylesheets="@../css/style.css">
+         <columns>
+            <TableColumn fx:id="timeColumn" editable="false" minWidth="9.600006103515625" prefWidth="220.79998779296875" sortType="DESCENDING" text="Thời gian" />
+            <TableColumn fx:id="infoColumn" editable="false" prefWidth="577.5999755859375" sortable="false" text="Thông tin" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+</VBox>

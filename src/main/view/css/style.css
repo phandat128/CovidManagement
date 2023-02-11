@@ -1,4 +1,4 @@
-.tree {
+.tree, .table-view {
     -fx-font-size: 14;
     -fx-font-family: "System";
 }

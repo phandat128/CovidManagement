@@ -2,19 +2,21 @@ package covidmanagement.model;
 
 import covidmanagement.Main;
 import covidmanagement.Utility;
-import covidmanagement.controller.MainController;
 import covidmanagement.controller.khaibaocontroller.SuaKhaiBaoController;
 import covidmanagement.controller.khaibaocontroller.XemKhaiBaoController;
 import covidmanagement.database.QueryDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +121,7 @@ public class KhaiBaoModel {
 
     private void handleDeleteClick(ActionEvent actionEvent) {
         Utility.displayConfirmDeleteDialog("Bạn muốn xóa khai báo này không?", maKhaiBao, "Khaibao");
+        LichSuModel.add("Xóa khai báo số " + maKhaiBao);
     }
 
     private void handleChangeClick(ActionEvent event){
@@ -127,6 +130,7 @@ public class KhaiBaoModel {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.setTitle("Chỉnh sửa thông tin khai báo y tế");
             stage.show();
             SuaKhaiBaoController mainController = fxmlLoader.getController();
             mainController.setField(maKhaiBao ,diemKhaiBao, ngayKhaiBao, maNhanKhau, lichTrinh,
@@ -143,6 +147,7 @@ public class KhaiBaoModel {
 //            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.setTitle("Chi tiết thông tin khai báo y tế");
             stage.show();
             XemKhaiBaoController mainController = fxmlLoader.getController();
             mainController.setField(diemKhaiBao, ngayKhaiBao, maNhanKhau, lichTrinh,
@@ -202,6 +207,8 @@ public class KhaiBaoModel {
         statement.executeUpdate();
         statement.close();
         queryDB.close();
+
+        LichSuModel.add("Thêm một khai báo");
     }
     public static void update(int maKhaiBao, String diemkhaibao, LocalDate ngayKhaiBao,
                            boolean bhyt, String lichTrinh, boolean trieuchung, boolean tiepXucNguoiBenh,
@@ -223,7 +230,28 @@ public class KhaiBaoModel {
         statement.executeUpdate();
         statement.close();
         queryDB.close();
+
+        LichSuModel.add("Sửa đổi thông tin khai báo số " + maKhaiBao);
     }
+
+    public static void deleteKhaiBao(int maNhanKhau) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        QueryDB queryDB = null;
+        try {
+            queryDB = new QueryDB();
+            preparedStatement = queryDB.getConnection().prepareStatement(
+                    "DELETE FROM khaibao WHERE MaNhankhau = ?;");
+            preparedStatement.setInt(1, maNhanKhau);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            queryDB.close();
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Lỗi khi Xóa dữ liệu: " + e.getMessage() + "." + "Vui lòng thực hiện lại!!");
+            alert.show();
+        }
+    }
+
     private void setName(int maNK) {
         try {
             NhanKhauModel nhanKhau = NhanKhauModel.getInstanceById(maNK);

@@ -103,6 +103,8 @@ public class HoKhauModel {
         statement.executeUpdate();
         statement.close();
         queryDB.close();
+
+        LichSuModel.add("Thêm hộ khẩu số " + maHK);
     }
 
     public static void update(String soNha, String ngach, String ngo, String duong, String phuong, String quan, int maHK) throws SQLException{
@@ -120,9 +122,12 @@ public class HoKhauModel {
         statement.executeUpdate();
         statement.close();
         queryDB.close();
+
+        LichSuModel.add("Sửa đổi thông tin hộ khẩu số " + maHK);
     }
     private void xoaClick (ActionEvent event) {
         Utility.displayConfirmDeleteDialog("Xác nhận xóa?", this.maHK, "HoKhau");
+        LichSuModel.add("Xóa hộ khẩu số " + this.maHK);
     }
     private void suaClick(ActionEvent event){
         try {
@@ -130,6 +135,7 @@ public class HoKhauModel {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.setTitle("Chỉnh sửa thông tin hộ khẩu");
             stage.show();
             SuaHoKhaucontroller  controller = fxmlLoader.getController();
             controller.setField(maHK, soNha,ngach,ngo,duong,phuong,quan,thanhPho);
@@ -146,6 +152,7 @@ public class HoKhauModel {
             fxmlLoader.setController(controller);
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
+            stage.setTitle("Chi tiết nhân khẩu trong hộ");
             stage.setScene(scene);
             stage.show();
         } catch(IOException e){

@@ -17,7 +17,7 @@
         <children>
           <AnchorPane layoutX="0.0" layoutY="350.0" prefHeight="200.0" prefWidth="910.0">
             <children>
-              <TableView fx:id="tableNhanKhau" layoutX="15.0" layoutY="-47.0" maxWidth="-Infinity" prefWidth="880.0" AnchorPane.leftAnchor="15.0">
+              <TableView stylesheets="@../../css/style.css" fx:id="tableNhanKhau" layoutX="15.0" layoutY="-47.0" maxWidth="-Infinity" prefWidth="880.0" AnchorPane.leftAnchor="15.0">
                 <columns>
                   <TableColumn fx:id="columnid" prefWidth="40.0" text="#" />
                   <TableColumn fx:id="columnMaNhanKhau" prefWidth="105.0" text="Mã Nhân Khẩu" />

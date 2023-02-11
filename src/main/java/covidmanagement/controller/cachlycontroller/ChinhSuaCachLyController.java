@@ -2,7 +2,6 @@ package covidmanagement.controller.cachlycontroller;
 
 import covidmanagement.Utility;
 import covidmanagement.model.CachLyModel;
-import covidmanagement.model.XetNghiemModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,11 +12,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class ChinhSuaCachLyController implements Initializable {
@@ -59,23 +56,10 @@ public class ChinhSuaCachLyController implements Initializable {
         ));
         mucdoClSearch.setOnAction(this::getMucdoChoice);
 
-        StringConverter<LocalDate> dateConverter = new StringConverter<LocalDate>() {
-            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            @Override
-            public String toString(LocalDate localDate) {
-                if (localDate == null) return "";
-                return formatter.format(localDate);
-            }
-            @Override
-            public LocalDate fromString(String s) {
-                if (s.isBlank()) return null;
-                return LocalDate.parse(s, formatter);
-            }
-        };
-        dateBeginRangeFromCl.setConverter(dateConverter);
-        dateBeginRangeToCl.setConverter(dateConverter);
-        dateFinishRangeFromCl.setConverter(dateConverter);
-        dateFinishRangeToCl.setConverter(dateConverter);
+        dateBeginRangeFromCl.setConverter(Utility.LOCAL_DATE_CONVERTER);
+        dateBeginRangeToCl.setConverter(Utility.LOCAL_DATE_CONVERTER);
+        dateFinishRangeFromCl.setConverter(Utility.LOCAL_DATE_CONVERTER);
+        dateFinishRangeToCl.setConverter(Utility.LOCAL_DATE_CONVERTER);
 
         idNKColumnCl.setCellValueFactory(new PropertyValueFactory<>("maNK"));
         nameColumnCl.setCellValueFactory(new PropertyValueFactory<>("name"));

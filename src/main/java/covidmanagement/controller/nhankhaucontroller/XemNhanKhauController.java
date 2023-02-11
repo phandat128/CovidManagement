@@ -1,5 +1,6 @@
 package covidmanagement.controller.nhankhaucontroller;
 
+import covidmanagement.Utility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,7 +36,7 @@ public class XemNhanKhauController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        pickerNgaySinh.setConverter(Utility.LOCAL_DATE_CONVERTER);
     }
 
     public void setField(int maNhanKhau, String hoVaTen, String gioiTinh, LocalDate ngaySinh, String cmnd_CCCD_,

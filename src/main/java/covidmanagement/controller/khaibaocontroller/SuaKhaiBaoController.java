@@ -34,6 +34,7 @@ public class SuaKhaiBaoController implements Initializable {
     int idKB;
     public void initialize(URL url, ResourceBundle resourceBundle) {
         saveDeclare.setDisable(true);
+        declareDate.setConverter(Utility.LOCAL_DATE_CONVERTER);
         declareDate.valueProperty().addListener((observableValue, currentValue, newValue) -> {
             if (currentValue == null) return;
             if (!currentValue.isEqual(newValue)) saveDeclare.setDisable(false);

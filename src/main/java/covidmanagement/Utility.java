@@ -8,14 +8,57 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.util.StringConverter;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.SQLException;
 import java.text.Normalizer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class Utility {
+    public static final StringConverter<LocalDate> LOCAL_DATE_CONVERTER = new StringConverter<>() {
+        private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        @Override
+        public String toString(LocalDate localDate) {
+            if (localDate == null) return "";
+            return FORMATTER.format(localDate);
+        }
+
+        @Override
+        public LocalDate fromString(String s) {
+            if (s.isBlank()) return null;
+            return LocalDate.parse(s, FORMATTER);
+        }
+    };
+
+    public static final StringConverter<Date> DATE_CONVERTER = new StringConverter<>() {
+        private final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        @Override
+        public String toString(Date date) {
+            if (date == null) return "";
+            return formatter.format(date);
+        }
+
+        @Override
+        public Date fromString(String s) {
+            if (s.isBlank()) return null;
+            try {
+                return formatter.parse(s);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    };
+
     //chuyển từ có dấu sang không dấu không cách
     public static String removeAccent(String s){
         String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
@@ -67,15 +110,12 @@ public class Utility {
         if (alert.getResult() == ButtonType.OK){
             //remove row id in tableName
             String sql = "DELETE FROM " + tableName + " WHERE ma" + tableName + " = " + id + ";";
-            System.out.println(sql);
             try {
                 QueryDB queryDB = new QueryDB();
                 queryDB.executeUpdate(sql);
-                //TODO: hiển thị thông báo xóa thành công
                 displaySuccessDialog("Đã xóa thành công!");
             } catch (SQLException e){
                 e.printStackTrace();
-                //TODO: hiển thị thông báo xóa không thành công
                 Utility.displayWarningDialog("Hộ khẩu đang chứa nhân khẩu. Hãy thay đổi mã hộ khẩu của các nhân khẩu trong hộ trước");
             }
         }

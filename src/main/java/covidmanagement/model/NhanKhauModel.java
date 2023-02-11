@@ -26,7 +26,6 @@ public class NhanKhauModel {
     private Boolean LaChuHo;
     private String QuanHeVoiChuHo;
 
-
     public NhanKhauModel(int MaNhanKhau, String HoTen, LocalDate NgaySinh, String GioiTinh, String CMNDCCCD, String SDT,
                          String QuocTich, String TonGiao, String NguyenQuan, int MaHoKhau, Boolean LaChuHo, String QuanHeVoiChuHo, String NgheNghiep){
         this.MaNhanKhau = MaNhanKhau;
@@ -42,9 +41,7 @@ public class NhanKhauModel {
         this.LaChuHo = LaChuHo;
         this.QuanHeVoiChuHo = QuanHeVoiChuHo;
         this.NgheNghiep = NgheNghiep;
-
     }
-
 
     public static List<NhanKhauModel> getNhanKhauList(){
         List<NhanKhauModel> NhanKhauList = new ArrayList<>();
@@ -71,7 +68,6 @@ public class NhanKhauModel {
                         _tonGiao, _nguyenQuan, _maHoKhau, _laChuHo, _quanHeVoiChuHo, _ngheNghiep));
 
             }
-
             rs.close();
             queryDB.close();
         } catch (SQLException e){
@@ -114,13 +110,14 @@ public class NhanKhauModel {
                 alert.setHeaderText("Thêm nhân khẩu thất bại!!");
                 alert.show();
             }
+            preparedStatement.close();
+            queryDB.close();
+
+            LichSuModel.add("Thêm một nhân khẩu trong hộ số " + maHoKhau);
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Lỗi khi thêm dữ liệu: " + e.getMessage()+"." + "Vui lòng nhập lại!!");
             alert.show();
-        } finally {
-            preparedStatement.close();
-            queryDB.close();
         }
     }
 
@@ -159,16 +156,15 @@ public class NhanKhauModel {
                 alert.setHeaderText("Cập nhật nhân khẩu thất bại!!");
                 alert.show();
             }
+            preparedStatement.close();
+            queryDB.close();
+
+            LichSuModel.add("Sửa đổi thông tin nhân khẩu số " + maNhanKhau);
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Lỗi khi cập nhật dữ liệu: " + e.getMessage() + "." + "Vui lòng nhập lại!!");
             alert.show();
-        } finally {
-            preparedStatement.close();
-            queryDB.close();
         }
-
-
     }
 
     public static void deleteNhanKhau(int maNhanKhau) throws SQLException {
@@ -189,73 +185,14 @@ public class NhanKhauModel {
 //                alert.setHeaderText("Xóa nhân khẩu thất bại!!");
 //                alert.show();
 //            }
+            preparedStatement.close();
+            queryDB.close();
+
+            LichSuModel.add("Xóa nhân khẩu số " + maNhanKhau);
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Lỗi khi Xóa dữ liệu: " + e.getMessage() + "." + "Vui lòng thực hiện lại!!");
             alert.show();
-        } finally {
-            preparedStatement.close();
-            queryDB.close();
-        }
-    }
-
-    public static void deleteCahLy(int maNhanKhau) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        QueryDB queryDB = null;
-        try {
-            queryDB = new QueryDB();
-            preparedStatement = queryDB.getConnection().prepareStatement(
-                    "DELETE FROM cachly WHERE MaNhankhau = ?;");
-            preparedStatement.setInt(1, maNhanKhau);
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Lỗi khi Xóa dữ liệu: " + e.getMessage() + "." + "Vui lòng thực hiện lại!!");
-            alert.show();
-        } finally {
-            preparedStatement.close();
-            queryDB.close();
-        }
-    }
-
-    public static void deleteKhaiBao(int maNhanKhau) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        QueryDB queryDB = null;
-        try {
-            queryDB = new QueryDB();
-            preparedStatement = queryDB.getConnection().prepareStatement(
-                    "DELETE FROM khaibao WHERE MaNhankhau = ?;");
-            preparedStatement.setInt(1, maNhanKhau);
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Lỗi khi Xóa dữ liệu: " + e.getMessage() + "." + "Vui lòng thực hiện lại!!");
-            alert.show();
-        } finally {
-            preparedStatement.close();
-            queryDB.close();
-        }
-    }
-
-    public static void deleteXetNghiem(int maNhanKhau) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        QueryDB queryDB = null;
-        try {
-            queryDB = new QueryDB();
-            preparedStatement = queryDB.getConnection().prepareStatement(
-                    "DELETE FROM xetnghiem WHERE MaNhankhau = ?;");
-            preparedStatement.setInt(1, maNhanKhau);
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Lỗi khi Xóa dữ liệu: " + e.getMessage() + "." + "Vui lòng thực hiện lại!!");
-            alert.show();
-        } finally {
-            preparedStatement.close();
-            queryDB.close();
         }
     }
 

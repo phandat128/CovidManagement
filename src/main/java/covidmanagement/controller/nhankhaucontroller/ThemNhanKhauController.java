@@ -1,6 +1,7 @@
 package covidmanagement.controller.nhankhaucontroller;
 
 import covidmanagement.Main;
+import covidmanagement.Utility;
 import covidmanagement.controller.hokhaucontroller.ThemHoKhauController;
 import covidmanagement.model.HoKhauModel;
 import covidmanagement.model.NhanKhauModel;
@@ -41,7 +42,7 @@ public class ThemNhanKhauController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         txtMaNhanKhau.setDisable(true);
-
+        pickerNgaySinh.setConverter(Utility.LOCAL_DATE_CONVERTER);
     }
     @FXML
     void addActionevent(ActionEvent event) throws SQLException {
@@ -65,12 +66,7 @@ public class ThemNhanKhauController implements Initializable {
             alert.setHeaderText("Trường Giới Tính không được để trống!");
             alert.show();
             return;
-        }else if (txtCMND_CCCD.getText().isBlank()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText("Trường CMND_CCCD không được để trống!");
-            alert.show();
-            return;
-        } else if (!txtCMND_CCCD.getText().matches("[0-9]+")) {
+        }else if (!txtCMND_CCCD.getText().isBlank() && !txtCMND_CCCD.getText().matches("[0-9]+")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText("Trường CMND_CCCD chỉ được chứa chữ số!");
             alert.show();

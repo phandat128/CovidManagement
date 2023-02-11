@@ -10,12 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class ThemXetNghiemController implements Initializable {
@@ -34,19 +32,7 @@ public class ThemXetNghiemController implements Initializable {
         resultField.setValue(KetQuaXetNghiem.CHƯA_XÁC_ĐỊNH);
         dateField.setValue(LocalDate.now());
         // set date format to DD/MM/yyyy
-        dateField.setConverter(new StringConverter<>() {
-            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            @Override
-            public String toString(LocalDate localDate) {
-                if (localDate == null) return "";
-                return formatter.format(localDate);
-            }
-            @Override
-            public LocalDate fromString(String s) {
-                if (s.isBlank()) return null;
-                return LocalDate.parse(s, formatter);
-            }
-        });
+        dateField.setConverter(Utility.LOCAL_DATE_CONVERTER);
     }
 
     public void onAdd() {

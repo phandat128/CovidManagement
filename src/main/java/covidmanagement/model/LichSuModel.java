@@ -36,13 +36,25 @@ public class LichSuModel {
         try {
             QueryDB queryDB = new QueryDB();
             ResultSet rs = queryDB.executeQuery("SELECT * FROM LichSu");
-            Date _thoiGian = rs.getDate(1);
-            String _thongTin = rs.getString(2);
-            lichSu.add(new LichSuModel(_thoiGian, _thongTin));
+            while(rs.next()) {
+                Date _thoiGian = rs.getTimestamp("thoigian");
+                String _thongTin = rs.getString("thongtin");
+                System.out.println(_thoiGian + _thongTin);
+                lichSu.add(new LichSuModel(_thoiGian, _thongTin));
+            }
+            Collections.reverse(lichSu);
+            queryDB.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
         return lichSu;
     }
 
+    public Date getThoiGian() {
+        return thoiGian;
+    }
+
+    public String getThongTin() {
+        return thongTin;
+    }
 }

@@ -1,7 +1,6 @@
 package covidmanagement.controller.cachlycontroller;
 
 import covidmanagement.Utility;
-import javafx.collections.FXCollections;
 import covidmanagement.model.CachLyModel;
 import covidmanagement.model.CachLyModel.MucDoCachLy;
 import javafx.collections.FXCollections;
@@ -11,13 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import java.time.format.DateTimeFormatter;
 
 public class ThemCachLyController implements Initializable {
     @FXML
@@ -36,32 +33,8 @@ public class ThemCachLyController implements Initializable {
         mucdoCl.setValue(CachLyModel.MucDoCachLy.UNDEFINED);
 
         // set date format to DD/MM/yyyy
-        beginDateCl.setConverter(new StringConverter<>() {
-            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            @Override
-            public String toString(LocalDate localDate) {
-                if (localDate == null) return "";
-                return formatter.format(localDate);
-            }
-            @Override
-            public LocalDate fromString(String s) {
-                if (s.isBlank()) return null;
-                return LocalDate.parse(s, formatter);
-            }
-        });
-        finishDateCl.setConverter(new StringConverter<>() {
-            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            @Override
-            public String toString(LocalDate localDate) {
-                if (localDate == null) return "";
-                return formatter.format(localDate);
-            }
-            @Override
-            public LocalDate fromString(String s) {
-                if (s.isBlank()) return null;
-                return LocalDate.parse(s, formatter);
-            }
-        });
+        beginDateCl.setConverter(Utility.LOCAL_DATE_CONVERTER);
+        finishDateCl.setConverter(Utility.LOCAL_DATE_CONVERTER);
     }
 
     public void them(){

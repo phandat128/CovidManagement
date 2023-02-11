@@ -13,6 +13,11 @@
 
 <VBox alignment="TOP_CENTER" spacing="24.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.xetnghiemcontroller.ThemXetNghiemController">
    <children>
+      <Label text="KHAI BÁO XÉT NGHIỆM MỚI">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
       <HBox alignment="CENTER" prefHeight="30.0">
          <children>
             <Label alignment="CENTER_RIGHT" contentDisplay="BOTTOM" prefHeight="30.0" prefWidth="142.0" text="Mã nhân khẩu">

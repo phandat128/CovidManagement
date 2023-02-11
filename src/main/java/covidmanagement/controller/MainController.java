@@ -6,12 +6,10 @@ import covidmanagement.model.HoKhauModel;
 import covidmanagement.model.NhanKhauModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
@@ -19,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -57,6 +54,7 @@ public class MainController implements Initializable {
             branch.add(new TreeItem<>("Chỉnh sửa " + component));
             root.getChildren().add(manageComponent);
         }
+        root.getChildren().add(new TreeItem<>("Lịch sử"));
         treeView.setRoot(root);
         treeView.setShowRoot(false);
 
@@ -123,6 +121,16 @@ public class MainController implements Initializable {
             }
             return;
         }
+        if (fileName.equalsIgnoreCase("lichsu")){
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("lichsu-view.fxml"));
+                Parent lichsuView = fxmlLoader.load();
+                this.mainBorderPane.setCenter(lichsuView);
+            } catch(IOException e){
+                e.printStackTrace();
+            }
+            return;
+        }
         String fileFolder = Utility.removeAccent(item.getParent().getValue()).substring(6);
         System.out.println(fileFolder + "/" + fileName);
         try {
@@ -133,53 +141,4 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
-
-    public void moveToLoginPage(ActionEvent event){
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource( "login-view.fxml"));
-            Parent componentScene = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Đăng nhập");
-            LoginController loginController = fxmlLoader.getController();
-            loginController.setStage(stage);
-            Scene scene = new Scene(componentScene);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-//    public void moveToSuaKhaiBaoPage(String diemkhaibao, int maNhanKhau, LocalDate ngayKhaiBao, String lichTrinh,
-//                                     boolean bhyt, boolean trieuchung, boolean tiepXucNguoiBenh, boolean tiepXucNguoiTuVungDich,
-//                                     boolean tiepXucNguoiCoBieuHien, String benhNen){
-//        try {
-//            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("khaibao/suakhaibao-view.fxml"));
-//            Parent componentScene = fxmlLoader.load();
-//            SuaKhaiBaoController suaController = fxmlLoader.getController();
-//            suaController.setField(diemkhaibao, ngayKhaiBao, maNhanKhau, lichTrinh,
-//                                bhyt, trieuchung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich,
-//                                tiepXucNguoiCoBieuHien, benhNen);
-//            mainBorderPane.setCenter(componentScene);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    public void moveToXemKhaiBaoPage(String diemkhaibao, LocalDate ngayKhaiBao, int maNhanKhau, String lichTrinh,
-//                                     boolean bhyt, boolean trieuchung, boolean tiepXucNguoiBenh, boolean tiepXucNguoiTuVungDich,
-//                                     boolean tiepXucNguoiCoBieuHien, String benhNen){
-//        try {
-//            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("khaibao/xemkhaibao-view.fxml"));
-//            Parent componentScene = fxmlLoader.load();
-//            XemKhaiBaoController xemController = fxmlLoader.getController();
-//            xemController.setField(diemkhaibao, ngayKhaiBao, maNhanKhau, lichTrinh,
-//                    bhyt, trieuchung, tiepXucNguoiBenh, tiepXucNguoiTuVungDich,
-//                    tiepXucNguoiCoBieuHien, benhNen);
-//            mainBorderPane.setCenter(componentScene);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
