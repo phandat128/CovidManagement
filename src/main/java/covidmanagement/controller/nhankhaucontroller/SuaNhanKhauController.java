@@ -1,5 +1,6 @@
 package covidmanagement.controller.nhankhaucontroller;
 
+import covidmanagement.Utility;
 import covidmanagement.model.NhanKhauModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,7 +30,7 @@ public class SuaNhanKhauController implements Initializable  {
 
         @Override
         public void initialize(URL location, ResourceBundle resources) {
-
+                pickerNgaySinh.setConverter(Utility.LOCAL_DATE_CONVERTER);
         }
 
         public void setField(int maNhanKhau, String hoVaTen, String gioiTinh, LocalDate ngaySinh, String cmnd_CCCD_,
@@ -75,17 +76,12 @@ public class SuaNhanKhauController implements Initializable  {
                         alert.setHeaderText("Vui lòng nhập lại ngày sinh!");
                         alert.show();
                         return;
-                }else if (!gioitinhnam.isSelected() && !gioitinhnu.isSelected()){
+                }else if (!gioitinhnam.isSelected() && !gioitinhnu.isSelected()) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setHeaderText("Trường Giới Tính không được để trống!");
                         alert.show();
                         return;
-                }else if (txtCMND_CCCD.getText().isBlank()) {
-                        Alert alert = new Alert(Alert.AlertType.WARNING);
-                        alert.setHeaderText("Trường CMND_CCCD không được để trống!");
-                        alert.show();
-                        return;
-                } else if (!txtCMND_CCCD.getText().matches("[0-9]+")) {
+                } else if (!txtCMND_CCCD.getText().isBlank() && !txtCMND_CCCD.getText().matches("[0-9]+")) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setHeaderText("Trường CMND_CCCD chỉ được chứa chữ số!");
                         alert.show();

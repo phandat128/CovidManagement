@@ -134,7 +134,7 @@
                   </Button>
                </right>
                 </BorderPane>
-                <TableView fx:id="searchTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                <TableView stylesheets="@../../css/style.css" fx:id="searchTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                     <columns>
                         <TableColumn fx:id="idColumn" prefWidth="28.800018310546875" text="STT" />
                         <TableColumn fx:id="idNKColumn" prefWidth="60.0" text="Mã NK" />

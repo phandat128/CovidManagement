@@ -16,7 +16,7 @@ CREATE TABLE NhanKhau(
 	HoTen varchar(50) NOT NULL,
 	NgaySinh date NOT NULL,
 	GioiTinh varchar(10) NOT NULL,
-	CMND_CCCD varchar(20) UNIQUE,
+	CMND_CCCD varchar(20),
 	SDT varchar(15),
 	QuocTich varchar(20) NOT NULL,
 	TonGiao varchar(20) DEFAULT 'Không',
@@ -28,6 +28,9 @@ CREATE TABLE NhanKhau(
 	GhiChu varchar(100),
  	CONSTRAINT PK_NhanKhau PRIMARY KEY (MaNhanKhau)
 );
+
+CREATE UNIQUE INDEX ON NhanKhau (nullif(CMND_CCCD, ''));
+CREATE UNIQUE INDEX ON NhanKhau(nullif(SDT, ''));
 
 CREATE TABLE CachLy(
 	MaCachLy serial NOT NULL,

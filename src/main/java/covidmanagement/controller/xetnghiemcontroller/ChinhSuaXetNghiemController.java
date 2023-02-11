@@ -12,12 +12,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 import java.util.ResourceBundle;
 
 public class ChinhSuaXetNghiemController implements Initializable {
@@ -58,21 +55,8 @@ public class ChinhSuaXetNghiemController implements Initializable {
         ));
         resultSearch.setOnAction(this::getResultChoice);
         // set date format to DD/MM/yyyy
-        StringConverter<LocalDate> dateConverter = new StringConverter<LocalDate>() {
-            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            @Override
-            public String toString(LocalDate localDate) {
-                if (localDate == null) return "";
-                return formatter.format(localDate);
-            }
-            @Override
-            public LocalDate fromString(String s) {
-                if (s.isBlank()) return null;
-                return LocalDate.parse(s, formatter);
-            }
-        };
-        dateRangeFrom.setConverter(dateConverter);
-        dateRangeTo.setConverter(dateConverter);
+        dateRangeFrom.setConverter(Utility.LOCAL_DATE_CONVERTER);
+        dateRangeTo.setConverter(Utility.LOCAL_DATE_CONVERTER);
         // set up for table view
         idNKColumn.setCellValueFactory(new PropertyValueFactory<>("maNK"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

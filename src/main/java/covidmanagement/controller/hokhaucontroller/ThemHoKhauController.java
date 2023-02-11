@@ -72,7 +72,7 @@ public class ThemHoKhauController {
         try {
             HoKhauModel.add(idHK, soNhaText, ngachText, ngoText,duongText, phuongText, quanText,thanhPhoText);
             //TODO: thông báo thêm thành công
-            Utility.displaySuccessDialog("Thêm thành công!");
+            Utility.displaySuccessDialog("Thêm hộ khẩu thành công!");
         } catch (SQLException e){
             e.printStackTrace();
             //TODO: thông báo lỗi không thêm được

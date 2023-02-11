@@ -3,6 +3,7 @@ package covidmanagement.controller.khaibaocontroller;
 import covidmanagement.Utility;
 import covidmanagement.model.KhaiBaoModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -12,12 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TimKiemKhaiBaoController implements Initializable {
@@ -44,22 +42,10 @@ public class TimKiemKhaiBaoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        StringConverter<LocalDate> dateConverter = new StringConverter<LocalDate>() {
-            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            @Override
-            public String toString(LocalDate localDate) {
-                if (localDate == null) return "";
-                return formatter.format(localDate);
-            }
-            @Override
-            public LocalDate fromString(String s) {
-                if (s.isBlank()) return null;
-                return LocalDate.parse(s, formatter);
-            }
-        };
-        dateRangeFrom.setConverter(dateConverter);
-        dateRangeTo.setConverter(dateConverter);
-        trieuchungColumn.setCellValueFactory(new PropertyValueFactory<>("trieuChung"));
+
+        dateRangeFrom.setConverter(Utility.LOCAL_DATE_CONVERTER);
+        dateRangeTo.setConverter(Utility.LOCAL_DATE_CONVERTER);
+        trieuchungColumn.setCellValueFactory(trieuchung -> new SimpleStringProperty(trieuchung.getValue().isTrieuChung() ? "Có" : "Không"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("maNhanKhau"));
         declareDateColumn.setCellValueFactory(new PropertyValueFactory<>("ngayKhaiBao"));
         declareSpotColumn.setCellValueFactory(new PropertyValueFactory<>("diemKhaiBao"));

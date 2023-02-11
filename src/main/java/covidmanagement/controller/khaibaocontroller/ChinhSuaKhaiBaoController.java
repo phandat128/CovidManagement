@@ -3,8 +3,6 @@ package covidmanagement.controller.khaibaocontroller;
 import covidmanagement.Main;
 import covidmanagement.Utility;
 import covidmanagement.model.KhaiBaoModel;
-import covidmanagement.model.NhanKhauModel;
-import covidmanagement.model.XetNghiemModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,12 +18,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class ChinhSuaKhaiBaoController implements Initializable {
@@ -69,21 +65,9 @@ public class ChinhSuaKhaiBaoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        StringConverter<LocalDate> dateConverter = new StringConverter<LocalDate>() {
-            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            @Override
-            public String toString(LocalDate localDate) {
-                if (localDate == null) return "";
-                return formatter.format(localDate);
-            }
-            @Override
-            public LocalDate fromString(String s) {
-                if (s.isBlank()) return null;
-                return LocalDate.parse(s, formatter);
-            }
-        };
-        dateRangeFrom.setConverter(dateConverter);
-        dateRangeTo.setConverter(dateConverter);
+        
+        dateRangeFrom.setConverter(Utility.LOCAL_DATE_CONVERTER);
+        dateRangeTo.setConverter(Utility.LOCAL_DATE_CONVERTER);
 
         trieuchungColumn.setCellValueFactory(new PropertyValueFactory<>("trieuChung"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("maNhanKhau"));

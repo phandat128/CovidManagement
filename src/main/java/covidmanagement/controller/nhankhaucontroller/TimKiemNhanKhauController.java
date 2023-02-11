@@ -1,6 +1,7 @@
 package covidmanagement.controller.nhankhaucontroller;
 
 import covidmanagement.Main;
+import covidmanagement.Utility;
 import covidmanagement.model.NhanKhauModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
@@ -48,6 +49,7 @@ public class TimKiemNhanKhauController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        pickerNgaySinh.setConverter(Utility.LOCAL_DATE_CONVERTER);
 
         columnMaNhanKhau.setCellValueFactory(new PropertyValueFactory<>("MaNhanKhau"));
         columnHoVaTen.setCellValueFactory(new PropertyValueFactory<>("HoTen"));
@@ -93,6 +95,7 @@ public class TimKiemNhanKhauController implements Initializable {
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);
+                stage.setTitle("Chi tiết thông tin nhân khẩu");
                 stage.show();
                 XemNhanKhauController controller = fxmlLoader.getController();
                 controller.setField(manhankhau, hoten, gioitinh, ngaysinh, cmnd, quoctich, tongiao, sdt, nguyenquan,

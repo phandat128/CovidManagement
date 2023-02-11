@@ -7,6 +7,7 @@ import covidmanagement.database.QueryDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -87,6 +88,8 @@ public class CachLyModel {
             statement.executeUpdate();
             statement.close();
             queryDB.close();
+
+            LichSuModel.add("Thêm thông tin ca cách ly " + name);
         }
 
         public static void updateCl(int maCachLy, LocalDate begindate, LocalDate finishdate, String place, MucDoCachLy mucdo) throws SQLException{
@@ -102,32 +105,56 @@ public class CachLyModel {
             statement.executeUpdate();
             statement.close();
             queryDB.close();
+
+            LichSuModel.add("Sửa đổi thông tin ca cách ly số " + maCachLy);
         }
 
-        private void handleDeleteClickCl(ActionEvent event) {
+    public static void deleteCachLy(int maNhanKhau) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        QueryDB queryDB = null;
+        try {
+            queryDB = new QueryDB();
+            preparedStatement = queryDB.getConnection().prepareStatement(
+                    "DELETE FROM cachly WHERE MaNhankhau = ?;");
+            preparedStatement.setInt(1, maNhanKhau);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            queryDB.close();
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Lỗi khi Xóa dữ liệu: " + e.getMessage() + "." + "Vui lòng thực hiện lại!!");
+            alert.show();
+        }
+    }
+
+    private void handleDeleteClickCl(ActionEvent event) {
             Utility.displayConfirmDeleteDialog("Xác nhận xóa", this.maCL, "CachLy");
-        }
-        private void handleChangeClickCl(ActionEvent event) {
-            System.out.println(maNK);
-            System.out.println(name);
-            System.out.println(begindate);
-            System.out.println(finishdate);
-            System.out.println(place);
-            System.out.println(mucdo);
+            LichSuModel.add("Xóa ca cách ly " + this.maCL);
+    }
 
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("cachly/suacachly-view.fxml"));
-                Scene scene = new Scene(fxmlLoader.load());
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.show();
-                SuaCachLyController Controller = fxmlLoader.getController();
-                Controller.setFieldCl(maCL, maNK, name, begindate, finishdate, place, mucdo);
+    private void handleChangeClickCl(ActionEvent event) {
+        System.out.println(maNK);
+        System.out.println(name);
+        System.out.println(begindate);
+        System.out.println(finishdate);
+        System.out.println(place);
+        System.out.println(mucdo);
 
-            } catch(IOException e){
-                e.printStackTrace();
-            }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("cachly/suacachly-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Chỉnh sửa thông tin ca cách ly");
+            stage.show();
+            SuaCachLyController Controller = fxmlLoader.getController();
+            Controller.setFieldCl(maCL, maNK, name, begindate, finishdate, place, mucdo);
+
+        } catch(IOException e){
+            e.printStackTrace();
         }
+    }
+
     public int getMaNK() {
         return maNK;
     }

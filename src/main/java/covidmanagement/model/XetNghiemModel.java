@@ -7,6 +7,7 @@ import covidmanagement.database.QueryDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -77,6 +78,8 @@ public class XetNghiemModel {
         statement.executeUpdate();
         statement.close();
         queryDB.close();
+
+        LichSuModel.add("Thêm xét nghiệm của " + name);
     }
 
     public static void update(int maXetNghiem, LocalDate date, String place, KetQuaXetNghiem result) throws SQLException{
@@ -91,10 +94,31 @@ public class XetNghiemModel {
         statement.executeUpdate();
         statement.close();
         queryDB.close();
+
+        LichSuModel.add("Sửa đổi thông tin xét nghiệm số " + maXetNghiem);
+    }
+
+    public static void deleteXetNghiem(int maNhanKhau) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        QueryDB queryDB = null;
+        try {
+            queryDB = new QueryDB();
+            preparedStatement = queryDB.getConnection().prepareStatement(
+                    "DELETE FROM xetnghiem WHERE MaNhankhau = ?;");
+            preparedStatement.setInt(1, maNhanKhau);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            queryDB.close();
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Lỗi khi Xóa dữ liệu: " + e.getMessage() + "." + "Vui lòng thực hiện lại!!");
+            alert.show();
+        }
     }
 
     private void handleDeleteClick(ActionEvent event) {
         Utility.displayConfirmDeleteDialog("Xác nhận xóa?", this.maXN, "XetNghiem");
+        LichSuModel.add("Xóa xét nghiệm số " + this.maXN);
     }
 
     private void handleChangeClick(ActionEvent event){
@@ -108,6 +132,7 @@ public class XetNghiemModel {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.setTitle("Chỉnh sửa thông tin xét nghiệm");
             stage.show();
             SuaXetNghiemController controller = fxmlLoader.getController();
             controller.setField(maXN, maNK, name, date, place, result);

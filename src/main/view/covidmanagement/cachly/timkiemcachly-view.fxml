@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.cachlycontroller.TimKiemCachLyController">
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="covidmanagement.controller.cachlycontroller.TimKiemCachLyController">
     <top>
         <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -76,10 +86,13 @@
                         </Button>
                </center>
                <left>
-                  <Button mnemonicParsing="false" onAction="#resetAllFieldsCl" prefHeight="34.0" prefWidth="215.0" text="Xóa các mục tìm kiếm" BorderPane.alignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#resetAllFieldsCl" prefHeight="34.0" prefWidth="215.0" text="Xóa các mục tìm kiếm" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
                </left>
                 </BorderPane>
-                <TableView fx:id="searchTableCl" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                <TableView fx:id="searchTableCl" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../css/style.css" GridPane.columnSpan="2" GridPane.rowIndex="4">
                     <columns>
                         <TableColumn fx:id="idColumnCl" prefWidth="28.800018310546875" text="STT" />
                         <TableColumn fx:id="idNKColumnCl" prefWidth="60.0" text="Mã NK" />
@@ -96,13 +109,19 @@
                 </TableView>
             <HBox prefHeight="43.0" prefWidth="400.0" GridPane.rowIndex="2">
                <children>
-                        <Label alignment="BOTTOM_RIGHT" prefHeight="30.0" prefWidth="57.0" text="Từ ngày:" />
+                        <Label alignment="BOTTOM_RIGHT" prefHeight="30.0" prefWidth="57.0" text="Từ ngày:">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
                         <DatePicker fx:id="dateBeginRangeFromCl" prefHeight="35.0" prefWidth="122.0">
                             <HBox.margin>
                                 <Insets left="10.0" />
                             </HBox.margin>
                         </DatePicker>
-                  <Label alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="69.0" text="Đến Ngày:" />
+                  <Label alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="69.0" text="Đến Ngày:">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
                   <DatePicker fx:id="dateBeginRangeToCl" layoutX="78.0" layoutY="10.0" prefHeight="35.0" prefWidth="122.0">
                      <HBox.margin>
                         <Insets left="10.0" />
@@ -112,13 +131,19 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Label alignment="BOTTOM_RIGHT" prefHeight="30.0" prefWidth="57.0" text="Từ ngày:" />
+                  <Label alignment="BOTTOM_RIGHT" prefHeight="30.0" prefWidth="57.0" text="Từ ngày:">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
                   <DatePicker fx:id="dateFinishRangeFromCl" prefHeight="35.0" prefWidth="121.0">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
                   </DatePicker>
-                  <Label alignment="BOTTOM_RIGHT" prefHeight="30.0" prefWidth="69.0" text="Đến Ngày:" />
+                  <Label alignment="BOTTOM_RIGHT" prefHeight="30.0" prefWidth="69.0" text="Đến Ngày:">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
                   <DatePicker fx:id="dateFinishRangeToCl" prefHeight="35.0" prefWidth="123.0">
                      <HBox.margin>
                         <Insets left="10.0" />

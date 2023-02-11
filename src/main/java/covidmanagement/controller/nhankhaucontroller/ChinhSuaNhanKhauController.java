@@ -1,7 +1,11 @@
 package covidmanagement.controller.nhankhaucontroller;
 
 import covidmanagement.Main;
+import covidmanagement.Utility;
+import covidmanagement.model.CachLyModel;
+import covidmanagement.model.KhaiBaoModel;
 import covidmanagement.model.NhanKhauModel;
+import covidmanagement.model.XetNghiemModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,6 +48,7 @@ public class ChinhSuaNhanKhauController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        pickerNgaySinh.setConverter(Utility.LOCAL_DATE_CONVERTER);
 
         columnMaNhanKhau.setCellValueFactory(new PropertyValueFactory<>("MaNhanKhau"));
         columnHoVaTen.setCellValueFactory(new PropertyValueFactory<>("HoTen"));
@@ -130,9 +135,9 @@ public class ChinhSuaNhanKhauController implements Initializable {
                     NhanKhauModel nhankhau = tableNhanKhau.getSelectionModel().getSelectedItem();
                     int manhankhau = nhankhau.getMaNhanKhau();
                 try {
-                    NhanKhauModel.deleteCahLy(manhankhau);
-                    NhanKhauModel.deleteKhaiBao(manhankhau);
-                    NhanKhauModel.deleteXetNghiem(manhankhau);
+                    CachLyModel.deleteCachLy(manhankhau);
+                    KhaiBaoModel.deleteKhaiBao(manhankhau);
+                    XetNghiemModel.deleteXetNghiem(manhankhau);
                     NhanKhauModel.deleteNhanKhau(manhankhau);
                 } catch (SQLException e){
                     e.printStackTrace();
@@ -188,6 +193,7 @@ public class ChinhSuaNhanKhauController implements Initializable {
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);
+                stage.setTitle("Chỉnh sửa thông tin nhân khẩu");
                 stage.show();
                 SuaNhanKhauController controller = fxmlLoader.getController();
                 controller.setField(manhankhau, hoten, gioitinh, ngaysinh, cmnd, quoctich, tongiao, sdt, nguyenquan,
